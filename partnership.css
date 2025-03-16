@@ -245,6 +245,17 @@ nav ul li a:hover {
     margin-bottom: 0;
 }
 
+.box-step {
+    display: flex;
+    /* align-items: center; */
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.box-step h4 {
+    margin-top: 0;
+}
+
 .step-number {
     background-color: #007bff;
     color: #fff;
