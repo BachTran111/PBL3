@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>GoTravel - Đà Nẵng</title>
+        <link rel="stylesheet" href="trang-chu.css" />
+        <link rel="stylesheet" href="style.css" />
+        <link rel="stylesheet" href="script.js" />
+        <link rel="stylesheet" href="./assets/fonts/themify-icons/themify-icons.css" />
+    </head>
+    <body>
+        <!-- Header -->
+        <header>
+            <div class="header-container">
+                <div class="container">
+                    <div class="header-content">
+                        <div class="logo">
+                            <img src="assets/img/gotravel_logo_air.png" alt="" />
+                        </div>
+                        <nav class="nav">
+                            <ul>
+                                <li><a href="#">HOME</a></li>
+                                <li><a href="homestay.html">HOMESTAYS</a></li>
+                                <li><a href="#">ABOUT</a></li>
+                                <li><a href="#">CONTACT</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+                <div class="auth">
+                    <a href="partnership.html">
+                        <button class="cooperate-btn">Hợp tác với chúng tôi</button>
+                    </a>
+                    <button class="signup" onclick="openPopup('register')">Đăng ký</button>
+                    <button class="login" onclick="openPopup('login')">Đăng nhập</button>
+                </div>
+            </div>
+        </header>
+
+        <section class="hero">
+            <div class="hero-content">
+                <h1>Đà Nẵng Trong Tầm Tay Bạn</h1>
+                <div class="search-box">
+                    <div class="search-input">
+                        <svg
+                            class="search-icon"
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="20"
+                            height="20"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        >
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                        </svg>
+                        <input type="text" placeholder="Nhập địa điểm..." />
+                    </div>
+                    <div class="date-picker">
+                        <input type="date" class="date1" />
+                        <input type="date" class="date2" />
+                    </div>
+                    <div class="guests-selector">
+                        <select>
+                            <option>1 Khách</option>
+                            <option>2 Khách</option>
+                            <option>3 Khách</option>
+                            <option>4 Khách</option>
+                        </select>
+                    </div>
+                    <button class="search-button">TÌM KIẾM</button>
+                </div>
+            </div>
+        </section>
+        <!-- Destinations -->
+        <section class="destinations">
+            <h2>Các điểm đến thu hút nhất Đà Nẵng</h2>
+            <div class="carousel-container">
+                <button class="carousel-button prev" onclick="prevSlides(5)"><i class="ti-angle-left"></i></button>
+                <div class="carousel">
+                    <div class="slide">
+                        <img src="assets/img/ba-na.jpg" alt="Sun World Bà Nà Hills" />
+                        <div class="slide-info">
+                            <h3>Sun World Bà Nà Hills</h3>
+                        </div>
+                    </div>
+                    <div class="slide">
+                        <img src="assets/img/nui-than-tai.jpg" alt="Núi Thần Tài" />
+                        <div class="slide-info">
+                            <h3>Núi Thần Tài</h3>
+                        </div>
+                    </div>
+                    <div class="slide">
+                        <img src="assets/img/mikazuki.jpg" alt="Mikazuki" />
+                        <div class="slide-info">
+                            <h3>Mikazuki</h3>
+                        </div>
+                    </div>
+                    <div class="slide">
+                        <img src="assets/img/asia-park.jpg" alt="Công viên châu Á" />
+                        <div class="slide-info">
+                            <h3>Công viên châu Á</h3>
+                        </div>
+                    </div>
+                    <div class="slide">
+                        <img src="assets/img/hoa-phu-thanh.png" alt="Thác Hòa Phú Thành" />
+                        <div class="slide-info">
+                            <h3>Thác Hòa Phú Thành</h3>
+                        </div>
+                    </div>
+                    <div class="slide">
+                        <img src="assets/img/suoi-mo.jpg" alt="Suối Mơ" />
+                        <div class="slide-info">
+                            <h3>Suối Mơ</h3>
+                        </div>
+                    </div>
+                    <div class="slide">
+                        <img src="assets/img/cau-quay-song-han.jpg" alt="Cầu Sông Hàn" />
+                        <div class="slide-info">
+                            <h3>Cầu Sông Hàn</h3>
+                        </div>
+                    </div>
+                    <div class="slide">
+                        <img src="assets/img/cau-thuan-phuoc.jpg" alt="Cầu Thuận Phước" />
+                        <div class="slide-info">
+                            <h3>Cầu Thuận Phước</h3>
+                        </div>
+                    </div>
+                    <div class="slide">
+                        <img src="assets/img/cau-rong.png" alt="Cầu Rồng" />
+                        <div class="slide-info">
+                            <h3>Cầu Rồng</h3>
+                        </div>
+                    </div>
+                    <div class="slide">
+                        <img src="assets/img/cau-tran-thi-ly.jpg" alt="Cầu Trần Thị Lý" />
+                        <div class="slide-info">
+                            <h3>Cầu Trần Thị Lý</h3>
+                        </div>
+                    </div>
+                    <div class="slide">
+                        <img src="assets/img/chua-linh-ung.jpg" alt="Linh Ứng Sơn Trà" />
+                        <div class="slide-info">
+                            <h3>Linh Ứng Sơn Trà</h3>
+                        </div>
+                    </div>
+                    <div class="slide">
+                        <img src="assets/img/ngu_hanh_son.jpg" alt="Ngũ Hành Sơn" />
+                        <div class="slide-info">
+                            <h3>Ngũ Hành Sơn</h3>
+                        </div>
+                    </div>
+                    <div class="slide">
+                        <img src="assets/img/dinh-ban-co.webp" alt="Đỉnh Bàn Cờ" />
+                        <div class="slide-info">
+                            <h3>Đỉnh Bàn Cờ</h3>
+                        </div>
+                    </div>
+                    <div class="slide">
+                        <img src="assets/img/bai-bien-my-khe.jpg" alt="Bãi biển Mỹ Khê" />
+                        <div class="slide-info">
+                            <h3>Bãi biển Mỹ Khê</h3>
+                        </div>
+                    </div>
+                    <div class="slide">
+                        <img src="assets/img/bien-non-nuoc.jpg" alt="Bãi biển Non Nước" />
+                        <div class="slide-info">
+                            <h3>Bãi biển Non Nước</h3>
+                        </div>
+                    </div>
+                    <div class="slide">
+                        <img src="assets/img/lang-da-my-nghe-non-nuoc.jpg" alt="Điêu Khắc Đá Mỹ Nghệ" />
+                        <div class="slide-info">
+                            <h3>Điêu Khắc Đá Mỹ Nghệ</h3>
+                        </div>
+                    </div>
+                </div>
+                <button class="carousel-button next" onclick="nextSlides(5)"><i class="ti-angle-right"></i></button>
+            </div>
+        </section>
+        <!-- featured properties -->
+        <section class="featured-properties">
+            <h2>Những chỗ nghỉ nổi bật được đề xuất cho quý khách:</h2>
+            <div class="location-and-view-more">
+                <div class="location-tabs">
+                    <button class="tab active">Ngũ Hành Sơn</button>
+                    <button class="tab">Sơn Trà</button>
+                    <button class="tab">Hải Châu</button>
+                    <button class="tab">Thanh Khê</button>
+                    <button class="tab">Liên Chiểu</button>
+                </div>
+                <a href="#" class="view-more">Xem thêm các chỗ nghỉ (Ngũ Hành Sơn) <i class="ti-angle-right"></i></a>
+            </div>
+            <div class="property-grid">
+                <div class="property-card">
+                    <div class="rating">9.1</div>
+                    <img src="assets/img/kin_wander_tan_quy.webp" alt="Kin Wander Tân Quy" />
+                    <div class="property-details">
+                        <h3>Kin Wander Tân Quy</h3>
+                        <div class="property-info">
+                            <div class="property-rating"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+                            <div class="property-location"><i class="ti-location-pin"></i>Quận 7, Hồ Chí Minh</div>
+                        </div>
+                        <p class="property-price">Giá mỗi đêm chưa gồm thuế và phí</p>
+                        <p class="property-price">VND 1,232,551</p>
+                    </div>
+                </div>
+
+                <div class="property-card">
+                    <div class="rating">9.1</div>
+                    <img src="assets/img/kin_wander_tan_phong.webp" alt="Kin Wander Tân Phong" />
+                    <div class="property-details">
+                        <h3>Kin Wander Tân Phong</h3>
+                        <div class="property-info">
+                            <div class="property-rating"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+                            <div class="property-location"><i class="ti-location-pin"></i>Quận 7, Hồ Chí Minh</div>
+                        </div>
+                        <p class="property-price">Giá mỗi đêm chưa gồm thuế và phí</p>
+                        <p class="property-price">VND 1,579,601</p>
+                    </div>
+                </div>
+
+                <div class="property-card">
+                    <div class="rating">8.3</div>
+                    <img src="assets/img/yen_house.jpg" alt="YÊN HOUSE" />
+                    <div class="property-details">
+                        <h3>YÊN HOUSE (YEN HOUSE)</h3>
+                        <div class="property-info">
+                            <div class="property-rating"><span>★</span><span>★</span><span>★</span><span>★</span><span>☆</span></div>
+                            <div class="property-location"><i class="ti-location-pin"></i>Tân Bình, Hồ Chí Minh</div>
+                        </div>
+                        <p class="property-price">Giá mỗi đêm chưa gồm thuế và phí</p>
+                        <p class="property-price">VND 648,148</p>
+                    </div>
+                </div>
+
+                <div class="property-card">
+                    <div class="rating">8.6</div>
+                    <img src="assets/img/vincity_serviced_apartment.webp" alt="VINCITY" />
+                    <div class="property-details">
+                        <h3>Vinhomes Serviced Apartment</h3>
+                        <div class="property-info">
+                            <div class="property-rating"><span>★</span><span>★</span><span>★</span><span>★</span><span>☆</span></div>
+                            <div class="property-location"><i class="ti-location-pin"></i>Quận 9, Hồ Chí Minh</div>
+                        </div>
+                        <p class="property-price">Giá mỗi đêm chưa gồm thuế và phí</p>
+                        <p class="property-price">VND 1,007,223</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div id="popup-placeholder"></div>
+        <script>
+            fetch("popup.html")
+                .then((response) => response.text())
+                .then((data) => {
+                    document.getElementById("popup-placeholder").innerHTML = data;
+                });
+        </script>
+
+        <script src="script.js"></script>
+    </body>
+</html>

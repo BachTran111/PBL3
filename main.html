@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vietnam Booking - Steps and Benefits</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* --- Steps Section --- */
+        .steps-section {
+            display: flex;
+            align-items: flex-start; /* Align items to the top */
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            margin-bottom: 40px; /* Spacing between sections */
+        }
+
+        .steps-text {
+            flex: 1;
+            padding-right: 30px;
+        }
+
+        .steps-image {
+            flex: 1;
+            text-align: center;
+        }
+
+        .steps-image img {
+            width: 100%;
+            max-width: 500px; /* Adjust as needed */
+            border-radius: 8px;
+            object-fit: cover; /* Cover the area */
+            height: auto;
+        }
+
+        .section-title {
+            font-size: 2em;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+
+        .section-subtitle {
+            font-size: 1.2em;
+            color: #34495e;
+            margin-bottom: 30px;
+        }
+
+        .step {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+
+        .step-number {
+            background-color: #007bff;
+            color: #fff;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 15px;
+            font-size: 0.9em;
+        }
+
+        .step-text {
+            color: #34495e;
+            line-height: 1.5;
+        }
+
+        /* --- Benefits Section --- */
+        .benefits-section {
+            text-align: center;
+        }
+
+        .benefits-title {
+            font-size: 2em;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 30px;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .benefit-item {
+            background-color: #fff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        .benefit-item img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .benefit-item p {
+            padding: 15px;
+            margin: 0;
+            color: #34495e;
+            font-size: 1em;
+        }
+        .benefit-item p strong{
+          display: block;
+          font-size: 1.2em;
+          margin-bottom: 5px;
+        }
+
+        @media (max-width: 768px) {
+            .steps-section {
+                flex-direction: column;
+            }
+
+            .steps-text {
+                padding-right: 0;
+                margin-bottom: 30px;
+            }
+
+            .steps-image img {
+                max-width: 100%;
+            }
+
+            .benefits-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 576px) {
+          .benefits-grid {
+              grid-template-columns: 1fr; /* Stack items on extra small screens */
+          }
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+
+        <!-- Steps Section -->
+        <section class="steps-section">
+            <div class="steps-text">
+                <h2 class="section-title">3 bước đơn giản</h2>
+                <p class="section-subtitle">Nâng tầm doanh nghiệp của bạn!</p>
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-text">
+                        <strong>Điền form đăng ký</strong>
+                        Khách sạn, resort hay homestay đều có thể đăng ký miễn phí.
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-text">
+                        <strong>Liên hệ xác nhận và thiết lập tài khoản</strong>
+                        Chuyên viên của chúng tôi sẽ liên hệ để xác nhận và thiết lập tài khoản.
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-text">
+                        <strong>Hướng dẫn và bắt đầu sử dụng</strong>
+                        Đội ngũ kĩ thuật sẽ hướng dẫn và hỗ trợ trong suốt quá trình sử dụng.
+                    </div>
+                </div>
+            </div>
+            <div class="steps-image">
+                <img src="https://i.imgur.com/5954V63.png" alt="Steps Illustration">
+            </div>
+        </section>
+
+        <!-- Benefits Section -->
+        <section class="benefits-section">
+            <h2 class="benefits-title">Tại sao bạn nên hợp tác cùng chúng tôi</h2>
+            <div class="benefits-grid">
+                <div class="benefit-item">
+                    <img src="https://i.imgur.com/F6jS9aN.png" alt="250.000+">
+                    <p><strong>250.000+</strong>Lượt người dùng truy cập hàng tháng</p>
+                </div>
+                <div class="benefit-item">
+                    <img src="https://i.imgur.com/9Pz8Lq4.png" alt="200.000+">
+                    <p><strong>200.000+</strong>Booking hàng tháng</p>
+                </div>
+                <div class="benefit-item">
+                    <img src="https://i.imgur.com/u3G4F0F.png" alt="100.000+">
+                    <p><strong>100.000+</strong>Tải xuống ứng dụng (Android & iOS)</p>
+                </div>
+                <div class="benefit-item">
+                    <img src="https://i.imgur.com/q8BvYmS.png" alt="35.000+">
+                    <p><strong>35.000+</strong>Đối tác trong và ngoài nước</p>
+                </div>
+            </div>
+        </section>
+
+    </div>
+</body>
+</html>

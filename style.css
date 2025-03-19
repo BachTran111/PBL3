@@ -1,0 +1,102 @@
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+}
+.container {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+.logo img {
+    height: 40px;
+    width: auto;
+    vertical-align: middle;
+}
+.logo {
+    width: auto;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+header {
+    background-color: #fff;
+    color: #333;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+}
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+}
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    align-items: center;
+}
+nav ul li {
+    margin-left: 20px;
+}
+nav ul li a {
+    text-decoration: none;
+    color: #333;
+    transition: color 0.3s ease;
+    padding: 10px 15px;
+    border-radius: 5px;
+}
+nav ul li a:hover {
+    color: #0099ff;
+    background-color: #f0f0f0;
+}
+.auth {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+.auth button {
+    padding: 10px 20px;
+    margin-left: 10px;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+.cooperate-btn {
+    width: max-content;
+    background-color: #28a745;
+}
+.cooperate-btn:hover {
+    background-color: #07651d;
+}
+.signup {
+    width: 110px;
+    background-color: #aaa;
+}
+.signup:hover {
+    background-color: #888;
+}
+.login {
+    width: 110px;
+    background-color: #0099ff;
+}
+.login:hover {
+    background-color: #007acc;
+}
