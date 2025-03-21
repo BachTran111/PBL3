@@ -1,5 +1,7 @@
 package com.xuanbach.repository.entity;
 
+import java.sql.Date;
+
 public class HomestayEntity {
 	private Long HomestayID;
 	private String Name;
@@ -9,7 +11,7 @@ public class HomestayEntity {
 	private String ApproveStatus;
 	private Long ApprovedBy;
 	private String ContactInfo;
-	private String CreatedAt;
+	private Date CreatedAt;
 	public Long getHomestayID() {
 		return HomestayID;
 	}
@@ -58,10 +60,10 @@ public class HomestayEntity {
 	public void setContactInfo(String contactInfo) {
 		ContactInfo = contactInfo;
 	}
-	public String getCreatedAt() {
+	public Date getCreatedAt() {
 		return CreatedAt;
 	}
-	public void setCreatedAt(String createdAt) {
+	public void setCreatedAt(Date createdAt) {
 		CreatedAt = createdAt;
 	}
 	
