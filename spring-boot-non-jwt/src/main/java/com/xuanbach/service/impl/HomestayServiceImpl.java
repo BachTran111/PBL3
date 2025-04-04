@@ -68,4 +68,9 @@ public class HomestayServiceImpl implements HomestayService {
     public boolean deleteHomestay(Long id) {
         return homestayRepository.deleteHomestay(id);
     }
+
+    @Override
+    public boolean updateHomestay(HomestayDTO homestayDTO) {
+        return homestayRepository.updateHomestay(homestayDTO,id);
+    }
 }
