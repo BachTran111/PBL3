@@ -104,6 +104,76 @@ public class HomestayRepositoryImpl implements HomestayRepository {
             return false;
         }
     }
-    
+
+    @Override
+    public boolean updateHomestay(HomestayDTO homestayDTO, Long id) {
+        StringBuilder sql = new StringBuilder();
+        sql.append("UPDATE homestay SET ");
+
+        boolean isFirst = true;
+
+        if (homestayDTO.getName() != null) {
+            if (!isFirst) sql.append(", ");
+            sql.append("Name = '").append(homestayDTO.getName()).append("'");
+            isFirst = false;
+        }
+
+        if (homestayDTO.getLocation() != null) {
+            if (!isFirst) sql.append(", ");
+            sql.append("Location = '").append(homestayDTO.getLocation()).append("'");
+            isFirst = false;
+        }
+
+        if (homestayDTO.getDescription() != null) {
+            if (!isFirst) sql.append(", ");
+            sql.append("Description = '").append(homestayDTO.getDescription()).append("'");
+            isFirst = false;
+        }
+
+        if (homestayDTO.getSurfRating() != null) {
+            if (!isFirst) sql.append(", ");
+            sql.append("SurfRating = ").append(homestayDTO.getSurfRating());
+            isFirst = false;
+        }
+
+        if (homestayDTO.getApproveStatus() != null) {
+            if (!isFirst) sql.append(", ");
+            sql.append("ApproveStatus = '").append(homestayDTO.getApproveStatus()).append("'");
+            isFirst = false;
+        }
+
+        if (homestayDTO.getApprovedBy() != null) {
+            if (!isFirst) sql.append(", ");
+            sql.append("ApprovedBy = ").append(homestayDTO.getApprovedBy());
+            isFirst = false;
+        }
+
+        if (homestayDTO.getContactInfo() != null) {
+            if (!isFirst) sql.append(", ");
+            sql.append("ContactInfo = '").append(homestayDTO.getContactInfo()).append("'");
+            isFirst = false;
+        }
+
+        if (homestayDTO.getCreatedAt() != null) {
+            if (!isFirst) sql.append(", ");
+            sql.append("CreatedAt = '").append(new java.sql.Date(homestayDTO.getCreatedAt().getTime())).append("'");
+            isFirst = false;
+        }
+
+        sql.append(" WHERE HomestayID = ").append(id);
+
+        try (Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
+             Statement stmt = conn.createStatement()) {
+
+            // Thực hiện câu lệnh UPDATE
+            int rowsAffected = stmt.executeUpdate(sql.toString());
+            return rowsAffected > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+
 }
 

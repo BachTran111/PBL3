@@ -13,5 +13,5 @@ public interface HomestayService {
 
 	boolean deleteHomestay(Long id);
 
-    boolean updateHomestay(HomestayDTO homestayDTO);
+    boolean updateHomestay(HomestayDTO homestayDTO, Long id);
 }

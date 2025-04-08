@@ -70,7 +70,7 @@ public class HomestayServiceImpl implements HomestayService {
     }
 
     @Override
-    public boolean updateHomestay(HomestayDTO homestayDTO) {
+    public boolean updateHomestay(HomestayDTO homestayDTO, Long id) {
         return homestayRepository.updateHomestay(homestayDTO,id);
     }
 }

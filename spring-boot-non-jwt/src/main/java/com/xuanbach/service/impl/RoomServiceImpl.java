@@ -37,4 +37,19 @@ public class RoomServiceImpl implements RoomService {
         }
         return result;
     }
+
+    @Override
+    public boolean addRoom(RoomDTO roomDTO) {
+        return roomRepository.addRoom(roomDTO);
+    }
+
+    @Override
+    public boolean updateRoom(RoomDTO roomDTO, Long id) {
+        return roomRepository.updateRoom(roomDTO,id);
+    }
+
+    @Override
+    public boolean deleteRoom(Long id) {
+        return roomRepository.deleteRoom(id);
+    }
 }

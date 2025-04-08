@@ -15,22 +15,15 @@ import com.xuanbach.service.RoomService;
 
 @RestController
 @RequestMapping("/homestay")
-public class BuildingAPI {
+@CrossOrigin(origins = "http://127.0.0.1:5500")
+public class HomestayAPI {
 
     @Autowired
     private HomestayService homestayService;
 
-    @Autowired
-    private RoomService roomService;
-
     @GetMapping("/")
     public List<HomestayDTO> getHomestay(@RequestParam Map<String, String> params) {
         return homestayService.findByName(params);
-    }
-
-    @GetMapping("/rooms")
-    public List<RoomDTO> getRooms(@RequestParam Map<String, String> params) {
-        return roomService.findRooms(params);
     }
 
     @PostMapping("/")
@@ -43,11 +36,11 @@ public class BuildingAPI {
         }
     }
 
-    @PutMapping("/")
-    public ResponseEntity<String> updateBuilding(@RequestBody HomestayDTO homestayDTO, Long id) {
-        boolean success = homestayService.updateHomestay(homestayDTO);
+    @PutMapping("/{id}")
+    public ResponseEntity<String> updateBuilding(@RequestBody HomestayDTO homestayDTO,@PathVariable Long id) {
+        boolean success = homestayService.updateHomestay(homestayDTO, id);
         if (success) {
-            return ResponseEntity.status(HttpStatus.CREATED).body("Homestay đã được thêm thành công!");
+            return ResponseEntity.status(HttpStatus.CREATED).body("Homestay đã được cập nhật thành công!");
         } else {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Thêm homestay thất bại!");
         }
