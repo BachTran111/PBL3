@@ -1,6 +1,8 @@
 package com.xuanbach.model;
 
-import java.util.Date;
+import com.fasterxml.jackson.annotation.JsonFormat;
+
+import java.sql.Date;
 
 public class HomestayDTO {
     private Long homestayID;
@@ -11,9 +13,44 @@ public class HomestayDTO {
     private String approveStatus;
     private Long approvedBy;
     private String contactInfo;
+
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private Date createdAt;
     private String status;
 
+    public String getStreet() {
+        return street;
+    }
+
+    public void setStreet(String street) {
+        this.street = street;
+    }
+
+    public String getWard() {
+        return ward;
+    }
+
+    public void setWard(String ward) {
+        this.ward = ward;
+    }
+
+    public String getDistrict() {
+        return district;
+    }
+
+    public void setDistrict(String district) {
+        this.district = district;
+    }
+
+    private String street;
+    private String ward;
+    private String district;
+
+    // Constructor mặc định
+    public HomestayDTO() {
+    }
+
+    // Getters and Setters
     public Long getHomestayID() {
         return homestayID;
     }
@@ -78,7 +115,7 @@ public class HomestayDTO {
         this.contactInfo = contactInfo;
     }
 
-    public Date getCreatedAt() {
+    public java.sql.Date getCreatedAt() {
         return createdAt;
     }
 

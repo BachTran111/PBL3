@@ -1,70 +1,138 @@
 package com.xuanbach.repository.entity;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
+import jakarta.persistence.Id;
+import jakarta.persistence.Column;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+
 import java.sql.Date;
 
+@Entity
+@Table(name = "homestay")
 public class HomestayEntity {
-	private Long HomestayID;
-	private String Name;
-	private String Location;
-	private String Description;
-	private Double SurfRating;
-	private String ApproveStatus;
-	private Long ApprovedBy;
-	private String ContactInfo;
-	private Date CreatedAt;
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "homestay_id")
+	private Long homestayID;
+
+	@Column(name = "name")
+	private String name;
+
+	@Column(name = "street")
+	private String street;
+
+	@Column(name = "ward")
+	private String ward;
+
+	@Column(name = "district")
+	private String district;
+
+	@Column(name = "description")
+	private String description;
+
+	@Column(name = "surf_rating")
+	private Double surfRating;
+
+	@Column(name = "approve_status")
+	private String approveStatus;
+
+	@Column(name = "approved_by")
+	private Long approvedBy;
+
+	@Column(name = "contact_info")
+	private String contactInfo;
+
+	@Column(name = "created_at")
+	private Date createdAt;
+
 	public Long getHomestayID() {
-		return HomestayID;
+		return homestayID;
 	}
+
 	public void setHomestayID(Long homestayID) {
-		HomestayID = homestayID;
+		this.homestayID = homestayID;
 	}
+
 	public String getName() {
-		return Name;
+		return name;
 	}
+
 	public void setName(String name) {
-		Name = name;
+		this.name = name;
 	}
-	public String getLocation() {
-		return Location;
+
+	public String getStreet() {
+		return street;
 	}
-	public void setLocation(String location) {
-		Location = location;
+
+	public void setStreet(String street) {
+		this.street = street;
 	}
-	public String getDescription() {
-		return Description;
+
+	public String getWard() {
+		return ward;
 	}
-	public void setDescription(String description) {
-		Description = description;
+
+	public void setWard(String ward) {
+		this.ward = ward;
 	}
-	public Double getSurfRating() {
-		return SurfRating;
+
+	public String getDistrict() {
+		return district;
 	}
-	public void setSurfRating(Double surfRating) {
-		SurfRating = surfRating;
+
+	public void setDistrict(String district) {
+		this.district = district;
 	}
-	public String getApproveStatus() {
-		return ApproveStatus;
-	}
-	public void setApproveStatus(String approveStatus) {
-		ApproveStatus = approveStatus;
-	}
-	public Long getApprovedBy() {
-		return ApprovedBy;
-	}
-	public void setApprovedBy(Long approvedBy) {
-		ApprovedBy = approvedBy;
-	}
-	public String getContactInfo() {
-		return ContactInfo;
-	}
-	public void setContactInfo(String contactInfo) {
-		ContactInfo = contactInfo;
-	}
+
 	public Date getCreatedAt() {
-		return CreatedAt;
+		return createdAt;
 	}
-	public void setCreatedAt(Date createdAt) {
-		CreatedAt = createdAt;
+
+	public void setCreatedAt(Date created_at) {
+		this.createdAt = created_at;
 	}
-	
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public Double getSurfRating() {
+		return surfRating;
+	}
+
+	public void setSurfRating(Double surfRating) {
+		this.surfRating = surfRating;
+	}
+
+	public String getApproveStatus() {
+		return approveStatus;
+	}
+
+	public void setApproveStatus(String approveStatus) {
+		this.approveStatus = approveStatus;
+	}
+
+	public Long getApprovedBy() {
+		return approvedBy;
+	}
+
+	public void setApprovedBy(Long approvedBy) {
+		this.approvedBy = approvedBy;
+	}
+
+	public String getContactInfo() {
+		return contactInfo;
+	}
+
+	public void setContactInfo(String contactInfo) {
+		this.contactInfo = contactInfo;
+	}
 }

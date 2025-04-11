@@ -5,7 +5,9 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
+import com.xuanbach.utils.HomestayMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,51 +16,27 @@ import com.xuanbach.repository.HomestayRepository;
 import com.xuanbach.repository.entity.HomestayEntity;
 import com.xuanbach.service.HomestayService;
 
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
+import jakarta.persistence.Query;
 
 @Service
 public class HomestayServiceImpl implements HomestayService {
     
     @Autowired
     private HomestayRepository homestayRepository;
-    
+
+    @PersistenceContext
+    private EntityManager entityManager;
+
     @Override
     public List<HomestayDTO> findByName(Map<String, String> params) {
-        List<HomestayEntity> homestayEntities = homestayRepository.findByName(params);
-        List<HomestayDTO> result = new ArrayList<>();
-
-        for (HomestayEntity item : homestayEntities) {
-            HomestayDTO homestay = new HomestayDTO();
-            homestay.setHomestayID(item.getHomestayID());
-            homestay.setName(item.getName());
-            homestay.setLocation(item.getLocation());
-            homestay.setDescription(item.getDescription());
-            homestay.setSurfRating(item.getSurfRating());
-            homestay.setApproveStatus(item.getApproveStatus());
-            homestay.setApprovedBy(item.getApprovedBy());
-            homestay.setContactInfo(item.getContactInfo());
-            homestay.setCreatedAt(item.getCreatedAt());
-            homestay.setStatus(generateStatus(item));
-            result.add(homestay);
-        }
-        return result;
+        List<HomestayEntity> entities = homestayRepository.findByName(params);
+        return entities.stream()
+                .map(HomestayMapper::toDTO)
+                .collect(Collectors.toList());
     }
 
-    private String generateStatus(HomestayEntity item) {
-        if (item.getApprovedBy() == null || item.getCreatedAt() == null) {
-            return "Chưa được phê duyệt";
-        }
-        return "Được phê duyệt bởi " + item.getApprovedBy() + 
-               " vào ngày " + formatDate(item.getCreatedAt());
-    }
-
-    private String formatDate(Date date) {
-        if (date == null) {
-            return "N/A";
-        }
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-        return sdf.format(date);
-    }
-    
     @Override
     public boolean addHomestay(HomestayDTO homestayDTO) {
         return homestayRepository.addHomestay(homestayDTO);

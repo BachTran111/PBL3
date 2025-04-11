@@ -1,14 +1,11 @@
 package com.xuanbach.repository.impl;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -17,77 +14,69 @@ import com.xuanbach.model.HomestayDTO;
 import com.xuanbach.repository.HomestayRepository;
 import com.xuanbach.repository.entity.HomestayEntity;
 
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
+import jakarta.persistence.Query;
+
 @Repository
+@Transactional
 public class HomestayRepositoryImpl implements HomestayRepository {
-    static final String DB_URL = "jdbc:mysql://localhost:3306/homestay_management2.0";
+    static final String DB_URL = "jdbc:mysql://localhost:3306/homestay";
     static final String USER = "root";
     static final String PASS = "Bachdepzai11";
 
-    @GetMapping(value = "/api/building/")
-    public List<HomestayEntity> findByName(@RequestParam Map<String, String> params) {
+    @PersistenceContext
+    private EntityManager entityManager;
+
+    @GetMapping(value = "/homestay/")
+    public List<HomestayEntity> findByName(Map<String, String> params) {
         StringBuilder sql = new StringBuilder("SELECT * FROM homestay WHERE 1=1 ");
 
         if (params.containsKey("name")) {
-            sql.append("AND Name LIKE '%").append(params.get("name")).append("%' ");
+            sql.append(" AND name LIKE '%").append(params.get("name")).append("%' ");
         }
+
         if (params.containsKey("location")) {
-            sql.append("AND Location LIKE '%").append(params.get("location")).append("%' ");
+            sql.append(" AND (street LIKE '%").append(params.get("location")).append("%' ")
+                    .append("OR ward LIKE '%").append(params.get("location")).append("%' ")
+                    .append("OR district LIKE '%").append(params.get("location")).append("%') ");
         }
+
         if (params.containsKey("minSurfRating")) {
             double minRating = Math.max(0, Double.parseDouble(params.get("minSurfRating")));
-            sql.append("AND SurfRating >= ").append(minRating).append(" ");
+            sql.append(" AND surf_rating >= ").append(minRating).append(" ");
         }
+
         if (params.containsKey("maxSurfRating")) {
             double maxRating = Math.min(5, Double.parseDouble(params.get("maxSurfRating")));
-            sql.append("AND SurfRating <= ").append(maxRating).append(" ");
+            sql.append(" AND surf_rating <= ").append(maxRating).append(" ");
         }
 
-        List<HomestayEntity> result = new ArrayList<>();
-        try (Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
-             Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery(sql.toString())) {
-
-            while (rs.next()) {
-            	HomestayEntity hm = new HomestayEntity();
-                hm.setHomestayID(rs.getLong("HomestayID"));
-                hm.setName(rs.getString("Name"));
-                hm.setLocation(rs.getString("Location"));
-                hm.setDescription(rs.getString("Description"));
-                hm.setSurfRating(rs.getDouble("SurfRating"));
-                hm.setApproveStatus(rs.getString("ApproveStatus"));
-                hm.setApprovedBy(rs.getLong("ApprovedBy"));
-                hm.setContactInfo(rs.getString("ContactInfo"));
-                hm.setCreatedAt(rs.getDate("CreatedAt"));
-                result.add(hm);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-            System.out.println("Connect failed...");
-        }
+        // Sử dụng EntityManager để thực hiện native query và mapping kết quả sang HomestayEntity
+        Query query = entityManager.createNativeQuery(sql.toString(), HomestayEntity.class);
+        List<HomestayEntity> result = query.getResultList();
         return result;
     }
-    
+
     @Override
     public boolean addHomestay(HomestayDTO homestayDTO) {
-        StringBuilder sql = new StringBuilder();
-        sql.append("INSERT INTO homestay (Name, Location, Description, SurfRating, ApproveStatus, ApprovedBy, ContactInfo, CreatedAt) VALUES ('")
-           .append(homestayDTO.getName()).append("', '")
-           .append(homestayDTO.getLocation()).append("', '")
-           .append(homestayDTO.getDescription()).append("', ")
-           .append(homestayDTO.getSurfRating()).append(", '")
-           .append(homestayDTO.getApproveStatus()).append("', ")
-           .append(homestayDTO.getApprovedBy()).append(", '")
-           .append(homestayDTO.getContactInfo()).append("', '")
-           .append(new java.sql.Date(homestayDTO.getCreatedAt().getTime())).append("')");
+        String sql = "INSERT INTO homestay (name, street, ward, district, description, surf_rating, " +
+                "approve_status, approved_by, contact_info, created_at) " +
+                "VALUES (:name, :street, :ward, :district, :description, :surfRating, " +
+                ":approveStatus, :approvedBy, :contactInfo, :createdAt)";
 
-        try (Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
-             Statement stmt = conn.createStatement()) {
-
-            return stmt.executeUpdate(sql.toString()) > 0;
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return false;
-        }
+        Query query = entityManager.createNativeQuery(sql);
+        query.setParameter("name", homestayDTO.getName());
+        query.setParameter("street", homestayDTO.getStreet());
+        query.setParameter("ward", homestayDTO.getWard());
+        query.setParameter("district", homestayDTO.getDistrict());
+        query.setParameter("description", homestayDTO.getDescription());
+        query.setParameter("surfRating", homestayDTO.getSurfRating());
+        query.setParameter("approveStatus", homestayDTO.getApproveStatus());
+        query.setParameter("approvedBy", homestayDTO.getApprovedBy());
+        query.setParameter("contactInfo", homestayDTO.getContactInfo());
+        query.setParameter("createdAt", homestayDTO.getCreatedAt());
+        return query.executeUpdate() > 0;
     }
 
     @Override
