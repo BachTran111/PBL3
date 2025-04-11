@@ -1,11 +1,28 @@
 package com.xuanbach.repository.entity;
 
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "user")
 public class UserEntity {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "user_id")
     private Long userID;
+
+    @Column(name = "username")
     private String username;
+
+    @Column(name = "password_hash", nullable = false)
     private String password;
+
+    @Column(name = "email")
     private String email;
+
+    @Column(name = "role_id")
     private Long roleID;
+
+    @Column(name = "created_at")
     private String createdAt;
 
     public Long getUserID() {
