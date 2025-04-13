@@ -2,6 +2,7 @@ package com.xuanbach.repository.impl;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -51,8 +52,6 @@ public class HomestayRepositoryImpl implements HomestayRepository {
             double maxRating = Math.min(5, Double.parseDouble(params.get("maxSurfRating")));
             sql.append(" AND surf_rating <= ").append(maxRating).append(" ");
         }
-
-        // Sử dụng EntityManager để thực hiện native query và mapping kết quả sang HomestayEntity
         Query query = entityManager.createNativeQuery(sql.toString(), HomestayEntity.class);
         List<HomestayEntity> result = query.getResultList();
         return result;
@@ -82,7 +81,7 @@ public class HomestayRepositoryImpl implements HomestayRepository {
     @Override
     public boolean deleteHomestay(Long id) {
         StringBuilder sql = new StringBuilder();
-        sql.append("DELETE FROM homestay WHERE HomestayID = ").append(id);
+        sql.append("DELETE FROM homestay WHERE homestay_id = ").append(id);
 
         try (Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
              Statement stmt = conn.createStatement()) {
@@ -95,72 +94,92 @@ public class HomestayRepositoryImpl implements HomestayRepository {
     }
 
     @Override
+    @Transactional
     public boolean updateHomestay(HomestayDTO homestayDTO, Long id) {
-        StringBuilder sql = new StringBuilder();
-        sql.append("UPDATE homestay SET ");
+        StringBuilder sql = new StringBuilder("UPDATE homestay SET ");
+        Map<String, Object> params = new HashMap<>();
 
         boolean isFirst = true;
 
         if (homestayDTO.getName() != null) {
             if (!isFirst) sql.append(", ");
-            sql.append("Name = '").append(homestayDTO.getName()).append("'");
+            sql.append("name = :name");
+            params.put("name", homestayDTO.getName());
             isFirst = false;
         }
 
-        if (homestayDTO.getLocation() != null) {
+        if (homestayDTO.getStreet() != null) {
             if (!isFirst) sql.append(", ");
-            sql.append("Location = '").append(homestayDTO.getLocation()).append("'");
+            sql.append("street = :street");
+            params.put("street", homestayDTO.getStreet());
+            isFirst = false;
+        }
+
+        if (homestayDTO.getWard() != null) {
+            if (!isFirst) sql.append(", ");
+            sql.append("ward = :ward");
+            params.put("ward", homestayDTO.getWard());
+            isFirst = false;
+        }
+
+        if (homestayDTO.getDistrict() != null) {
+            if (!isFirst) sql.append(", ");
+            sql.append("district = :district");
+            params.put("district", homestayDTO.getDistrict());
             isFirst = false;
         }
 
         if (homestayDTO.getDescription() != null) {
             if (!isFirst) sql.append(", ");
-            sql.append("Description = '").append(homestayDTO.getDescription()).append("'");
+            sql.append("description = :description");
+            params.put("description", homestayDTO.getDescription());
             isFirst = false;
         }
 
         if (homestayDTO.getSurfRating() != null) {
             if (!isFirst) sql.append(", ");
-            sql.append("SurfRating = ").append(homestayDTO.getSurfRating());
+            sql.append("surf_rating = :surfRating");
+            params.put("surfRating", homestayDTO.getSurfRating());
             isFirst = false;
         }
 
         if (homestayDTO.getApproveStatus() != null) {
             if (!isFirst) sql.append(", ");
-            sql.append("ApproveStatus = '").append(homestayDTO.getApproveStatus()).append("'");
+            sql.append("approve_status = :approveStatus");
+            params.put("approveStatus", homestayDTO.getApproveStatus());
             isFirst = false;
         }
 
         if (homestayDTO.getApprovedBy() != null) {
             if (!isFirst) sql.append(", ");
-            sql.append("ApprovedBy = ").append(homestayDTO.getApprovedBy());
+            sql.append("approved_by = :approvedBy");
+            params.put("approvedBy", homestayDTO.getApprovedBy());
             isFirst = false;
         }
 
         if (homestayDTO.getContactInfo() != null) {
             if (!isFirst) sql.append(", ");
-            sql.append("ContactInfo = '").append(homestayDTO.getContactInfo()).append("'");
+            sql.append("contact_info = :contactInfo");
+            params.put("contactInfo", homestayDTO.getContactInfo());
             isFirst = false;
         }
 
         if (homestayDTO.getCreatedAt() != null) {
             if (!isFirst) sql.append(", ");
-            sql.append("CreatedAt = '").append(new java.sql.Date(homestayDTO.getCreatedAt().getTime())).append("'");
+            sql.append("created_at = :createdAt");
+            params.put("createdAt", homestayDTO.getCreatedAt());
             isFirst = false;
         }
 
-        sql.append(" WHERE HomestayID = ").append(id);
+        sql.append(" WHERE homestay_id = :id");
+        params.put("id", id);
 
-        try (Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
-             Statement stmt = conn.createStatement()) {
-
-            // Thực hiện câu lệnh UPDATE
-            int rowsAffected = stmt.executeUpdate(sql.toString());
-            return rowsAffected > 0;
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return false;
+        Query query = entityManager.createNativeQuery(sql.toString());
+        for (Map.Entry<String, Object> entry : params.entrySet()) {
+            query.setParameter(entry.getKey(), entry.getValue());
         }
+
+        return query.executeUpdate() > 0;
     }
 
 
