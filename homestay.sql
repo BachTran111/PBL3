@@ -90,7 +90,10 @@ CREATE TABLE `homestay` (
   `approved_by` bigint DEFAULT NULL,
   `contact_info` varchar(255) DEFAULT NULL,
   `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`homestay_id`)
+  `host_id` bigint DEFAULT NULL,
+  PRIMARY KEY (`homestay_id`),
+  KEY `FKjrexvsuadmm3g62m0ac6dreo6` (`host_id`),
+  CONSTRAINT `FKjrexvsuadmm3g62m0ac6dreo6` FOREIGN KEY (`host_id`) REFERENCES `users` (`user_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -100,7 +103,7 @@ CREATE TABLE `homestay` (
 
 LOCK TABLES `homestay` WRITE;
 /*!40000 ALTER TABLE `homestay` DISABLE KEYS */;
-INSERT INTO `homestay` VALUES (1,'Con Cho Bi Dien','37 Ha Van Tin','Ha Ha','Hoa Khanh','so chi',4.52,'PENDING',NULL,'doggy@gmail.com','2025-04-11 18:47:58'),(2,'Con Chim Homestay','100 Ngu Hanh Son','Hai Hoa','Hoa Khanh','Gần Trường đại học DUT',4.2,'PENDING',NULL,'bird@gmail.com','2025-04-11 21:58:44'),(3,'LeoMessi','36 Ha Van Tin','Ha Ha','Hoa Khanh','so chi',4.52,'PENDING',NULL,'muoigio@gmail.com','2025-04-13 18:32:15'),(4,'Con Cho Bi Khung','37 Ha Van Tin','Ha Ha','Hoa Khanh','so chi',4.52,'PENDING',NULL,'doggy@gmail.com','2025-04-15 22:04:38');
+INSERT INTO `homestay` VALUES (1,'Con Cho Bi Dien','37 Ha Van Tin','Ha Ha','Hoa Khanh','so chi',4.52,'PENDING',NULL,'doggy@gmail.com','2025-04-11 18:47:58',2),(2,'Con Chim Homestay','100 Ngu Hanh Son','Hai Hoa','Hoa Khanh','Gần Trường đại học DUT',4.2,'PENDING',NULL,'bird@gmail.com','2025-04-11 21:58:44',2),(3,'LeoMessi','36 Ha Van Tin','Ha Ha','Hoa Khanh','so chi',4.52,'PENDING',NULL,'muoigio@gmail.com','2025-04-13 18:32:15',3),(4,'Con Cho Bi Khung','38 Ha Van Tin','Ha Ha','Hoa Khanh','so chi',4.52,'PENDING',NULL,'doggy@gmail.com','2025-04-15 22:04:38',3);
 /*!40000 ALTER TABLE `homestay` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -392,4 +395,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-04-15 22:33:59
+-- Dump completed on 2025-04-17 12:13:23
