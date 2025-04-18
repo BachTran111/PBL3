@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="vi">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Admin Dashboard</title>
+        <link rel="stylesheet" href="assets/css/header.css" />
+        <link rel="stylesheet" href="assets/fonts/themify-icons/themify-icons.css" />
+        <style>
+            body {
+                margin: 0;
+                font-family: Arial, sans-serif;
+            }
+
+            .user-icon-container {
+                position: relative;
+                display: inline-block;
+            }
+            .user-icon img {
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                cursor: pointer;
+            }
+            .user-dropdown {
+                display: none;
+                position: absolute;
+                right: 0;
+                top: 46px;
+                background-color: white;
+                border: 1px solid #ddd;
+                box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+                list-style: none;
+                padding: 0;
+                margin: 0;
+                width: 160px;
+                z-index: 1000;
+            }
+            .user-dropdown li {
+                border-bottom: 1px solid #eee;
+            }
+            .user-dropdown li a {
+                display: block;
+                padding: 10px 15px;
+                text-decoration: none;
+                color: #333;
+                transition: background 0.3s;
+            }
+            .user-dropdown li a:hover {
+                background-color: #f0f0f0;
+            }
+
+            .container {
+                display: flex;
+                margin-top: 60px;
+                min-height: 100vh;
+            }
+            .sidebar {
+                width: 250px;
+                background: #2c3e50;
+                color: #ecf0f1;
+                padding: 20px;
+            }
+            .sidebar h2 {
+                text-align: center;
+                margin-bottom: 20px;
+            }
+            .sidebar ul {
+                list-style: none;
+                padding: 0;
+            }
+            .sidebar li {
+                margin: 8px 0 0 20px;
+            }
+            .sidebar a {
+                color: #ecf0f1;
+                text-decoration: none;
+                padding: 10px;
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                border-radius: 6px;
+            }
+            .sidebar a:hover {
+                background: #3b4d61;
+                color: #1abc9c;
+            }
+            .parent-toggle .arrow-icon {
+                margin-left: auto;
+                transition: transform 0.3s;
+            }
+            .parent-toggle.open .arrow-icon {
+                transform: rotate(180deg);
+            }
+            .sub-menu {
+                display: none;
+                padding-left: 20px;
+            }
+            .main-content {
+                flex: 1;
+                padding: 30px;
+                background: #f9f9f9;
+            }
+            .tab-content {
+                display: none;
+            }
+            .tab-content.active {
+                display: block;
+            }
+            .tab-link.active-tab {
+                color: #1abc9c;
+                font-weight: bold;
+            }
+
+            /* default content */
+            #default-content {
+                text-align: center;
+            }
+            #default-content img {
+                width: 120px;
+                margin-bottom: 20px;
+            }
+
+            /* Bảng danh sách */
+            .room-table {
+                width: 100%;
+                border-collapse: collapse;
+                margin-top: 10px;
+            }
+            .room-table th,
+            .room-table td {
+                border: 1px solid #ddd;
+                padding: 10px;
+                text-align: center;
+            }
+            .room-table th {
+                background-color: #f5f5f5;
+            }
+
+            /* Nút */
+            .btn {
+                padding: 6px 12px;
+                border: none;
+                border-radius: 4px;
+                font-size: 14px;
+                cursor: pointer;
+                margin: 0 3px;
+            }
+            .btn-view {
+                background-color: #3498db;
+                color: white;
+            }
+            .btn-approve {
+                background-color: #2ecc71;
+                color: white;
+            }
+            .btn-reject {
+                background-color: #e74c3c;
+                color: white;
+            }
+
+            /* Pop-up overlay */
+            .popup-overlay {
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: rgba(0, 0, 0, 0.4);
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                z-index: 9999;
+            }
+            .popup-content {
+                background: white;
+                padding: 25px 30px;
+                border-radius: 10px;
+                width: 400px;
+                max-width: 90%;
+                position: relative;
+                animation: fadeIn 0.3s ease-in-out;
+            }
+            .close-popup {
+                position: absolute;
+                top: 10px;
+                right: 15px;
+                font-size: 24px;
+                background: none;
+                border: none;
+                color: #888;
+                cursor: pointer;
+            }
+            .close-popup:hover {
+                color: #1abc9c;
+            }
+            @keyframes fadeIn {
+                from {
+                    opacity: 0;
+                    transform: scale(0.95);
+                }
+                to {
+                    opacity: 1;
+                    transform: scale(1);
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <header>
+            <div class="header-container">
+                <div class="container1">
+                    <div class="header-content">
+                        <div class="logo">
+                            <a href="trang-chu.html">
+                                <img src="assets/img/gotravel_logo_air.png" alt="" />
+                            </a>
+                        </div>
+                        <nav class="nav">
+                            <ul>
+                                <li><a href="trang-chu.html">TRANG CHỦ</a></li>
+                                <li><a href="homestay.html">HOMESTAYS</a></li>
+                                <li><a href="about.html">VỀ CHÚNG TÔI</a></li>
+                                <li><a href="contact.html">LIÊN HỆ</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+                <div class="btns desktop-btns">
+                    <div class="user-icon-container">
+                        <div class="user-icon" onclick="toggleUserMenu()">
+                            <img src="assets/img/avt.jpg" alt="User" />
+                        </div>
+                        <ul class="user-dropdown" id="userDropdown">
+                            <li><a href="#">Trang cá nhân</a></li>
+                            <li><a href="#">Đăng xuất</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <button class="mobile-menu-toggle" aria-label="Toggle menu" aria-expanded="false">
+                    <i class="ti-menu"></i>
+                </button>
+
+                <div class="mobile-menu">
+                    <a href="trang-chu.html" class="mobile-menu-link">TRANG CHỦ</a>
+                    <a href="homestay.html" class="mobile-menu-link">HOMESTAYS</a>
+                    <a href="about.html" class="mobile-menu-link">VỀ CHÚNG TÔI</a>
+                    <a href="contact.html" class="mobile-menu-link">LIÊN HỆ</a>
+                    <hr class="mobile-menu-divider" />
+                    <a href="partnership.html" class="mobile-menu-link">Hợp tác với chúng tôi</a>
+                    <a href="#">Trang cá nhân</a>
+                    <a href="#">Đăng xuất</a>
+                </div>
+            </div>
+        </header>
+
+        <div class="container">
+            <div class="sidebar">
+                <h2>Admin Panel</h2>
+                <ul>
+                    <li>
+                        <a href="#" class="parent-toggle">Yêu cầu phê duyệt<span class="arrow-icon">▼</span></a>
+                        <ul class="sub-menu">
+                            <li><a href="#" class="tab-link" data-tab="tab-approve-business">Phê duyệt doanh nghiệp</a></li>
+                            <li><a href="#" class="tab-link" data-tab="tab-approve-room">Phê duyệt phòng</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#" class="tab-link" data-tab="tab-manage-company">Quản lý doanh nghiệp</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="main-content">
+                <div id="default-content" class="tab-content active">
+                    <img src="https://cdn-icons-png.flaticon.com/512/706/706797.png" alt="Welcome" />
+                    <h1>Chào mừng bạn đến với Trung tâm quản lý Homestay!</h1>
+                    <h3>Admin Panel</h3>
+                </div>
+                <div id="tab-approve-business" class="tab-content">
+                    <div class="card">
+                        <h2>Phê duyệt doanh nghiệp</h2>
+                        <table class="room-table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Tên doanh nghiệp</th>
+                                    <th>Xem chi tiết</th>
+                                    <th>Hành động</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>DN001</td>
+                                    <td>Công ty TNHH Du lịch ABC</td>
+                                    <td>
+                                        <button
+                                            class="btn btn-view"
+                                            onclick="openCommonPopup('business', { name: 'Homestay ABC', address: '123 Nha Trang', email: 'abc@mail.com', note: 'Ghi chú mẫu' })"
+                                        >
+                                            Xem chi tiết
+                                        </button>
+                                    </td>
+                                    <td>
+                                        <button class="btn btn-approve">Phê duyệt</button>
+                                        <button class="btn btn-reject">Từ chối</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div id="tab-approve-room" class="tab-content">
+                    <div class="card">
+                        <h2>Phê duyệt phòng</h2>
+                        <table class="room-table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Tên Homestay</th>
+                                    <th>Xem chi tiết</th>
+                                    <th>Hành động</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>P001</td>
+                                    <td>Homestay Bị Điên</td>
+                                    <td>
+                                        <button
+                                            class="btn btn-view"
+                                            onclick="openCommonPopup('room', { homestay: 'Homestay Bị Điên', roomType: 'Phòng đôi', facilities: 'Wifi, Máy lạnh', price: '700.000đ' })"
+                                        >
+                                            Xem chi tiết
+                                        </button>
+                                    </td>
+                                    <td>
+                                        <button class="btn btn-approve">Phê duyệt</button>
+                                        <button class="btn btn-reject">Từ chối</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div id="tab-manage-company" class="tab-content">
+                    <h2>Quản lý doanh nghiệp</h2>
+                    <!-- Nội dung -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Pop-up chi tiết dùng chung -->
+        <div id="common-popup" class="popup-overlay" style="display: none">
+            <div class="popup-content">
+                <button class="close-popup" onclick="closeCommonPopup()">×</button>
+                <h3 id="popup-title">Chi tiết</h3>
+                <div id="popup-body"></div>
+            </div>
+        </div>
+
+        <script>
+            // Icon user
+            function toggleUserMenu() {
+                const dropdown = document.getElementById("userDropdown");
+                dropdown.style.display = dropdown.style.display === "block" ? "none" : "block";
+            }
+
+            const mobileToggle = document.querySelector(".mobile-menu-toggle");
+            const mobileMenu = document.querySelector(".mobile-menu");
+
+            mobileToggle?.addEventListener("click", () => {
+                const isVisible = mobileMenu.style.display === "block";
+                mobileMenu.style.display = isVisible ? "none" : "block";
+                mobileToggle.setAttribute("aria-expanded", String(!isVisible));
+            });
+
+            // Tự động ẩn menu khi click ngoài
+            window.addEventListener("click", function (e) {
+                const userIcon = document.querySelector(".user-icon");
+                const dropdown = document.getElementById("userDropdown");
+
+                if (dropdown && !userIcon.contains(e.target)) {
+                    dropdown.style.display = "none";
+                }
+            });
+
+            const parentToggles = document.querySelectorAll(".parent-toggle");
+            const tabLinks = document.querySelectorAll(".tab-link");
+            const tabContents = document.querySelectorAll(".tab-content");
+            const defaultContent = document.getElementById("default-content");
+
+            parentToggles.forEach((toggle) => {
+                toggle.addEventListener("click", (e) => {
+                    e.preventDefault();
+                    const submenu = toggle.nextElementSibling;
+                    const isOpen = submenu.style.display === "block";
+
+                    document.querySelectorAll(".sub-menu").forEach((menu) => (menu.style.display = "none"));
+                    document.querySelectorAll(".parent-toggle").forEach((pt) => pt.classList.remove("open"));
+
+                    if (!isOpen) {
+                        submenu.style.display = "block";
+                        toggle.classList.add("open");
+                    }
+                });
+            });
+
+            tabLinks.forEach((link) => {
+                link.addEventListener("click", (e) => {
+                    e.preventDefault();
+                    tabLinks.forEach((l) => l.classList.remove("active-tab"));
+                    link.classList.add("active-tab");
+
+                    tabContents.forEach((c) => c.classList.remove("active"));
+                    const tabId = link.getAttribute("data-tab");
+                    document.getElementById(tabId).classList.add("active");
+
+                    defaultContent.classList.remove("active");
+                });
+            });
+
+            function openCommonPopup(type, data) {
+                const title = document.getElementById("popup-title");
+                const body = document.getElementById("popup-body");
+
+                if (type === "business") {
+                    title.innerText = "Chi tiết Doanh nghiệp";
+                    body.innerHTML = `
+            <p><strong>Tên Homestay:</strong> ${data.name}</p>
+            <p><strong>Địa chỉ:</strong> ${data.address}</p>
+            <p><strong>Email:</strong> ${data.email}</p>
+            <p><strong>Ghi chú:</strong> ${data.note}</p>
+          `;
+                } else if (type === "room") {
+                    title.innerText = "Chi tiết Phòng";
+                    body.innerHTML = `
+            <p><strong>Tên Homestay:</strong> ${data.homestay}</p>
+            <p><strong>Loại phòng:</strong> ${data.roomType}</p>
+            <p><strong>Tiện nghi:</strong> ${data.facilities}</p>
+            <p><strong>Giá:</strong> ${data.price}</p>
+          `;
+                }
+
+                document.getElementById("common-popup").style.display = "flex";
+            }
+
+            function closeCommonPopup() {
+                document.getElementById("common-popup").style.display = "none";
+            }
+        </script>
+    </body>
+</html>

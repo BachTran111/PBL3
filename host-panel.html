@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="vi">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Host Dashboard</title>
+        <link rel="stylesheet" href="assets/css/header.css" />
+        <link rel="stylesheet" href="assets/fonts/themify-icons/themify-icons.css" />
+        <style>
+            body {
+                margin: 0;
+                font-family: Arial, sans-serif;
+            }
+
+            .user-icon-container {
+                position: relative;
+                display: inline-block;
+            }
+            .user-icon img {
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                cursor: pointer;
+            }
+            .user-dropdown {
+                display: none;
+                position: absolute;
+                right: 0;
+                top: 46px;
+                background-color: white;
+                border: 1px solid #ddd;
+                box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+                list-style: none;
+                padding: 0;
+                margin: 0;
+                width: 160px;
+                z-index: 1000;
+            }
+            .user-dropdown li {
+                border-bottom: 1px solid #eee;
+            }
+            .user-dropdown li a {
+                display: block;
+                padding: 10px 15px;
+                text-decoration: none;
+                color: #333;
+                transition: background 0.3s;
+            }
+            .user-dropdown li a:hover {
+                background-color: #f0f0f0;
+            }
+
+            .container {
+                display: flex;
+                margin-top: 60px;
+                min-height: 100vh;
+            }
+            .sidebar {
+                width: 250px;
+                background: #2c3e50;
+                color: #ecf0f1;
+                padding: 20px;
+            }
+            .sidebar h2 {
+                text-align: center;
+                margin-bottom: 20px;
+            }
+            .sidebar ul {
+                list-style: none;
+                padding: 0;
+            }
+            .sidebar li {
+                margin: 8px 0 0 20px;
+            }
+            .sidebar a {
+                color: #ecf0f1;
+                text-decoration: none;
+                padding: 10px;
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                border-radius: 6px;
+            }
+            .sidebar a:hover {
+                background: #3b4d61;
+                color: #1abc9c;
+            }
+            .parent-toggle .arrow-icon {
+                margin-left: auto;
+                transition: transform 0.3s;
+            }
+            .parent-toggle.open .arrow-icon {
+                transform: rotate(180deg);
+            }
+            .sub-menu {
+                display: none;
+                padding-left: 20px;
+            }
+            .main-content {
+                flex: 1;
+                padding: 30px;
+                background: #f9f9f9;
+            }
+            .tab-content {
+                display: none;
+            }
+            .tab-content.active {
+                display: block;
+            }
+            .tab-link.active-tab {
+                color: #1abc9c;
+                font-weight: bold;
+            }
+
+            /* default content */
+            #default-content {
+                text-align: center;
+            }
+            #default-content img {
+                width: 120px;
+                margin-bottom: 20px;
+            }
+
+            /* tab-rooms tab-add */
+            .card {
+                background: #ffffff;
+                border-radius: 8px;
+                padding: 25px;
+                margin-bottom: 20px;
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+                position: relative;
+            }
+            .close-btn {
+                position: absolute;
+                top: 12px;
+                right: 15px;
+                background: none;
+                border: none;
+                font-size: 26px;
+                color: #999;
+                cursor: pointer;
+            }
+            .close-btn:hover {
+                color: #1abc9c;
+            }
+
+            .room-table {
+                width: 100%;
+                border-collapse: collapse;
+            }
+            .room-table th,
+            .room-table td {
+                border: 1px solid #ddd;
+                padding: 10px;
+                text-align: center;
+            }
+            .room-table th {
+                background-color: #f4f4f4;
+            }
+            .btn {
+                padding: 6px 12px;
+                border: none;
+                border-radius: 4px;
+                font-size: 14px;
+                cursor: pointer;
+                margin-right: 5px;
+            }
+            .btn-view {
+                background-color: #007bff;
+                color: white;
+            }
+            .btn-edit {
+                background-color: #ffc107;
+                color: white;
+            }
+            .btn-delete {
+                background-color: #dc3545;
+                color: white;
+            }
+            .btn-add {
+                background-color: #1abc9c;
+                color: white;
+                padding: 10px 20px;
+                border: none;
+                border-radius: 6px;
+                margin-top: 15px;
+            }
+            #preview-container {
+                margin-top: 10px;
+                display: flex;
+                gap: 10px;
+                flex-wrap: wrap;
+            }
+            #preview-container img {
+                width: 100px;
+                height: 100px;
+                object-fit: cover;
+                border: 1px solid #ccc;
+                border-radius: 6px;
+            }
+            .form-group {
+                margin-top: 20px;
+            }
+        </style>
+    </head>
+    <body>
+        <header>
+            <div class="header-container">
+                <div class="container1">
+                    <div class="header-content">
+                        <div class="logo">
+                            <a href="trang-chu.html">
+                                <img src="assets/img/gotravel_logo_air.png" alt="" />
+                            </a>
+                        </div>
+                        <nav class="nav">
+                            <ul>
+                                <li><a href="trang-chu.html">TRANG CHỦ</a></li>
+                                <li><a href="homestay.html">HOMESTAYS</a></li>
+                                <li><a href="about.html">VỀ CHÚNG TÔI</a></li>
+                                <li><a href="contact.html">LIÊN HỆ</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+                <div class="btns desktop-btns">
+                    <div class="user-icon-container">
+                        <div class="user-icon" onclick="toggleUserMenu()">
+                            <img src="assets/img/avt.jpg" alt="User" />
+                        </div>
+                        <ul class="user-dropdown" id="userDropdown">
+                            <li><a href="#">Trang cá nhân</a></li>
+                            <li><a href="#">Đăng xuất</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <button class="mobile-menu-toggle" aria-label="Toggle menu" aria-expanded="false">
+                    <i class="ti-menu"></i>
+                </button>
+
+                <div class="mobile-menu">
+                    <a href="trang-chu.html" class="mobile-menu-link">TRANG CHỦ</a>
+                    <a href="homestay.html" class="mobile-menu-link">HOMESTAYS</a>
+                    <a href="about.html" class="mobile-menu-link">VỀ CHÚNG TÔI</a>
+                    <a href="contact.html" class="mobile-menu-link">LIÊN HỆ</a>
+                    <hr class="mobile-menu-divider" />
+                    <a href="partnership.html" class="mobile-menu-link">Hợp tác với chúng tôi</a>
+                    <a href="#">Trang cá nhân</a>
+                    <a href="#">Đăng xuất</a>
+                </div>
+            </div>
+        </header>
+
+        <div class="container">
+            <div class="sidebar">
+                <h2>Host Panel</h2>
+                <ul>
+                    <li>
+                        <a href="#" class="parent-toggle">Quản lý Homestay <span class="arrow-icon">▼</span></a>
+                        <ul class="homestay-list" style="display: none">
+                            <li>
+                                <a href="#" class="homestay-toggle">Homestay A</a>
+                                <ul class="sub-menu">
+                                    <li><a href="#" class="tab-link" data-tab="rooms-A">Tất cả phòng</a></li>
+                                    <li><a href="#" class="tab-link" data-tab="add-room-A">Thêm phòng</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="#" class="homestay-toggle">Homestay B</a>
+                                <ul class="sub-menu">
+                                    <li><a href="#" class="tab-link" data-tab="rooms-B">Tất cả phòng</a></li>
+                                    <li><a href="#" class="tab-link" data-tab="add-B">Thêm phòng</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="main-content">
+                <div id="default-content" class="tab-content active">
+                    <img src="https://cdn-icons-png.flaticon.com/512/706/706797.png" alt="Welcome" />
+                    <h1>Chào mừng bạn đến với Trung tâm quản lý Homestay!</h1>
+                    <h3>Hãy chọn homestay để quản lý.</h3>
+                </div>
+                <div id="rooms-A" class="tab-content">
+                    <div class="card">
+                        <button class="close-btn" onclick="returnToDefault()">×</button>
+                        <h2>Danh sách tất cả phòng</h2>
+                        <table class="room-table">
+                            <thead>
+                                <tr>
+                                    <th>Mã phòng</th>
+                                    <th>Mã homestay</th>
+                                    <th>Loại phòng</th>
+                                    <th>Giá</th>
+                                    <th>Trạng thái</th>
+                                    <th>Hành động</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>R001</td>
+                                    <td>HS001</td>
+                                    <td>Phòng đôi</td>
+                                    <td>700.000đ</td>
+                                    <td>Đang hoạt động</td>
+                                    <td>
+                                        <button class="btn btn-view">Xem</button>
+                                        <button class="btn btn-edit">Sửa</button>
+                                        <button class="btn btn-delete">Xóa</button>
+                                    </td>
+                                </tr>
+                                <!-- Thêm dòng khác -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div id="add-room-A" class="tab-content">
+                    <div class="card">
+                        <button class="close-btn" onclick="returnToDefault()">×</button>
+                        <h2>Thêm phòng mới</h2>
+                        <form>
+                            <!-- Loại phòng -->
+                            <div class="form-group">
+                                <label><strong>Loại phòng:</strong></label
+                                ><br />
+                                <label><input type="radio" name="roomType" value="Single" required /> Single</label>
+                                <label><input type="radio" name="roomType" value="Double" /> Double</label>
+                                <label><input type="radio" name="roomType" value="Deluxe" /> Deluxe</label>
+                                <label><input type="radio" name="roomType" value="Suite" /> Suite</label>
+                            </div>
+
+                            <!-- Giá -->
+                            <div class="form-group">
+                                <label for="Price"><strong>Giá phòng (VNĐ):</strong></label>
+                                <input type="number" id="Price" name="price" placeholder="Nhập giá phòng..." />
+                            </div>
+
+                            <!-- Tiện nghi -->
+                            <div class="form-group">
+                                <label><strong>Tiện nghi:</strong></label
+                                ><br />
+                                <label><input type="checkbox" name="amenities" value="Hồ bơi" /> Hồ bơi</label>
+                                <label><input type="checkbox" name="amenities" value="Bãi đỗ xe" /> Bãi đỗ xe</label>
+                                <label><input type="checkbox" name="amenities" value="WiFi miễn phí" /> WiFi miễn phí</label>
+                                <label><input type="checkbox" name="amenities" value="TV" /> TV</label>
+                                <label><input type="checkbox" name="amenities" value="Điều hòa" /> Điều hòa</label>
+                                <label><input type="checkbox" name="amenities" value="Tủ lạnh" /> Tủ lạnh</label>
+                                <label><input type="checkbox" name="amenities" value="Bếp riêng" /> Bếp riêng</label>
+                                <label><input type="checkbox" name="amenities" value="Ban công" /> Ban công</label>
+                                <label><input type="checkbox" name="amenities" value="Bồn tắm" /> Bồn tắm</label>
+                                <label><input type="checkbox" name="amenities" value="Máy pha trà/cà phê" /> Máy pha trà/cà phê</label>
+                            </div>
+
+                            <!-- Ảnh -->
+                            <div class="form-group">
+                                <label for="Image"><strong>Ảnh phòng:</strong></label>
+                                <input type="file" id="Image" multiple accept="image/*" />
+                                <div id="preview-container"></div>
+                            </div>
+
+                            <button type="submit" class="btn btn-add">Thêm phòng</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            function toggleUserMenu() {
+                const dropdown = document.getElementById("userDropdown");
+                dropdown.style.display = dropdown.style.display === "block" ? "none" : "block";
+            }
+
+            const mobileToggle = document.querySelector(".mobile-menu-toggle");
+            const mobileMenu = document.querySelector(".mobile-menu");
+
+            mobileToggle?.addEventListener("click", () => {
+                const isVisible = mobileMenu.style.display === "block";
+                mobileMenu.style.display = isVisible ? "none" : "block";
+                mobileToggle.setAttribute("aria-expanded", String(!isVisible));
+            });
+
+            // Tự động ẩn menu khi click ngoài
+            window.addEventListener("click", function (e) {
+                const userIcon = document.querySelector(".user-icon");
+                const dropdown = document.getElementById("userDropdown");
+
+                if (dropdown && !userIcon.contains(e.target)) {
+                    dropdown.style.display = "none";
+                }
+            });
+
+            const parentToggle = document.querySelector(".parent-toggle");
+            const homestayList = document.querySelector(".homestay-list");
+            const homestayToggles = document.querySelectorAll(".homestay-toggle");
+            const tabLinks = document.querySelectorAll(".tab-link");
+            const tabContents = document.querySelectorAll(".tab-content");
+            const defaultContent = document.getElementById("default-content");
+
+            parentToggle.addEventListener("click", (e) => {
+                e.preventDefault();
+                const isShown = homestayList.style.display === "block";
+                homestayList.style.display = isShown ? "none" : "block";
+                document.querySelectorAll(".sub-menu").forEach((menu) => (menu.style.display = "none"));
+                parentToggle.classList.toggle("open", !isShown);
+            });
+
+            homestayToggles.forEach((toggle) => {
+                toggle.addEventListener("click", (e) => {
+                    e.preventDefault();
+                    const submenu = toggle.nextElementSibling;
+                    const isShown = submenu.style.display === "block";
+                    document.querySelectorAll(".sub-menu").forEach((menu) => (menu.style.display = "none"));
+                    submenu.style.display = isShown ? "none" : "block";
+
+                    if (!isShown) {
+                        const firstTab = submenu.querySelector(".tab-link");
+                        if (firstTab) firstTab.click();
+                    }
+                });
+            });
+
+            tabLinks.forEach((link) => {
+                link.addEventListener("click", (e) => {
+                    e.preventDefault();
+                    const tabId = link.getAttribute("data-tab");
+
+                    tabContents.forEach((tab) => tab.classList.remove("active"));
+                    defaultContent.classList.remove("active");
+
+                    document.getElementById(tabId).classList.add("active");
+
+                    tabLinks.forEach((l) => l.classList.remove("active-tab"));
+                    link.classList.add("active-tab");
+
+                    homestayToggles.forEach((toggle) => toggle.classList.remove("active-homestay"));
+                    const parent = link.closest(".sub-menu")?.previousElementSibling;
+                    if (parent && parent.classList.contains("homestay-toggle")) {
+                        parent.classList.add("active-homestay");
+                    }
+                });
+            });
+
+            const imageInput = document.getElementById("Image");
+            const previewContainer = document.getElementById("preview-container");
+
+            imageInput.addEventListener("change", function () {
+                previewContainer.innerHTML = ""; // Xóa ảnh cũ
+
+                Array.from(this.files).forEach((file) => {
+                    if (file.type.startsWith("image/")) {
+                        const reader = new FileReader();
+                        reader.onload = function (e) {
+                            const img = document.createElement("img");
+                            img.src = e.target.result;
+                            previewContainer.appendChild(img);
+                        };
+                        reader.readAsDataURL(file);
+                    }
+                });
+            });
+
+            function returnToDefault() {
+                tabContents.forEach((tab) => tab.classList.remove("active"));
+                defaultContent.classList.add("active");
+                tabLinks.forEach((l) => l.classList.remove("active-tab"));
+                homestayToggles.forEach((toggle) => toggle.classList.remove("active-homestay"));
+                document.querySelectorAll(".sub-menu").forEach((menu) => (menu.style.display = "none"));
+                homestayList.style.display = "none";
+            }
+        </script>
+    </body>
+</html>
