@@ -14,6 +14,6 @@ public interface HomestayRepository extends JpaRepository<Homestay, Long> {
     List<Homestay> findByHost_Id(Long hostId);
     boolean existsByStreetAndWardAndDistrict(String street, String ward, String district);
 
-    List<Homestay> findByDistrict(String district);
+    List<Homestay> findByDistrictAndApproveStatus(String district,String status);
 
 }

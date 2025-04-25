@@ -4,6 +4,7 @@ import com.homestay.homestayweb.dto.request.RoomRequest;
 import com.homestay.homestayweb.dto.response.RoomResponse;
 import com.homestay.homestayweb.entity.Homestay;
 import com.homestay.homestayweb.entity.Room;
+import com.homestay.homestayweb.exception.ResourceNotFoundException;
 import com.homestay.homestayweb.repository.HomestayRepository;
 import com.homestay.homestayweb.repository.RoomRepository;
 import com.homestay.homestayweb.service.RoomService;
@@ -29,13 +30,48 @@ public class RoomServiceImpl implements RoomService {
                 .homestay(homestay)
                 .roomType(request.getRoomType())
                 .price(request.getPrice())
-                .availability(request.getAvailability())
+                .availability(true)
                 .features(request.getFeatures())
+                .roomStatus("PENDING")
                 .build();
 
         roomRepository.save(room);
         return mapToResponse(room);
     }
+
+    @Override
+    public List<RoomResponse> getRoomsByHomestayA(Long homestayId, String status) {
+        return roomRepository.findByHomestay_HomestayIdAndRoomStatus(homestayId,status)
+                .stream()
+                .map(this::mapToResponse)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<RoomResponse> getRoomsByHomestayP(Long homestayId, String status) {
+        return roomRepository.findByHomestay_HomestayIdAndRoomStatus(homestayId,status)
+                .stream()
+                .map(this::mapToResponse)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public RoomResponse pendingRoom(Long id) {
+        Room room = roomRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Room not found"));
+        room.setRoomStatus("ACCEPTED");
+        roomRepository.save(room);
+        return mapToResponse(room);
+    }
+
+    @Override
+    public List<RoomResponse> getAllPendingRooms() {
+            return roomRepository.findByRoomStatus("PENDING")
+                    .stream()
+                    .map(this::mapToResponse)
+                    .collect(Collectors.toList());
+        }
+
 
     @Override
     public List<RoomResponse> getRoomsByHomestay(Long homestayId) {
@@ -83,10 +119,14 @@ public class RoomServiceImpl implements RoomService {
         return RoomResponse.builder()
                 .roomId(room.getRoomId())
                 .homestayName(room.getHomestay().getName())
+                .rating(room.getHomestay().getSurfRating())
                 .roomType(room.getRoomType())
                 .price(room.getPrice())
                 .availability(room.getAvailability())
                 .features(room.getFeatures())
+                .district(room.getHomestay().getDistrict())
+                .ward(room.getHomestay().getWard())
+                .street(room.getHomestay().getStreet())
                 .build();
     }
 }

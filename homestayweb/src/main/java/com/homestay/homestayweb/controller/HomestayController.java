@@ -57,8 +57,13 @@ public class HomestayController {
 
     @GetMapping
     public ResponseEntity<List<HomestayResponse>> getAll() {
-                System.out.println("123");
         return ResponseEntity.ok(homestayService.getAllHomestays());
+    }
+
+    @GetMapping("/pending")
+//    @PreAuthorize("hasAuthority('ADMIN_ACCESS')")
+    public ResponseEntity<List<HomestayResponse>> getAllP() {
+        return ResponseEntity.ok(homestayService.getAllPendingHomestays());
     }
 
     @GetMapping("/{id}")
@@ -67,11 +72,15 @@ public class HomestayController {
     }
 
     @GetMapping("/my")
-    @PreAuthorize("hasAuthority('VIEW_HOMESTAY')")
     public ResponseEntity<List<HomestayResponse>> getMyHomestays() {
         UserDetailsImpl userDetails = (UserDetailsImpl) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         List<HomestayResponse> homestays = homestayService.getHomestaysByHostId(userDetails.getId());
         return ResponseEntity.ok(homestays);
+    }
+
+    @GetMapping("/host/{host_id}")
+    public ResponseEntity<List<HomestayResponse>> getByHost(@PathVariable Long host_id) {
+        return ResponseEntity.ok(homestayService.getHomestayByHost(host_id));
     }
 
     @PutMapping("/admin/pending/{id}")
@@ -81,8 +90,50 @@ public class HomestayController {
     }
 
     @GetMapping("/slide/{district}")
-    public ResponseEntity<List<HomestayResponse>> getAllByDistrict(@PathVariable String district) {
-        return ResponseEntity.ok(homestayService.getAllByDistrict(district));
+    public ResponseEntity<List<HomestayResponse>> getAllByDistrict(@PathVariable String district, String status) {
+        return ResponseEntity.ok(homestayService.getAllByDistrict(district,status));
+    }
+
+    @GetMapping("/{id}/images/primary")
+    public ResponseEntity<Map<String, String>> getPrimaryImage(@PathVariable Long id) {
+        Homestay homestay = homestayService.findEntityById(id);
+        HomestayImage primaryImage = homestayImageService.getPrimaryImage(homestay);
+
+        if (primaryImage == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        }
+
+        Map<String, String> response = new HashMap<>();
+        response.put("primaryImageUrl", primaryImage.getImageUrl());
+
+        return ResponseEntity.ok(response);
+    }
+
+    @PostMapping("/{id}/images")
+    @PreAuthorize("hasAuthority('CREATE_HOMESTAY')")
+    public ResponseEntity<String> uploadImageToHomestay(
+            @PathVariable("id") Long homestayId,
+            @RequestParam("file") MultipartFile file,
+            @RequestParam(name = "isPrimary", defaultValue = "false") boolean isPrimary
+    ) {
+        try {
+            // Upload ảnh lên Cloudinary
+            String imageUrl = cloudinaryService.uploadFile(file);
+
+            // Gán Homestay cho ảnh
+            HomestayImage image = new HomestayImage();
+            image.setImageUrl(imageUrl);
+            image.setIsPrimary(isPrimary);
+            image.setHomestay(homestayService.(homestayId));
+
+            // Lưu vào DB thông qua service
+            homestayImageService.saveHomestayImage(image);
+
+            return ResponseEntity.ok(imageUrl);
+
+        } catch (Exception e) {
+            return ResponseEntity.internalServerError().body("Upload thất bại: " + e.getMessage());
+        }
     }
 
     @GetMapping("/{id}/images/primary")

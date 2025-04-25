@@ -132,9 +132,26 @@ public class HomestayServiceImpl implements HomestayService {
         return mapToResponse(homestay);
     }
 
+
     @Override
-    public List<HomestayResponse> getAllByDistrict(String district) {
-        List<Homestay> homestays = homestayRepository.findByDistrict(district);
+    public List<HomestayResponse> getHomestaysByHostId(Long id) {
+        List<Homestay> homestays = homestayRepository.findByHost_Id(id);
+        return homestays.stream()
+                .map(this::mapToResponse)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<HomestayResponse> getAllPendingHomestays() {
+        List<Homestay> homestays = homestayRepository.findByApproveStatus("PENDING");
+        return homestays.stream()
+                .map(this::mapToResponse)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<HomestayResponse> getAllByDistrict(String district,String status) {
+        List<Homestay> homestays = homestayRepository.findByDistrictAndApproveStatus(district,"ACCEPTED");
         return homestays.stream()
                 .map(this::mapToResponse)
                 .collect(Collectors.toList());

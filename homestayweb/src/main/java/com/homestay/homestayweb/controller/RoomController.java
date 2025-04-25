@@ -1,6 +1,7 @@
 package com.homestay.homestayweb.controller;
 
 import com.homestay.homestayweb.dto.request.RoomRequest;
+import com.homestay.homestayweb.dto.response.HomestayResponse;
 import com.homestay.homestayweb.dto.response.RoomResponse;
 import com.homestay.homestayweb.service.RoomService;
 import lombok.RequiredArgsConstructor;
@@ -38,10 +39,19 @@ public class RoomController {
         return ResponseEntity.noContent().build();
     }
 
-    @GetMapping("/homestay/{homestayId}")
-    @PreAuthorize("hasAuthority('VIEW_ROOM')")
+    @GetMapping("/valid-homestay/{homestayId}")
     public ResponseEntity<List<RoomResponse>> getRoomsByHomestay(@PathVariable Long homestayId) {
-        return ResponseEntity.ok(roomService.getRoomsByHomestay(homestayId));
+        return ResponseEntity.ok(roomService.getRoomsByHomestayA(homestayId,"ACCEPTED"));
+    }
+
+    @GetMapping("/pending-homestay/{homestayId}")
+    public ResponseEntity<List<RoomResponse>> getRoomsByHomestayP(@PathVariable Long homestayId) {
+        return ResponseEntity.ok(roomService.getRoomsByHomestayP(homestayId,"PENDING"));
+    }
+
+    @GetMapping("/pending")
+    public ResponseEntity<List<RoomResponse>> getAllPendingRooms(){
+        return ResponseEntity.ok(roomService.getAllPendingRooms());
     }
 
     @GetMapping("/{roomId}")
@@ -54,5 +64,13 @@ public class RoomController {
     public ResponseEntity<List<RoomResponse>> getAllRooms(){
         return ResponseEntity.ok(roomService.getAllRooms());
     }
+
+    @PutMapping("/admin/pending/{id}")
+    @PreAuthorize("hasAuthority('ADMIN_ACCESS')")
+    public ResponseEntity<RoomResponse> pending(@PathVariable Long id) {
+        return ResponseEntity.ok(roomService.pendingRoom(id));
+    }
+
+
 }
 

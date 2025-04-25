@@ -12,4 +12,5 @@ public class RoomRequest {
     private Double price;
     private Boolean availability;
     private String features;
+    private String roomStatus;
 }
