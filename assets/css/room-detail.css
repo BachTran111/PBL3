@@ -159,22 +159,6 @@ main.room-detail {
     color: #007bff;
 }
 
-.btn-book {
-    background-color: #006ce4;
-    color: white;
-    font-weight: 600;
-    border: none;
-    border-radius: 20px;
-    padding: 8px 18px;
-    font-size: 14px;
-    cursor: pointer;
-    transition: background-color 0.2s ease;
-}
-
-.btn-book:hover {
-    background-color: #0054c7;
-}
-
 /* === Tăng khoảng cách giữa các section === */
 .info-section {
     margin: 40px auto;
