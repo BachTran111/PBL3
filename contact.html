@@ -32,15 +32,10 @@
           </div>
         </div>
         <div class="btns desktop-btns" id="auth-buttons">
-          <a href="partnership.html">
-            <button class="cooperate-btn">Hợp tác với chúng tôi</button>
-          </a>
-          <button class="dang-ky-btn" onclick="openPopup('register')">
-            Đăng ký
-          </button>
-          <button class="dang-nhap-btn" onclick="openPopup('login')">
-            Đăng nhập
-          </button>
+          <button class="cooperate-btn" onclick="location.href='partnership.html'">Hợp tác với chúng tôi</button>
+          <!-- Loại bỏ onclick trong HTML, thay vào đó sẽ gắn sự kiện trong JavaScript -->
+          <button class="dang-ky-btn signup" id="registerBtn">Đăng ký</button>
+          <button class="dang-nhap-btn login" id="loginBtn">Đăng nhập</button>
         </div>
 
         <div id="user-info" style="display: none">
@@ -84,18 +79,17 @@
     </header>
 
     <div id="popup-placeholder"></div>
-    <script>
-      // Popup functionality
+    <script type="module">
+      import { setupPopupEventListeners } from './assets/js/popup-login.js';
+    
       fetch("popup.html")
-        .then((response) => response.text())
-        .then((data) => {
+        .then(response => response.text())
+        .then(data => {
           document.getElementById("popup-placeholder").innerHTML = data;
+          setupPopupEventListeners();
         });
     </script>
 
-    <script src="assets/js/popup-login.js"></script>
-    <script src="assets/js/carousel.js"></script>
-    <script src="assets/js/toggle-mobile-menu.js"></script>
-    <script src="assets/js/login.js"></script>
+    <script type="module" src="assets/js/main.js"></script>
   </body>
 </html>
