@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="vi">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Trang Tài Khoản</title>
+        <link rel="stylesheet" href="assets/css/account.css" />
+        <link rel="stylesheet" href="assets/css/header.css" />
+        <link rel="stylesheet" href="assets/fonts/themify-icons/themify-icons.css" />
+    </head>
+    <body>
+        <!-- Header -->
+        <header>
+            <div class="header-container">
+                <div class="container">
+                    <div class="header-content">
+                        <div class="logo">
+                            <a href="trang-chu.html">
+                                <img class="logo-image" src="assets/img/gotravel_logo_air.png" alt="" />
+                            </a>
+                        </div>
+                        <nav class="nav">
+                            <ul>
+                                <li><a href="trang-chu.html">TRANG CHỦ</a></li>
+                                <li><a href="homestay.html">HOMESTAYS</a></li>
+                                <li><a href="about.html">VỀ CHÚNG TÔI</a></li>
+                                <li><a href="contact.html">LIÊN HỆ</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+                <div class="btns desktop-btns">
+                    <a href="partnership.html">
+                        <button class="cooperate-btn">Hợp tác với chúng tôi</button>
+                    </a>
+                    <button class="dang-ky-btn" onclick="openPopup('register')">Đăng ký</button>
+                    <button class="dang-nhap-btn" onclick="openPopup('login')">Đăng nhập</button>
+                </div>
+
+                <button class="mobile-menu-toggle" aria-label="Toggle menu" aria-expanded="false">
+                    <i class="ti-menu"></i>
+                </button>
+
+                <div class="mobile-menu">
+                    <a href="#" class="mobile-menu-link mobile-nav-link">TRANG CHỦ</a>
+                    <a href="homestay.html" class="mobile-menu-link mobile-nav-link">HOMESTAYS</a>
+                    <a href="about.html" class="mobile-menu-link mobile-nav-link">VỀ CHÚNG TÔI</a>
+                    <a href="contact.html" class="mobile-menu-link mobile-nav-link">LIÊN HỆ</a>
+                    <hr class="mobile-menu-divider" />
+                    <a href="partnership.html" class="mobile-menu-link">Hợp tác với chúng tôi</a>
+                    <button class="mobile-menu-btn" onclick="openPopup('register'); closeMobileMenu();">Đăng ký</button>
+                    <button class="mobile-menu-btn" onclick="openPopup('login'); closeMobileMenu();">Đăng nhập</button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Sidebar Menu -->
+        <aside class="sidebar">
+            <nav class="nav">
+                <ul>
+                    <!-- <li><a href="#">Đơn đặt chỗ của tôi</a></li> -->
+                    <h3>Đơn đặt chỗ của tôi</h3>
+                    <li><a href="#">Khách Sạn</a></li>
+                    <li><a href="#">Hoạt động</a></li>
+                    <li><a href="#">Tin nhắn từ chỗ nghỉ</a></li>
+                    <li><a href="#">Nhận xét</a></li>
+                    <li><a href="#">Tiền GoTravel</a></li>
+                    <li><a href="#">Hồ sơ</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="container">
+                <!-- Tabs for Upcoming, Completed, and Canceled -->
+                <div class="tabs">
+                    <button class="tab-btn active" onclick="openTab('upcoming')">Sắp tới</button>
+                    <button class="tab-btn" onclick="openTab('completed')">Hoàn tất</button>
+                    <button class="tab-btn" onclick="openTab('canceled')">Đã hủy</button>
+                </div>
+
+                <div class="search-box-container">
+                    <input type="text" class="search-box" placeholder="Tìm kiếm theo mã đặt phòng" />
+                    <button class="search-btn">Tìm</button>
+                </div>
+
+                <!-- Tab Content -->
+                <div id="upcoming" class="tab-content active">
+                    <h2>Sắp tới</h2>
+                    <p>Xin chào Phuc Thinh. Quý khách không có chuyến đi sắp tới nào.</p>
+                    <!-- <button class="find-homestay-btn">Tìm chỗ nghỉ</button> -->
+                </div>
+
+                <div id="completed" class="tab-content">
+                    <h2>Hoàn tất</h2>
+                    <p>Chào Phuc Thinh. Quý khách không có đặt chỗ đã hoàn thành gần đây.</p>
+                    <!-- <button class="find-homestay-btn">Tìm chỗ nghỉ</button> -->
+                </div>
+
+                <div id="canceled" class="tab-content">
+                    <h2>Đã hủy</h2>
+                    <p>Chào Phuc Thinh. Quý khách không có đặt chỗ đã hủy gần đây.</p>
+                    <!-- <button class="find-homestay-btn">Tìm chỗ nghỉ</button> -->
+                </div>
+            </div>
+        </main>
+        <script>
+            function openTab(tabId) {
+                // Ẩn tất cả nội dung tab
+                const tabContents = document.querySelectorAll(".tab-content");
+                tabContents.forEach((content) => content.classList.remove("active"));
+
+                // Xóa class active ở tất cả các nút tab
+                const tabButtons = document.querySelectorAll(".tab-btn");
+                tabButtons.forEach((btn) => btn.classList.remove("active"));
+
+                // Hiển thị nội dung tab được chọn
+                document.getElementById(tabId).classList.add("active");
+
+                // Thêm class active vào nút tab được nhấn
+                const clickedButton = [...tabButtons].find(
+                    (btn) => btn.textContent.trim() === document.getElementById(tabId).querySelector("h2").textContent.trim()
+                );
+                if (clickedButton) {
+                    clickedButton.classList.add("active");
+                }
+            }
+        </script>
+    </body>
+</html>
