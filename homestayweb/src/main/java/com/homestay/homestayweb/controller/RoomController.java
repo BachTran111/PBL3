@@ -57,7 +57,6 @@ public class RoomController {
     }
 
     @GetMapping("/{roomId}")
-    @PreAuthorize("hasAuthority('VIEW_ROOM')")
     public ResponseEntity<RoomResponse> getRoomById(@PathVariable Long roomId) {
         return ResponseEntity.ok(roomService.getRoomById(roomId));
     }
@@ -82,7 +81,5 @@ public class RoomController {
         List<RoomResponse> availableRooms = roomService.getAvailableRooms(homestayId, checkInDate, checkOutDate);
         return ResponseEntity.ok(availableRooms);
     }
-
-
 }
 
