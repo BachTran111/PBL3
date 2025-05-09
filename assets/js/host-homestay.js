@@ -228,33 +228,6 @@ window.onload = function () {
         });
     }
 
-    function renderRoomList(rooms) {
-        const roomList = document.querySelector(".room-list");
-        roomList.innerHTML = "";
-
-        if (!rooms.length) {
-            roomList.innerHTML = '<div class="no-rooms">Không có phòng nào.</div>';
-            return;
-        }
-
-        rooms.forEach((room) => {
-            const roomItem = document.createElement("div");
-            roomItem.className = "room-item";
-            roomItem.innerHTML = `
-            <div class="room-column">${room.roomId}</div>
-            <div class="room-column">${room.roomType}</div>
-            <div class="room-column">${Number(room.price).toLocaleString("vi-VN")}đ</div>
-            <div class="room-column">${room.availability ? "Còn trống" : "Đang được sử dụng"}</div>
-            <div class="room-column">
-                <button class="btn btn-view" data-id="${room.roomId}">Xem</button>
-                <button class="btn btn-edit" data-id="${room.roomId}">Sửa</button>
-                <button class="btn btn-delete" data-id="${room.roomId}">Xóa</button>
-            </div>
-        `;
-            roomList.appendChild(roomItem);
-        });
-    }
-
     window.returnToDefault = function () {
         document.querySelectorAll(".tab-content").forEach((tc) => (tc.style.display = "none"));
         document.getElementById("default-content").style.display = "block";
