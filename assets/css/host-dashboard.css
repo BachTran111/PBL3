@@ -11,50 +11,86 @@ body {
 
 /* Sidebar Styles */
 .sidebar {
-    width: 250px;
-    margin-top: 60px;
-    padding: 25px;
-    background-color: #fff;
+    width: 260px;
+    padding: 30px 20px;
+    background-color: #ffffff;
     position: fixed;
     top: 0;
     left: 0;
     height: 100%;
-    box-shadow: 2px 0 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.08);
+    z-index: 100;
+    margin-top: 60px;
+    overflow-y: auto;
+    transition: all 0.3s ease;
 }
+
 .sidebar h2 {
     text-align: center;
-    margin-bottom: 20px;
-    font-size: 20px;
-    color: #333;
+    font-size: 22px;
+    color: #007bff;
+    margin-bottom: 25px;
+    font-weight: 600;
 }
+
 .sidebar ul {
     list-style: none;
-    padding: 0 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+    padding: 0;
+    margin: 0;
 }
+
+.sidebar ul li ul {
+    list-style: none;
+    padding-left: 20px;
+    margin-top: 8px;
+}
+
 .sidebar li a {
     color: #333;
     text-decoration: none;
     padding: 10px 15px;
+    margin-bottom: 10px;
     display: flex;
     align-items: center;
-    border-radius: 6px;
-    transition: background-color 0.3s ease;
+    border-radius: 8px;
+    font-size: 15px;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
+
 .sidebar li a:hover {
-    background-color: #f0f0f0;
+    background-color: #f0f4ff;
     color: #007bff;
 }
-/* nút mũi tên */
+
+/* Active tab style */
+.sidebar .tab-link.active-tab,
+.sidebar .homestay-toggle.active-homestay {
+    background-color: #e7f0ff;
+    font-weight: 600;
+    color: #007bff;
+}
+
+/* Arrow icon */
 .arrow-icon {
     margin-left: auto;
-    transition: transform 0.3s ease;
     font-size: 14px;
+    transition: transform 0.3s ease;
 }
+
 .parent-toggle.open .arrow-icon {
     transform: rotate(180deg);
+    color: #007bff;
+}
+
+/* Submenu style */
+.sub-menu {
+    list-style: none;
+    padding-left: 20px;
+    margin-top: 8px;
+}
+
+.sub-menu li {
+    margin-bottom: 8px;
 }
 
 /* Main content */
@@ -154,29 +190,59 @@ body {
     color: white;
 }
 
-.btn-add {
+.btn-approve {
     background-color: #28a745;
     color: white;
-    padding: 10px 20px;
-    border-radius: 6px;
-    margin-top: 15px;
 }
 
-.btn-add:hover {
-    background-color: #218838;
+.btn-reject {
+    background-color: #dc3545;
+    color: white;
 }
 
-.form-group {
-    margin-bottom: 15px;
+/* Tab "Thêm phòng mới" */
+#add-room .form-group {
+    margin-bottom: 20px;
+}
+
+#add-room .form-group label {
+    font-size: 16px;
+    color: #000;
+    display: block;
+    margin-bottom: 8px;
+    align-items: center;
+}
+
+#add-room .form-group input[type="radio"],
+#add-room .form-group input[type="checkbox"] {
+    margin-right: 10px;
+}
+
+#add-room .btn-add {
+    background-color: #5cb85c;
+    color: #fff;
+    border: none;
+    padding: 12px 24px;
+    font-size: 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#add-room .btn-add:hover {
+    background-color: #4cae4c;
 }
 
 .form-group input[type="text"],
 .form-group input[type="number"],
 .form-group input[type="file"] {
-    width: 90%;
-    padding: 8px;
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
     border: 1px solid #ccc;
     border-radius: 4px;
+    margin-top: 8px;
+    box-sizing: border-box;
 }
 
 .form-group input:focus {
@@ -184,19 +250,25 @@ body {
     outline: none;
 }
 
+/* Xem trước ảnh */
 #preview-container {
     display: flex;
     flex-wrap: wrap;
-    gap: 10px;
-    margin-top: 10px;
+    gap: 15px;
+    margin-top: 20px;
 }
 
 #preview-container img {
     width: 100px;
     height: 100px;
     object-fit: cover;
-    border: 1px solid #ccc;
-    border-radius: 6px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+#preview-container img:hover {
+    transform: scale(1.05);
 }
 
 @keyframes fadeIn {
@@ -205,5 +277,100 @@ body {
     }
     to {
         opacity: 1;
+    }
+}
+
+/* Tab "Kinh doanh Homestay mới" */
+#add-homestay .form-group {
+    margin-bottom: 20px;
+}
+
+#add-homestay .form-group label {
+    font-size: 16px;
+    color: #000;
+    display: block;
+    margin-bottom: 8px;
+}
+
+#add-homestay .form-group input,
+#add-homestay .form-group textarea {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-top: 8px;
+    box-sizing: border-box;
+}
+
+#add-homestay .form-group textarea {
+    height: 150px;
+    resize: vertical;
+}
+
+#add-homestay .form-group input[type="radio"],
+#add-homestay .form-group input[type="checkbox"] {
+    margin-right: 10px;
+}
+
+#add-homestay .btn-add {
+    background-color: #5cb85c;
+    color: #fff;
+    border: none;
+    padding: 12px 24px;
+    font-size: 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#add-homestay .btn-add:hover {
+    background-color: #4cae4c;
+}
+
+#add-homestay input[type="file"] {
+    margin-top: 10px;
+}
+
+/* Xem trước ảnh */
+#homestay-preview-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+#homestay-preview-container img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+#homestay-preview-container img:hover {
+    transform: scale(1.05);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    #add-homestay .card-box {
+        padding: 20px;
+    }
+
+    #add-homestay h2 {
+        font-size: 20px;
+    }
+
+    #add-homestay .form-group input,
+    #add-homestay .form-group textarea {
+        font-size: 14px;
+        padding: 10px;
+    }
+
+    #add-homestay .btn-add {
+        padding: 10px 20px;
+        font-size: 14px;
     }
 }

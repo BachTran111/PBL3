@@ -1,11 +1,10 @@
 window.onload = function () {
     const homestayList = document.querySelector(".homestay-list");
-
     const token = localStorage.getItem("authToken");
-
     const decodedToken = jwt_decode(token);
     const hostId = decodedToken.host_id;
 
+    // Load danh sách homestay
     fetch(`http://localhost:8080/homestay/api/homestays/host/${hostId}`, {
         method: "GET",
         headers: {
@@ -18,52 +17,101 @@ window.onload = function () {
             data.forEach((homestay) => {
                 const li = document.createElement("li");
                 li.innerHTML = `
-          <a href="#" class="homestay-toggle" data-id="${homestay.id}">
-            ${homestay.name}
-          </a>
-          <ul class="sub-menu" style="display: none">
-            <li>
-              <a href="#" class="tab-link" data-tab="view-all-room" data-hid="${homestay.id}">
-                Tất cả phòng
-              </a>
-            </li>
-            <li>
-              <a href="#" class="tab-link" data-tab="add-room" data-hid="${homestay.id}">
-                Thêm phòng
-              </a>
-            </li>
-            <li>
-              <a href="#" class="tab-link" data-tab="view-all-pending-room" data-hid="${homestay.id}">
-                Phòng đang chờ duyệt
-                </a>
-            </li>
-          </ul>
-        `;
+                    <a href="#" class="homestay-toggle" data-id="${homestay.id}">
+                        ${homestay.name}
+                    </a>
+                    <ul class="sub-menu" style="display: none">
+                        <li>
+                            <a href="#" class="tab-link" data-tab="view-all-room" data-hid="${homestay.id}">
+                                Tất cả phòng
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="tab-link" data-tab="add-room" data-hid="${homestay.id}">
+                                Thêm phòng
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="tab-link" data-tab="view-all-pending-room" data-hid="${homestay.id}">
+                                Phòng đang chờ duyệt
+                            </a>
+                        </li>
+                    </ul>
+                `;
                 li.querySelector(".homestay-toggle").addEventListener("click", (e) => {
                     e.preventDefault();
+
+                    // Gỡ active-tab khỏi tất cả tab trước
+                    document.querySelectorAll(".tab-link, .homestay-toggle, .parent-toggle").forEach((el) => el.classList.remove("active-tab"));
+
+                    // Ẩn tất cả submenu khác
+                    document.querySelectorAll(".homestay-list .sub-menu").forEach((menu) => {
+                        if (menu !== li.querySelector(".sub-menu")) {
+                            menu.style.display = "none";
+                        }
+                    });
+
+                    // Toggle submenu hiện tại
                     const sm = li.querySelector(".sub-menu");
-                    sm.style.display = sm.style.display === "block" ? "none" : "block";
+                    const isShown = sm.style.display === "block";
+                    sm.style.display = isShown ? "none" : "block";
+
+                    // Nếu đang mở, in đậm homestay name và parent-toggle
+                    if (!isShown) {
+                        e.target.classList.add("active-tab");
+                        const parentToggle = document.querySelector(".parent-toggle");
+                        parentToggle.classList.add("active-tab");
+
+                        // Tự động click tab con đầu tiên
+                        const firstTab = sm.querySelector(".tab-link");
+                        if (firstTab) firstTab.click();
+                    }
                 });
+
                 homestayList.appendChild(li);
             });
-            homestayList.style.display = "block";
         })
         .catch((err) => console.error("Lỗi khi load homestay:", err));
 
+    // Xử lý sự kiện click vào tab-link
     document.addEventListener("click", function (e) {
-        if (!e.target.classList.contains("tab-link")) return;
+        const clickedTab = e.target.closest(".tab-link");
+        if (!clickedTab) return;
         e.preventDefault();
 
-        const tabId = e.target.dataset.tab;
-        const homestayId = e.target.dataset.hid;
+        // Gỡ active-tab khỏi tất cả tab
+        document.querySelectorAll(".tab-link, .homestay-toggle, .parent-toggle").forEach((el) => el.classList.remove("active-tab"));
+
+        // Đánh dấu tab được click là active
+        clickedTab.classList.add("active-tab");
+
+        // Đánh dấu các cấp cha: homestay-toggle và parent-toggle
+        const subMenu = clickedTab.closest(".sub-menu");
+        if (subMenu) {
+            const homestayToggle = subMenu.previousElementSibling;
+            if (homestayToggle) {
+                homestayToggle.classList.add("active-tab");
+
+                // Tiếp tục truy ngược lên .parent-toggle nếu có
+                const parentLi = homestayToggle.closest("li");
+                const parentToggle = parentLi?.parentElement?.closest("li")?.querySelector(".parent-toggle");
+                if (parentToggle) {
+                    parentToggle.classList.add("active-tab");
+                }
+            }
+        }
+
+        // Xử lý nội dung tab
+        const tabId = clickedTab.dataset.tab;
+        const homestayId = clickedTab.dataset.hid;
 
         document.querySelectorAll(".tab-content").forEach((tc) => (tc.style.display = "none"));
 
         if (tabId === "view-all-room") {
             showRoomList(homestayId);
-        } else if (tabId == "add-room") {
+        } else if (tabId === "add-room") {
             showAddForm(homestayId);
-        } else if (tabId == "view-all-pending-room") {
+        } else if (tabId === "view-all-pending-room") {
             showPendingRoomList(homestayId);
         } else {
             const tab = document.getElementById(tabId);
@@ -84,22 +132,22 @@ window.onload = function () {
                 const tbody = viewTab.querySelector(".room-table tbody");
                 tbody.innerHTML = "";
                 if (!rooms.length) {
-                    tbody.innerHTML = '<tr><td colspan="6">Không có phòng nào.</td></tr>';
+                    tbody.innerHTML = '<tr><td colspan="5">Không có phòng nào.</td></tr>';
                     return;
                 }
                 rooms.forEach((r) => {
                     const tr = document.createElement("tr");
                     tr.innerHTML = `
-            <td>${r.roomId}</td>
-            <td>${r.roomType}</td>
-            <td>${Number(r.price).toLocaleString("vi-VN")}đ</td>
-            <td>${r.availability ? "Còn trống" : "Đang được sử dụng"}</td>
-            <td>
-              <button class="btn btn-view"  data-id="${r.roomIdd}">Xem</button>
-              <button class="btn btn-edit"  data-id="${r.roomId}">Sửa</button>
-              <button class="btn btn-delete" data-id="${r.roomId}">Xóa</button>
-            </td>
-          `;
+                        <td>${r.roomId}</td>
+                        <td>${r.roomType}</td>
+                        <td>${Number(r.price).toLocaleString("vi-VN")}đ</td>
+                        <td>${r.availability ? "Còn trống" : "Đang được sử dụng"}</td>
+                        <td>
+                            <button class="btn btn-view" data-id="${r.roomId}">Xem</button>
+                            <button class="btn btn-edit" data-id="${r.roomId}">Sửa</button>
+                            <button class="btn btn-delete" data-id="${r.roomId}">Xóa</button>
+                        </td>
+                    `;
                     tbody.appendChild(tr);
                 });
             })
@@ -119,11 +167,6 @@ window.onload = function () {
         }
         hidden.value = homestayId;
     }
-
-    window.returnToDefault = function () {
-        document.querySelectorAll(".tab-content").forEach((tc) => (tc.style.display = "none"));
-        document.getElementById("default-content").style.display = "block";
-    };
 
     function showPendingRoomList(homestayId) {
         const viewTab = document.getElementById("view-all-pending-room");
@@ -135,42 +178,28 @@ window.onload = function () {
                 const tbody = viewTab.querySelector(".room-table tbody");
                 tbody.innerHTML = "";
                 if (!rooms.length) {
-                    tbody.innerHTML = '<tr><td colspan="6">Không có phòng nào.</td></tr>';
+                    tbody.innerHTML = '<tr><td colspan="5">Không có phòng nào.</td></tr>';
                     return;
                 }
                 rooms.forEach((r) => {
                     const tr = document.createElement("tr");
                     tr.innerHTML = `
-            <td>${r.roomId}</td>
-            <td>${r.roomType}</td>
-            <td>${Number(r.price).toLocaleString("vi-VN")}đ</td>
-            <td>${r.availability ? "Còn trống" : "Đang được sử dụng"}</td>
-            <td>
-              <button class="btn btn-view"  data-id="${r.roomIdd}">Xem</button>
-              <button class="btn btn-edit"  data-id="${r.roomId}">Sửa</button>
-              <button class="btn btn-delete" data-id="${r.roomId}">Xóa</button>
-            </td>
-          `;
+                        <td>${r.roomId}</td>
+                        <td>${r.roomType}</td>
+                        <td>${Number(r.price).toLocaleString("vi-VN")}đ</td>
+                        <td>${r.availability ? "Còn trống" : "Đang được sử dụng"}</td>
+                        <td>
+                            <button class="btn btn-view" data-id="${r.roomId}">Xem</button>
+                            <button class="btn btn-edit" data-id="${r.roomId}">Sửa</button>
+                            <button class="btn btn-delete" data-id="${r.roomId}">Xóa</button>
+                        </td>
+                    `;
                     tbody.appendChild(tr);
                 });
             })
             .catch((err) => console.error("Lỗi load phòng:", err));
     }
 
-    function showAddForm(homestayId) {
-        const addTab = document.getElementById("add-room");
-        addTab.style.display = "block";
-
-        let hidden = addTab.querySelector("input[name='homestayId']");
-        if (!hidden) {
-            hidden = document.createElement("input");
-            hidden.type = "hidden";
-            hidden.name = "homestayId";
-            addTab.querySelector(".card-box").appendChild(hidden);
-        }
-        hidden.value = homestayId;
-    }
-    
     function renderBookingTable(data) {
         const tbody = document.querySelector("#manage-bookings tbody");
         tbody.innerHTML = "";
@@ -183,28 +212,56 @@ window.onload = function () {
         data.forEach((b) => {
             const tr = document.createElement("tr");
             tr.innerHTML = `
-            <td>${b.homestayName}</td>
-            <td>${b.room_id}</td>
-            <td>${b.email}</td>
-            <td>${b.check_in_date}</td>
-            <td>${b.check_out_date}</td>
-            <td>${Number(b.total_price).toLocaleString("vi-VN")}đ</td>
-            <td>${b.created_at}</td>
-            <td>
-                <button class="btn btn-view">Phê duyệt</button>
-                <button class="btn btn-delete">Từ chối</button>
-            </td>
-        `;
+                <td>${b.homestayName}</td>
+                <td>${b.room_id}</td>
+                <td>${b.email}</td>
+                <td>${b.check_in_date}</td>
+                <td>${b.check_out_date}</td>
+                <td>${Number(b.total_price).toLocaleString("vi-VN")}đ</td>
+                <td>${b.created_at}</td>
+                <td>
+                    <button class="btn btn-approve">Phê duyệt</button>
+                    <button class="btn btn-reject">Từ chối</button>
+                </td>
+            `;
             tbody.appendChild(tr);
+        });
+    }
+
+    function renderRoomList(rooms) {
+        const roomList = document.querySelector(".room-list");
+        roomList.innerHTML = "";
+
+        if (!rooms.length) {
+            roomList.innerHTML = '<div class="no-rooms">Không có phòng nào.</div>';
+            return;
+        }
+
+        rooms.forEach((room) => {
+            const roomItem = document.createElement("div");
+            roomItem.className = "room-item";
+            roomItem.innerHTML = `
+            <div class="room-column">${room.roomId}</div>
+            <div class="room-column">${room.roomType}</div>
+            <div class="room-column">${Number(room.price).toLocaleString("vi-VN")}đ</div>
+            <div class="room-column">${room.availability ? "Còn trống" : "Đang được sử dụng"}</div>
+            <div class="room-column">
+                <button class="btn btn-view" data-id="${room.roomId}">Xem</button>
+                <button class="btn btn-edit" data-id="${room.roomId}">Sửa</button>
+                <button class="btn btn-delete" data-id="${room.roomId}">Xóa</button>
+            </div>
+        `;
+            roomList.appendChild(roomItem);
         });
     }
 
     window.returnToDefault = function () {
         document.querySelectorAll(".tab-content").forEach((tc) => (tc.style.display = "none"));
         document.getElementById("default-content").style.display = "block";
+        document.querySelectorAll(".tab-link, .homestay-toggle, .parent-toggle").forEach((el) => el.classList.remove("active-tab"));
     };
-    //Them
 
+    // Xử lý thêm phòng
     document.getElementById("submit-room").addEventListener("click", function () {
         const roomType = document.querySelector("input[name='RoomType']:checked")?.value;
         const price = document.getElementById("Price").value;

@@ -50,11 +50,14 @@
                 <h2>Bảng điều khiển Host</h2>
                 <ul>
                     <li>
-                        <a href="#" class="parent-toggle">Quản lý Homestay<span class="arrow-icon">▼</span> </a>
+                        <a href="#" class="parent-toggle">Quản lý Homestay<span class="arrow-icon">▼</span></a>
                         <ul class="homestay-list" style="display: none"></ul>
                     </li>
                     <li>
                         <a href="#" class="tab-link" data-tab="manage-bookings">Quản lý đơn đặt phòng</a>
+                    </li>
+                    <li>
+                        <a href="#" class="tab-link" data-tab="add-homestay">Kinh doanh Homestay mới</a>
                     </li>
                 </ul>
             </div>
@@ -130,7 +133,6 @@
                                 <label><input type="checkbox" name="Facilities" value="Tủ lạnh" /> Tủ lạnh</label>
                             </div>
 
-                            <!-- Anh (chua co) -->
                             <div class="form-group">
                                 <label for="Image"><strong>Ảnh phòng:</strong></label>
                                 <input type="file" name="Image" id="Image" accept="image/*" multiple />
@@ -155,13 +157,52 @@
                                         <th>Ngày Check-out</th>
                                         <th>Tổng tiền</th>
                                         <th>Ngày đặt</th>
-                                        <th>Phê duyệt / Từ chối</th>
+                                        <th>Hành động</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <!-- Dữ liệu đơn đặt phòng sẽ được render ở đây -->
                                 </tbody>
                             </table>
+                        </div>
+                    </div>
+
+                    <div id="add-homestay" class="tab-content" style="display: none">
+                        <div class="card-box">
+                            <button class="close-btn" onclick="returnToDefault()">×</button>
+                            <h2>Kinh doanh Homestay mới</h2>
+                            <form id="add-homestay-form">
+                                <div class="form-group">
+                                    <label for="name"><strong>Tên Homestay:</strong></label>
+                                    <input type="text" name="name" id="name" required placeholder="Nhập tên homestay..." />
+                                </div>
+                                <div class="form-group">
+                                    <label for="street"><strong>Địa chỉ (Số nhà, đường):</strong></label>
+                                    <input type="text" name="street" id="street" required placeholder="Nhập địa chỉ..." />
+                                </div>
+                                <div class="form-group">
+                                    <label for="ward"><strong>Phường/Xã:</strong></label>
+                                    <input type="text" name="ward" id="ward" required placeholder="Nhập phường/xã..." />
+                                </div>
+                                <div class="form-group">
+                                    <label for="district"><strong>Quận/Huyện:</strong></label>
+                                    <input type="text" name="district" id="district" required placeholder="Nhập quận/huyện..." />
+                                </div>
+                                <div class="form-group">
+                                    <label for="description"><strong>Mô tả:</strong></label>
+                                    <textarea name="description" id="description" required placeholder="Nhập mô tả homestay..."></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label for="homestay-images"><strong>Thêm ảnh Homestay:</strong></label>
+                                    <input type="file" name="homestay-images" id="homestay-images" accept="image/*" multiple />
+                                    <div id="homestay-preview-container"></div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="contactInfo"><strong>Thông tin liên hệ:</strong></label>
+                                    <input type="text" name="contactInfo" id="contactInfo" required placeholder="Nhập thông tin liên hệ..." />
+                                </div>
+                                <button type="submit" class="btn btn-add">Thêm Homestay</button>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -214,33 +255,33 @@
             tabLinks.forEach((link) => {
                 link.addEventListener("click", function (e) {
                     e.preventDefault();
-                    const tabId = this.getAttribute("data-tab");
 
-                    // Ẩn tất cả nội dung tab
+                    // Gỡ bỏ tất cả class active-tab ở các tab và parent
+                    document.querySelectorAll(".tab-link, .parent-toggle").forEach((el) => el.classList.remove("active-tab"));
+
+                    // Gán class cho tab được chọn
+                    this.classList.add("active-tab");
+
+                    // Gán class cho tất cả tab cha
+                    let parent = this.closest("ul.sub-menu")?.previousElementSibling;
+                    while (parent && (parent.classList.contains("parent-toggle") || parent.classList.contains("tab-link"))) {
+                        parent.classList.add("active-tab");
+                        parent = parent.closest("ul.sub-menu")?.previousElementSibling;
+                    }
+
+                    // Ẩn tab cũ, hiện tab mới
+                    const tabId = this.getAttribute("data-tab");
                     tabContents.forEach((tab) => {
                         tab.classList.remove("active");
                         tab.style.display = "none";
                     });
-
-                    // Bỏ active mặc định
                     defaultContent.classList.remove("active");
                     defaultContent.style.display = "none";
 
-                    // Hiện tab được chọn
                     const selectedTab = document.getElementById(tabId);
                     if (selectedTab) {
                         selectedTab.classList.add("active");
                         selectedTab.style.display = "block";
-                    }
-
-                    // Gán lại highlight
-                    tabLinks.forEach((l) => l.classList.remove("active-tab"));
-                    this.classList.add("active-tab");
-
-                    homestayToggles.forEach((toggle) => toggle.classList.remove("active-homestay"));
-                    const parentHomestay = this.closest("ul.sub-menu")?.previousElementSibling;
-                    if (parentHomestay?.classList.contains("homestay-toggle")) {
-                        parentHomestay.classList.add("active-homestay");
                     }
                 });
             });
@@ -263,21 +304,52 @@
                 homestayList.style.display = "none";
             }
 
-            const imageInput = document.getElementById("Image");
-            const previewContainer = document.getElementById("preview-container");
+            // Xử lý sự kiện thay đổi ảnh cho "Ảnh phòng"
+            const roomImageInput = document.getElementById("Image");
+            const roomPreviewContainer = document.getElementById("preview-container");
 
-            imageInput.addEventListener("change", function () {
-                previewContainer.innerHTML = ""; // Xóa ảnh cũ
+            roomImageInput.addEventListener("change", function () {
+                roomPreviewContainer.innerHTML = ""; // Xóa ảnh cũ trong container
 
+                // Lặp qua tất cả các file đã chọn
                 Array.from(this.files).forEach((file) => {
                     if (file.type.startsWith("image/")) {
-                        const reader = new FileReader();
+                        // Kiểm tra nếu file là ảnh
+                        const reader = new FileReader(); // Tạo đối tượng FileReader để đọc file
+
                         reader.onload = function (e) {
-                            const img = document.createElement("img");
-                            img.src = e.target.result;
-                            previewContainer.appendChild(img);
+                            const img = document.createElement("img"); // Tạo thẻ img
+                            img.src = e.target.result; // Gán nguồn ảnh là kết quả đọc từ file
+                            img.classList.add("preview-image"); // Thêm class cho ảnh
+                            roomPreviewContainer.appendChild(img); // Thêm ảnh vào container
                         };
-                        reader.readAsDataURL(file);
+
+                        reader.readAsDataURL(file); // Đọc file dưới dạng Data URL
+                    }
+                });
+            });
+
+            // Xử lý sự kiện thay đổi ảnh cho "Thêm ảnh Homestay"
+            const homestayImageInput = document.getElementById("homestay-images");
+            const homestayPreviewContainer = document.getElementById("homestay-preview-container");
+
+            homestayImageInput.addEventListener("change", function () {
+                homestayPreviewContainer.innerHTML = ""; // Xóa ảnh cũ trong container
+
+                // Lặp qua tất cả các file đã chọn
+                Array.from(this.files).forEach((file) => {
+                    if (file.type.startsWith("image/")) {
+                        // Kiểm tra nếu file là ảnh
+                        const reader = new FileReader(); // Tạo đối tượng FileReader để đọc file
+
+                        reader.onload = function (e) {
+                            const img = document.createElement("img"); // Tạo thẻ img
+                            img.src = e.target.result; // Gán nguồn ảnh là kết quả đọc từ file
+                            img.classList.add("preview-image"); // Thêm class cho ảnh
+                            homestayPreviewContainer.appendChild(img); // Thêm ảnh vào container
+                        };
+
+                        reader.readAsDataURL(file); // Đọc file dưới dạng Data URL
                     }
                 });
             });
