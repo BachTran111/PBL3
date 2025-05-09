@@ -4,7 +4,6 @@ window.onload = function () {
     const decodedToken = jwt_decode(token);
     const hostId = decodedToken.host_id;
 
-    // Load danh sách homestay
     fetch(`http://localhost:8080/homestay/api/homestays/host/${hostId}`, {
         method: "GET",
         headers: {
@@ -29,11 +28,6 @@ window.onload = function () {
                         <li>
                             <a href="#" class="tab-link" data-tab="add-room" data-hid="${homestay.id}">
                                 Thêm phòng
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" class="tab-link" data-tab="view-all-pending-room" data-hid="${homestay.id}">
-                                Phòng đang chờ duyệt
                             </a>
                         </li>
                     </ul>
