@@ -7,6 +7,7 @@
         <link rel="stylesheet" href="assets/css/homestay.css" />
         <link rel="stylesheet" href="assets/css/header.css" />
         <link rel="stylesheet" href="./assets/fonts/themify-icons/themify-icons.css" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" />
     </head>
     <body>
         <header>
@@ -59,62 +60,44 @@
             </div>
         </header>
 
-        <div class="hero">
-            <div class="search-box">
-                <div class="search-location">
-                    <svg
-                        class="search-icon"
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="20"
-                        height="20"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                    >
-                        <circle cx="11" cy="11" r="8"></circle>
-                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-                    </svg>
-                    <input type="text" placeholder="Hải Châu" />
-                </div>
-                <div class="date-picker">
-                    <input type="date" class="date1" />
-                    <input type="date" class="date2" />
-                </div>
-                <div class="guests-selector">
-                    <select>
-                        <option>Single</option>
-                        <option>Supperior</option>
-                        <option>Deluxe</option>
-                        <option>Suite</option>
-                    </select>
-                </div>
-                <button class="search-button">TÌM KIẾM</button>
+        <div class="search-box">
+            <div class="search-wrapper">
+                <img src="assets/img/icon/search.svg" alt="search-icon" class="search-icon" />
+                <input type="text" autocomplete="off" placeholder="Nhập địa điểm..." class="search-field" />
             </div>
+
+            <div class="date-picker">
+                <div class="date1">
+                    <img src="assets/img/icon/calendar.svg" alt="date-icon" class="date-icon" />
+                    <input type="date" class="date-start" placeholder="Ngày nhận phòng" />
+                </div>
+                <div class="date2">
+                    <img src="assets/img/icon/calendar.svg" alt="date-icon" class="date-icon" />
+                    <input type="date" class="date-end" placeholder="Ngày trả phòng" />
+                </div>
+            </div>
+
+            <div class="room-type-selector">
+                <img src="assets/img/icon/bed-alt.svg" alt="room-icon" class="room-icon" />
+                <select class="room-type-select">
+                    <option>Single</option>
+                    <option>Superior</option>
+                    <option>Deluxe</option>
+                    <option>Suite</option>
+                </select>
+                <img src="assets/img/icon/angle-small-down.svg" alt="arrow-icon" class="arrow-icon" />
+            </div>
+
+            <button class="search-button">Tìm kiếm</button>
         </div>
 
         <div class="homestay-section">
             <div class="filters">
                 <div class="search-input">
-                    <svg
-                        class="search-icon"
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="20"
-                        height="20"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                    >
-                        <circle cx="11" cy="11" r="8"></circle>
-                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-                    </svg>
-                    <input type="text" placeholder="Tìm kiếm..." />
+                    <img src="assets/img/icon/search.svg" alt="search-icon" class="search-icon" />
+                    <input type="text" autocomplete="off" placeholder="Tìm kiếm..." class="search-field" />
                 </div>
+
                 <h2>Giá mỗi đêm</h2>
                 <label><input type="checkbox" /> Từ 200 nghìn đến 500 nghìn</label>
                 <label><input type="checkbox" /> Từ 500 nghìn đến 1 triệu</label>
@@ -150,6 +133,35 @@
 
         <div id="popup-placeholder"></div>
         <script type="module">
+            // Khởi tạo flatpickr cho "Ngày nhận phòng"
+            const dateStart = flatpickr(".date-start", {
+                dateFormat: "d/m/Y",
+                locale: "vi", // Đặt ngôn ngữ tiếng Việt
+                minDate: "today", // Không cho phép chọn các ngày trước ngày hôm nay
+                onChange: function (selectedDates, dateStr, instance) {
+                    // Cập nhật minDate cho "Ngày trả phòng" khi người dùng chọn "Ngày nhận phòng"
+                    const dateStartValue = selectedDates[0]; // Ngày nhận phòng đã chọn
+                    if (dateStartValue) {
+                        // Cập nhật minDate cho "Ngày trả phòng"
+                        dateEnd.set("minDate", dateStartValue);
+                    }
+                },
+            });
+
+            // Khởi tạo flatpickr cho "Ngày trả phòng"
+            const dateEnd = flatpickr(".date-end", {
+                dateFormat: "d/m/Y",
+                locale: "vi", // Đặt ngôn ngữ tiếng Việt
+                minDate: "today", // Ban đầu cho phép chọn ngày từ ngày hôm nay
+                onChange: function (selectedDates, dateStr, instance) {
+                    const dateEndValue = selectedDates[0]; // Ngày trả phòng đã chọn
+                    if (dateEndValue) {
+                        // Cập nhật minDate cho "Ngày nhận phòng" để không chọn ngày trước ngày trả phòng
+                        dateStart.set("maxDate", dateEndValue);
+                    }
+                },
+            });
+
             import { setupPopupEventListeners } from "./assets/js/popup-login.js";
 
             fetch("popup.html")
@@ -163,5 +175,6 @@
         <script type="module" src="assets/js/main.js"></script>
         <script type="module" src="assets/js/role-redirect.js"></script>
         <script type="module" src="assets/js/room-list.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     </body>
 </html>
