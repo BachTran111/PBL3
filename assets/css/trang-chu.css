@@ -172,7 +172,6 @@ body {
     align-items: center;
     position: relative;
     width: 100%;
-    margin-bottom: 20px; /* Khoảng cách dưới selector */
 }
 
 /* Ẩn mũi tên mặc định của select */
@@ -226,11 +225,6 @@ body {
 
 .search-button:hover {
     background-color: #007acc;
-    transform: scale(1.03); /* Thêm hiệu ứng phóng to khi hover */
-}
-
-.search-button:active {
-    transform: scale(1); /* Trở lại kích thước ban đầu khi nhấn */
 }
 
 /* Destinations */
@@ -688,7 +682,6 @@ body {
 
     .room-type-selector {
         width: 100%;
-        margin-bottom: 20px;
     }
 
     .room-type-selector select {
