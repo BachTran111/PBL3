@@ -7,7 +7,7 @@
         <link rel="stylesheet" href="" />
         <link rel="stylesheet" href="assets/css/trang-chu.css" />
         <link rel="stylesheet" href="assets/css/header.css" />
-        <link rel="stylesheet" href="./assets/fonts/themify-icons/themify-icons.css" />
+        <link rel="stylesheet" href="assets/fonts/themify-icons/themify-icons.css" />
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" />
     </head>
     <body>
@@ -84,7 +84,7 @@
                     </div>
 
                     <div class="room-type-selector">
-                        <!-- <img src="assets/img/icon/bed-alt.svg" alt="room-icon" class="room-icon" /> -->
+                        <img src="assets/img/icon/bed-alt.svg" alt="room-icon" class="room-icon" />
                         <select class="room-type-select">
                             <option>Single</option>
                             <option>Superior</option>
@@ -235,13 +235,33 @@
         </section>
         <div id="popup-placeholder"></div>
         <script type="module">
-            flatpickr(".date-start", {
+            // Khởi tạo flatpickr cho "Ngày nhận phòng"
+            const dateStart = flatpickr(".date-start", {
                 dateFormat: "d/m/Y",
                 locale: "vi", // Đặt ngôn ngữ tiếng Việt
+                minDate: "today", // Không cho phép chọn các ngày trước ngày hôm nay
+                onChange: function (selectedDates, dateStr, instance) {
+                    // Cập nhật minDate cho "Ngày trả phòng" khi người dùng chọn "Ngày nhận phòng"
+                    const dateStartValue = selectedDates[0]; // Ngày nhận phòng đã chọn
+                    if (dateStartValue) {
+                        // Cập nhật minDate cho "Ngày trả phòng"
+                        dateEnd.set("minDate", dateStartValue);
+                    }
+                },
             });
-            flatpickr(".date-end", {
+
+            // Khởi tạo flatpickr cho "Ngày trả phòng"
+            const dateEnd = flatpickr(".date-end", {
                 dateFormat: "d/m/Y",
                 locale: "vi", // Đặt ngôn ngữ tiếng Việt
+                minDate: "today", // Ban đầu cho phép chọn ngày từ ngày hôm nay
+                onChange: function (selectedDates, dateStr, instance) {
+                    const dateEndValue = selectedDates[0]; // Ngày trả phòng đã chọn
+                    if (dateEndValue) {
+                        // Cập nhật minDate cho "Ngày nhận phòng" để không chọn ngày trước ngày trả phòng
+                        dateStart.set("maxDate", dateEndValue);
+                    }
+                },
             });
 
             import { setupPopupEventListeners } from "./assets/js/popup-login.js";

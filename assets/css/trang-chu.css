@@ -31,6 +31,7 @@ body {
     font-weight: bold;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 2);
 }
+
 /* Cải thiện tổng thể của search box */
 .search-box {
     display: flex;
@@ -80,6 +81,7 @@ body {
     border-radius: 5px;
     background-color: #fff;
     transition: all 0.3s ease;
+    /* padding-left: 40px; Dành không gian cho biểu tượng */
 }
 
 .search-wrapper:focus-within {
@@ -89,7 +91,7 @@ body {
 
 .search-field {
     width: 100%;
-    padding: 12px;
+    padding: 12px 40px 12px 40px; /* Dành không gian cho icon */
     font-size: 16px;
     border: none;
     outline: none;
@@ -99,10 +101,14 @@ body {
 
 /* Cải thiện cho biểu tượng search */
 .search-icon {
-    width: 20px;
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px; /* Kích thước biểu tượng */
     height: 20px;
     color: #888;
-    margin: 10px; /* Khoảng cách giữa icon và input */
+    pointer-events: none; /* Ngăn không cho người dùng tương tác với icon */
 }
 
 /* Cải thiện phần date picker */
@@ -117,7 +123,7 @@ body {
 .date1,
 .date2 {
     position: relative;
-    width: 49%; /* Chiều rộng của mỗi trường */
+    flex: 1;
 }
 
 .date-picker input {
@@ -140,7 +146,7 @@ body {
 /* Cải thiện cho biểu tượng */
 .date-icon {
     position: absolute;
-    left: 15px;
+    left: 12px;
     top: 50%;
     transform: translateY(-50%);
     width: 20px; /* Kích thước biểu tượng */
@@ -152,7 +158,7 @@ body {
 /* Đảm bảo có không gian cho biểu tượng trong input */
 .date-picker .date-start,
 .date-picker .date-end {
-    padding-left: 50px; /* Dành không gian cho biểu tượng */
+    padding-left: 40px; /* Dành không gian cho biểu tượng */
 }
 
 /* Chỉnh viền của trường Ngày nhận phòng và Ngày trả phòng */
@@ -172,26 +178,45 @@ body {
     align-items: center;
     position: relative;
     width: 100%;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #fff;
 }
 
 /* Ẩn mũi tên mặc định của select */
 .room-type-selector select {
     width: 100%;
-    padding: 12px 40px 12px 12px; /* Thêm không gian bên trái cho icon */
+    padding: 12px 40px 12px 40px; /* Dành không gian cho icon */
     font-size: 16px;
-    border-radius: 5px;
-    border: 1px solid #ddd;
+    border: none;
     background-color: transparent;
     appearance: none; /* Ẩn mũi tên mặc định của select */
     cursor: pointer;
     transition: border-color 0.3s ease; /* Thêm hiệu ứng khi focus vào */
+    border-radius: 5px;
 }
 
 /* Thêm hiệu ứng khi focus vào select */
 .room-type-selector select:focus {
     border-color: #007bff;
     outline: none;
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Thêm hiệu ứng focus */
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+.room-type-selector .room-icon {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+    color: #888;
+    pointer-events: none; /* Ngăn không cho người dùng tương tác với icon */
+}
+
+.room-type-selector select {
+    padding-left: 40px; /* Dành không gian cho icon bên trái */
+    box-sizing: border-box;
 }
 
 /* Cải thiện cho biểu tượng mũi tên */
@@ -541,47 +566,22 @@ body {
         font-size: 16px;
     }
 
+    .search-wrapper,
     .date-picker,
     .room-type-selector {
         width: 100%;
     }
 
-    /* Chỉnh sửa phần search input */
-    .search-wrapper {
-        display: flex;
-        width: 100%;
-    }
-
-    .search-wrapper input {
-        width: 100%;
-        padding: 12px;
-    }
-
-    .search-icon {
-        margin: 0 4px 0 15px;
-        flex-shrink: 0;
-    }
-
-    .date-picker {
-        flex-direction: column;
-        gap: 20px;
-    }
-
+    .search-wrapper input,
     .date-picker .date1,
-    .date-picker .date2 {
-        width: 100%;
-        border-radius: 5px;
-        box-sizing: border-box;
-    }
-
+    .date-picker .date2,
     .room-type-selector select {
         box-sizing: border-box;
     }
 
-    /* Cải thiện responsive cho màn hình nhỏ */
+    .date-picker,
     .room-type-selector {
         flex-direction: column;
-        gap: 10px;
     }
 
     .search-button {
@@ -664,30 +664,10 @@ body {
         gap: 15px;
     }
 
-    /* Giữ nguyên các phần tử theo dạng hàng ngang */
-    .search-wrapper {
-        width: 100%;
-    }
-
-    .search-wrapper input {
-        padding: 12px;
-        font-size: 16px;
-    }
-
     .date-picker {
         display: flex;
         justify-content: space-between;
         gap: 15px;
-    }
-
-    .room-type-selector {
-        width: 100%;
-    }
-
-    .room-type-selector select {
-        width: 100%;
-        padding: 12px;
-        font-size: 16px;
     }
 
     .search-button {
