@@ -432,3 +432,248 @@ main.room-detail {
 .btn-book-now:hover {
     background-color: #0054c7;
 }
+
+/* === Phần Đánh giá === */
+.review-section {
+    margin-top: 40px;
+    padding: 20px 100px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    color: #333;
+}
+
+.review-section h3 {
+    font-size: 24px;
+    margin: 20px 0 0 0;
+}
+
+/* Rating Box */
+.rating-box {
+    padding: 20px 0;
+    border-bottom: 1px solid #ddd;
+}
+
+.rating-summary {
+    display: flex;
+    align-items: center;
+    font-size: 18px;
+    gap: 10px;
+}
+
+.star-rating {
+    color: #f39c12;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.total-reviews {
+    font-size: 16px;
+    color: #7f8c8d;
+}
+
+.rating-bars {
+    margin-top: 10px;
+}
+
+.rating-bar {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.rating-bar span {
+    font-size: 14px;
+    color: #333;
+    margin-left: 10px;
+    white-space: nowrap;
+}
+
+.bar-fill {
+    flex-shrink: 0;
+    width: 120px;
+    height: 8px;
+    background-color: #0099ff;
+    border-radius: 5px;
+    transition: width 0.3s ease;
+}
+
+/* Review Form */
+.review-form {
+    padding: 20px 0;
+    border-bottom: 1px solid #ddd;
+}
+.review-form h4 {
+    font-size: 18px;
+    margin: 0;
+    font-weight: 600;
+}
+
+.rating-stars {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+    gap: 5px;
+    margin: 0 0 10px 0;
+    border: none;
+    padding: 0;
+}
+
+.rating-stars input[type="radio"] {
+    display: none;
+}
+
+.star-label {
+    font-size: 28px;
+    color: #ccc;
+    cursor: pointer;
+    transition: color 0.3s ease;
+    user-select: none;
+}
+
+/* Khi radio được chọn, tô màu từ sao đó trở về bên phải (vì row-reverse) */
+.rating-stars input[type="radio"]:checked ~ label,
+.rating-stars label:hover,
+.rating-stars label:hover ~ label {
+    color: #f39c12;
+}
+
+/* Textarea */
+.review-form textarea {
+    display: flex;
+    width: 100%;
+    padding: 14px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    resize: vertical;
+    font-size: 14px;
+    color: #333;
+    font-family: inherit;
+}
+
+/* Inputs */
+.review-form input[type="text"],
+.review-form input[type="email"] {
+    flex: 1;
+    width: 100%;
+    padding: 14px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    margin-bottom: 15px;
+    font-size: 14px;
+    color: #333;
+    font-family: inherit;
+}
+
+.comment-row {
+    display: flex;
+    margin-bottom: 15px;
+}
+
+.comment-row textarea {
+    flex: 1;
+    min-width: 0;
+}
+
+.name-email-row {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+/* Submit Button */
+.btn-submit-review {
+    background-color: #0099ff;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.btn-submit-review:hover,
+.btn-submit-review:focus {
+    background-color: #007acc;
+    outline: none;
+}
+
+/* Reviews list */
+.review-item {
+    padding: 20px 0;
+    border-bottom: 1px solid #ddd;
+}
+
+.review-item:last-child {
+    border-bottom: none;
+}
+
+.review-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 16px;
+    color: #333;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.review-header > div {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    flex-wrap: wrap;
+}
+
+.reviewer-name {
+    font-weight: 700;
+}
+
+.reviewer-email {
+    color: #7f8c8d;
+    font-size: 14px;
+    font-style: italic;
+}
+
+.review-date {
+    color: #7f8c8d;
+    font-size: 12px;
+    font-style: italic;
+}
+
+.review-text {
+    font-size: 14px;
+    margin-top: 10px;
+    color: #34495e;
+}
+
+.reply {
+    margin-top: 10px;
+    margin-left: 30px;
+    font-size: 14px;
+    color: #7f8c8d;
+    border-left: 3px solid #007bff;
+    padding-left: 10px;
+    background-color: #eaf4ff;
+    border-radius: 0 5px 5px 0;
+}
+
+.reply-text {
+    margin-top: 5px;
+    font-style: italic;
+    color: #2c3e50;
+}
+
+.host-reply {
+    font-weight: 700;
+    font-size: 14px;
+    color: #007bff;
+}
+
+.host-reply:hover {
+    cursor: pointer;
+}
