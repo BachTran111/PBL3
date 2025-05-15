@@ -657,7 +657,7 @@ main.room-detail {
     font-size: 14px;
     color: #7f8c8d;
     border-left: 3px solid #007bff;
-    padding-left: 10px;
+    padding: 10px;
     background-color: #eaf4ff;
     border-radius: 0 5px 5px 0;
 }
@@ -668,12 +668,13 @@ main.room-detail {
     color: #2c3e50;
 }
 
-.host-reply {
+.host-reply,
+.user-reply {
     font-weight: 700;
     font-size: 14px;
     color: #007bff;
 }
 
-.host-reply:hover {
+.user-reply:hover {
     cursor: pointer;
 }
