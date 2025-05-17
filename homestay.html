@@ -1,167 +1,270 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Homestay</title>
-        <link rel="stylesheet" href="assets/css/homestay.css" />
-        <link rel="stylesheet" href="assets/css/header.css" />
-        <link rel="stylesheet" href="./assets/fonts/themify-icons/themify-icons.css" />
-    </head>
-    <body>
-        <header>
-            <div class="header-container">
-                <div class="container1">
-                    <div class="header-content">
-                        <div class="logo">
-                            <a href="trang-chu.html">
-                                <img src="assets/img/gotravel_logo_air.png" alt="" />
-                            </a>
-                        </div>
-                        <nav class="nav">
-                            <ul>
-                                <li><a href="trang-chu.html">TRANG CHỦ</a></li>
-                                <li><a href="#">HOMESTAYS</a></li>
-                                <li><a href="about.html" target="_blank">VỀ CHÚNG TÔI</a></li>
-                                <li><a href="contact.html" target="_blank">LIÊN HỆ</a></li>
-                            </ul>
-                        </nav>
-                    </div>
-                </div>
-                <div class="btns desktop-btns" id="auth-buttons">
-                    <button class="cooperate-btn" onclick="location.href='partnership.html'">Hợp tác với chúng tôi</button>
-                    <button class="dang-ky-btn signup" id="registerBtn">Đăng ký</button>
-                    <button class="dang-nhap-btn login" id="loginBtn">Đăng nhập</button>
-                </div>
-
-                <div id="user-info" class="user-dropdown" style="display: none; position: relative">
-                    <img src="/assets/img/icon/user.svg" alt="user-icon" id="user-icon" />
-                    <div id="user-menu" class="dropdown-menu">
-                        <a href="#" id="profileLink" class="dropdown-item">Hồ sơ</a>
-                        <button id="logoutBtn" class="dropdown-item">Đăng xuất</button>
-                    </div>
-                </div>
-
-                <button class="mobile-menu-toggle" aria-label="Toggle menu" aria-expanded="false">
-                    <i class="ti-menu"></i>
-                </button>
-
-                <div class="mobile-menu">
-                    <a href="trang-chu.html" class="mobile-menu-link">TRANG CHỦ</a>
-                    <a href="#" class="mobile-menu-link">HOMESTAYS</a>
-                    <a href="about.html" class="mobile-menu-link">VỀ CHÚNG TÔI</a>
-                    <a href="contact.html" class="mobile-menu-link">LIÊN HỆ</a>
-                    <hr class="mobile-menu-divider" />
-                    <a href="partnership.html" class="mobile-menu-link">Hợp tác với chúng tôi</a>
-                    <button class="mobile-menu-btn" onclick="openPopup('register'); closeMobileMenu();">Đăng ký</button>
-                    <button class="mobile-menu-btn" onclick="openPopup('login'); closeMobileMenu();">Đăng nhập</button>
-                </div>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Homestay</title>
+    <link rel="stylesheet" href="assets/css/homestay.css" />
+    <link rel="stylesheet" href="assets/css/header.css" />
+    <link
+      rel="stylesheet"
+      href="./assets/fonts/themify-icons/themify-icons.css"
+    />
+  </head>
+  <body>
+    <header>
+      <div class="header-container">
+        <div class="container1">
+          <div class="header-content">
+            <div class="logo">
+              <a href="trang-chu.html">
+                <img src="assets/img/gotravel_logo_air.png" alt="" />
+              </a>
             </div>
-        </header>
-
-        <div class="hero">
-            <div class="search-box">
-                <div class="search-location">
-                    <svg
-                        class="search-icon"
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="20"
-                        height="20"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                    >
-                        <circle cx="11" cy="11" r="8"></circle>
-                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-                    </svg>
-                    <input type="text" placeholder="Hải Châu" />
-                </div>
-                <div class="date-picker">
-                    <input type="date" class="date1" />
-                    <input type="date" class="date2" />
-                </div>
-                <div class="guests-selector">
-                    <select>
-                        <option>Single</option>
-                        <option>Supperior</option>
-                        <option>Deluxe</option>
-                        <option>Suite</option>
-                    </select>
-                </div>
-                <button class="search-button">TÌM KIẾM</button>
-            </div>
+            <nav class="nav">
+              <ul>
+                <li><a href="trang-chu.html">TRANG CHỦ</a></li>
+                <li><a href="#">HOMESTAYS</a></li>
+                <li><a href="about.html" target="_blank">VỀ CHÚNG TÔI</a></li>
+                <li><a href="contact.html" target="_blank">LIÊN HỆ</a></li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+        <div class="btns desktop-btns" id="auth-buttons">
+          <button
+            class="cooperate-btn"
+            onclick="location.href='partnership.html'"
+          >
+            Hợp tác với chúng tôi
+          </button>
+          <button class="dang-ky-btn signup" id="registerBtn">Đăng ký</button>
+          <button class="dang-nhap-btn login" id="loginBtn">Đăng nhập</button>
         </div>
 
-        <div class="homestay-section">
-            <div class="filters">
-                <div class="search-input">
-                    <svg
-                        class="search-icon"
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="20"
-                        height="20"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                    >
-                        <circle cx="11" cy="11" r="8"></circle>
-                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-                    </svg>
-                    <input type="text" placeholder="Tìm kiếm..." />
-                </div>
-                <h2>Giá mỗi đêm</h2>
-                <label><input type="checkbox" /> Từ 200 nghìn đến 500 nghìn</label>
-                <label><input type="checkbox" /> Từ 500 nghìn đến 1 triệu</label>
-                <label><input type="checkbox" /> Từ 1 triệu đến 2 triệu</label>
-                <label><input type="checkbox" /> Trên 2 triệu</label>
-
-                <h2>Loại phòng</h2>
-                <label><input type="checkbox" /> Single</label>
-                <label><input type="checkbox" /> Supperior</label>
-                <label><input type="checkbox" /> Deluxe</label>
-                <label><input type="checkbox" /> Suite</label>
-
-                <h2>Tiện nghi</h2>
-                <label><input type="checkbox" /> Hồ bơi</label>
-                <label><input type="checkbox" /> Bãi đỗ xe</label>
-                <label><input type="checkbox" /> WiFi miễn phí</label>
-                <label><input type="checkbox" /> TV</label>
-                <label><input type="checkbox" /> Điều hòa</label>
-                <label><input type="checkbox" /> Tủ lạnh</label>
-                <label><input type="checkbox" /> Bếp riêng</label>
-                <label><input type="checkbox" /> Ban công</label>
-                <label><input type="checkbox" /> Bồn tắm</label>
-                <label><input type="checkbox" /> Máy pha trà/cà phê</label>
-
-                <h2>Xếp hạng đánh giá</h2>
-                <label><input type="checkbox" /> Từ 3 sao trở lên</label>
-                <label><input type="checkbox" /> Từ 4 sao trở lên</label>
-                <label><input type="checkbox" /> 5 sao</label>
-            </div>
-
-            <div class="results"></div>
+        <div
+          id="user-info"
+          class="user-dropdown"
+          style="display: none; position: relative"
+        >
+          <img src="/assets/img/icon/user.svg" alt="user-icon" id="user-icon" />
+          <div id="user-menu" class="dropdown-menu">
+            <a href="#" id="profileLink" class="dropdown-item">Hồ sơ</a>
+            <button id="logoutBtn" class="dropdown-item">Đăng xuất</button>
+          </div>
         </div>
 
-        <div id="popup-placeholder"></div>
-        <script type="module">
-            import { setupPopupEventListeners } from "./assets/js/popup-login.js";
+        <button
+          class="mobile-menu-toggle"
+          aria-label="Toggle menu"
+          aria-expanded="false"
+        >
+          <i class="ti-menu"></i>
+        </button>
 
-            fetch("popup.html")
-                .then((response) => response.text())
-                .then((data) => {
-                    document.getElementById("popup-placeholder").innerHTML = data;
-                    setupPopupEventListeners();
-                });
-        </script>
+        <div class="mobile-menu">
+          <a href="trang-chu.html" class="mobile-menu-link">TRANG CHỦ</a>
+          <a href="#" class="mobile-menu-link">HOMESTAYS</a>
+          <a href="about.html" class="mobile-menu-link">VỀ CHÚNG TÔI</a>
+          <a href="contact.html" class="mobile-menu-link">LIÊN HỆ</a>
+          <hr class="mobile-menu-divider" />
+          <a href="partnership.html" class="mobile-menu-link"
+            >Hợp tác với chúng tôi</a
+          >
+          <button
+            class="mobile-menu-btn"
+            onclick="openPopup('register'); closeMobileMenu();"
+          >
+            Đăng ký
+          </button>
+          <button
+            class="mobile-menu-btn"
+            onclick="openPopup('login'); closeMobileMenu();"
+          >
+            Đăng nhập
+          </button>
+        </div>
+      </div>
+    </header>
 
-        <script type="module" src="assets/js/main.js"></script>
-        <script type="module" src="assets/js/role-redirect.js"></script>
-        <script type="module" src="assets/js/room-list.js"></script>
-    </body>
+    <div class="hero">
+      <div class="search-box">
+        <div class="search-location">
+          <svg
+            class="search-icon"
+            xmlns="http://www.w3.org/2000/svg"
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+          <input type="text" data-filter="location" placeholder="Hải Châu" />
+        </div>
+        <div class="date-picker">
+          <input type="date" id="checkin" data-filter="checkIn" class="date1" />
+          <input
+            type="date"
+            id="checkout"
+            data-filter="checkOut"
+            class="date2"
+          />
+        </div>
+        <!-- <div class="guests-selector">
+          <select>
+            <option>Single</option>
+            <option>Supperior</option>
+            <option>Deluxe</option>
+            <option>Suite</option>
+          </select>
+        </div> -->
+        <button class="search-button">TÌM KIẾM</button>
+      </div>
+    </div>
+
+    <div class="homestay-section">
+      <div class="filters">
+        <div class="search-input">
+          <svg
+            class="search-icon"
+            xmlns="http://www.w3.org/2000/svg"
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+          <input type="text" data-filter="location" placeholder="Tìm kiếm..." />
+        </div>
+        <h2>Giá mỗi đêm</h2>
+        <label
+          ><input type="checkbox" data-filter="price" value="0-200000" /> Dưới
+          200 nghìn</label
+        >
+        <label
+          ><input type="checkbox" data-filter="price" value="200000-500000" />
+          Từ 200 nghìn đến 500 nghìn</label
+        >
+        <label
+          ><input type="checkbox" data-filter="price" value="500000-1000000" />
+          Từ 500 nghìn đến 1 triệu</label
+        >
+        <label
+          ><input
+            type="checkbox"
+            data-filter="price"
+            value="1000000-100000000"
+          />
+          Trên 1 triệu</label
+        >
+
+        <h2>Loại phòng</h2>
+        <label
+          ><input type="checkbox" data-filter="roomType" value="Single" />
+          Single</label
+        >
+        <label
+          ><input type="checkbox" data-filter="roomType" value="Superior" />
+          Supperior</label
+        >
+        <label
+          ><input type="checkbox" data-filter="roomType" value="Deluxe" />
+          Deluxe</label
+        >
+        <label
+          ><input type="checkbox" data-filter="roomType" value="Suite" />
+          Suite</label
+        >
+
+        <h2>Tiện nghi</h2>
+        <label
+          ><input type="checkbox" data-filter="features" value="Hồ bơi" /> Hồ
+          bơi</label
+        >
+        <label
+          ><input type="checkbox" data-filter="features" value="Bãi đỗ xe" />
+          Bãi đỗ xe</label
+        >
+        <label
+          ><input type="checkbox" data-filter="features" value="Wifi" /> WiFi
+          miễn phí</label
+        >
+        <label
+          ><input type="checkbox" data-filter="features" value="TV" /> TV</label
+        >
+        <label
+          ><input type="checkbox" data-filter="features" value="Máy lạnh" />
+          Điều hòa</label
+        >
+        <label
+          ><input type="checkbox" data-filter="features" value="Tủ lạnh" /> Tủ
+          lạnh</label
+        >
+        <label
+          ><input type="checkbox" data-filter="features" value="Bếp riêng" />
+          Bếp riêng</label
+        >
+        <label
+          ><input type="checkbox" data-filter="features" value="Ban công" /> Ban
+          công</label
+        >
+        <label
+          ><input type="checkbox" data-filter="features" value="Bồn tắm" /> Bồn
+          tắm</label
+        >
+        <label
+          ><input
+            type="checkbox"
+            data-filter="features"
+            value="Máy pha cà phê"
+          />
+          Máy pha trà/cà phê</label
+        >
+
+        <h2>Xếp hạng đánh giá</h2>
+        <label
+          ><input type="checkbox" data-filter="surfRating" value="3" /> Từ 3 sao
+          trở lên</label
+        >
+        <label
+          ><input type="checkbox" data-filter="surfRating" value="4" /> Từ 4 sao
+          trở lên</label
+        >
+        <label
+          ><input type="checkbox" data-filter="surfRating" value="5" /> 5
+          sao</label
+        >
+      </div>
+
+      <div class="results"></div>
+    </div>
+
+    <div id="popup-placeholder"></div>
+    <script type="module">
+      import { setupPopupEventListeners } from "./assets/js/popup-login.js";
+
+      fetch("popup.html")
+        .then((response) => response.text())
+        .then((data) => {
+          document.getElementById("popup-placeholder").innerHTML = data;
+          setupPopupEventListeners();
+        });
+    </script>
+
+    <script type="module" src="assets/js/main.js"></script>
+    <script type="module" src="assets/js/role-redirect.js"></script>
+    <script type="module" src="assets/js/room-list.js"></script>
+  </body>
 </html>

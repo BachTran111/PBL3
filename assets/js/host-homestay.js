@@ -6,7 +6,7 @@ window.onload = function () {
   const decodedToken = jwt_decode(token);
   const hostId = decodedToken.host_id;
 
-  fetch(`http://localhost:8080/homestay/api/homestays/host/${hostId}`, {
+  fetch("http://localhost:8080/homestay/api/homestays/my", {
     method: "GET",
     headers: {
       Authorization: `Bearer ${token}`,

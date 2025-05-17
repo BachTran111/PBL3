@@ -1,155 +1,207 @@
 <!DOCTYPE html>
 <html lang="vi">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Bảng điều khiển</title>
-        <link rel="stylesheet" href="assets/css/header.css" />
-        <link rel="stylesheet" href="assets/fonts/themify-icons/themify-icons.css" />
-        <link rel="stylesheet" href="assets/css/admin-dashboard.css" />
-    </head>
-    <body>
-        <header>
-            <div class="header-container">
-                <div class="container1">
-                    <div class="header-content">
-                        <div class="logo">
-                            <a href="trang-chu.html">
-                                <img src="assets/img/gotravel_logo_air.png" alt="" />
-                            </a>
-                        </div>
-                        <nav class="nav">
-                            <ul>
-                                <li><a href="trang-chu.html">TRANG CHỦ</a></li>
-                                <li><a href="homestay.html">HOMESTAYS</a></li>
-                                <li><a href="about.html" target="_blank">VỀ CHÚNG TÔI</a></li>
-                                <li><a href="contact.html" target="_blank">LIÊN HỆ</a></li>
-                            </ul>
-                        </nav>
-                    </div>
-                </div>
-
-                <div class="btns desktop-btns" id="auth-buttons">
-                    <button class="cooperate-btn" onclick="location.href='partnership.html'">Hợp tác với chúng tôi</button>
-                    <button class="dang-ky-btn signup" id="registerBtn">Đăng ký</button>
-                    <button class="dang-nhap-btn login" id="loginBtn">Đăng nhập</button>
-                </div>
-
-                <div id="user-info" class="user-dropdown" style="display: none; position: relative">
-                    <img src="/assets/img/icon/user.svg" alt="user-icon" id="user-icon" />
-                    <div id="user-menu" class="dropdown-menu">
-                        <a href="#" id="profileLink" class="dropdown-item">Hồ sơ</a>
-                        <button id="logoutBtn" class="dropdown-item">Đăng xuất</button>
-                    </div>
-                </div>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bảng điều khiển</title>
+    <link rel="stylesheet" href="assets/css/header.css" />
+    <link
+      rel="stylesheet"
+      href="assets/fonts/themify-icons/themify-icons.css"
+    />
+    <link rel="stylesheet" href="assets/css/admin-dashboard.css" />
+  </head>
+  <body>
+    <header>
+      <div class="header-container">
+        <div class="container1">
+          <div class="header-content">
+            <div class="logo">
+              <a href="trang-chu.html">
+                <img src="assets/img/gotravel_logo_air.png" alt="" />
+              </a>
             </div>
-        </header>
-
-        <div class="container">
-            <!-- Sidebar Menu -->
-            <div class="sidebar">
-                <h2>Bảng điều khiển Admin</h2>
-                <ul>
-                    <li><a href="#" class="tab-link" data-tab="tab-approve-business">Yêu cầu phê duyệt</a></li>
-                    <li><a href="#" class="tab-link" data-tab="tab-manage-company">Quản lý doanh nghiệp</a></li>
-                </ul>
-            </div>
-
-            <!-- Main Content -->
-            <div class="main-content">
-                <div id="default-content" class="tab-content active">
-                    <img src="https://cdn-icons-png.flaticon.com/512/706/706797.png" alt="Welcome" />
-                    <h1>Chào mừng bạn đến với GoTravel</h1>
-                    <h3>Admin Dashboard</h3>
-                </div>
-
-                <div id="tab-approve-business" class="tab-content">
-                    <h2>Phê duyệt doanh nghiệp</h2>
-                    <table class="room-table">
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Tên doanh nghiệp</th>
-                                <th>Xem chi tiết</th>
-                                <th>Hành động</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>DN001</td>
-                                <td>Công ty TNHH Du lịch ABC</td>
-                                <td>
-                                    <button
-                                        class="btn btn-view"
-                                        onclick="openCommonPopup('business', { name: 'Homestay ABC', address: '123 Nha Trang', email: 'abc@mail.com', note: 'Ghi chú mẫu' })"
-                                    >
-                                        Xem chi tiết
-                                    </button>
-                                </td>
-                                <td>
-                                    <button class="btn btn-approve">Phê duyệt</button>
-                                    <button class="btn btn-reject">Từ chối</button>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-
-                <div id="tab-manage-company" class="tab-content">
-                    <h2>Quản lý doanh nghiệp</h2>
-                </div>
-            </div>
+            <nav class="nav">
+              <ul>
+                <li><a href="trang-chu.html">TRANG CHỦ</a></li>
+                <li><a href="homestay.html">HOMESTAYS</a></li>
+                <li><a href="about.html" target="_blank">VỀ CHÚNG TÔI</a></li>
+                <li><a href="contact.html" target="_blank">LIÊN HỆ</a></li>
+              </ul>
+            </nav>
+          </div>
         </div>
 
-        <div id="common-popup" class="popup-overlay" style="display: none">
-            <div class="popup-content">
-                <button class="close-popup" onclick="closeCommonPopup()">×</button>
-                <h3 id="popup-title">Chi tiết</h3>
-                <div id="popup-body"></div>
-            </div>
+        <div class="btns desktop-btns" id="auth-buttons">
+          <button
+            class="cooperate-btn"
+            onclick="location.href='partnership.html'"
+          >
+            Hợp tác với chúng tôi
+          </button>
+          <button class="dang-ky-btn signup" id="registerBtn">Đăng ký</button>
+          <button class="dang-nhap-btn login" id="loginBtn">Đăng nhập</button>
         </div>
 
-        <script>
-            const tabLinks = document.querySelectorAll(".tab-link");
-            const tabContents = document.querySelectorAll(".tab-content");
-            const defaultContent = document.getElementById("default-content");
+        <div
+          id="user-info"
+          class="user-dropdown"
+          style="display: none; position: relative"
+        >
+          <img src="/assets/img/icon/user.svg" alt="user-icon" id="user-icon" />
+          <div id="user-menu" class="dropdown-menu">
+            <a href="#" id="profileLink" class="dropdown-item">Hồ sơ</a>
+            <button id="logoutBtn" class="dropdown-item">Đăng xuất</button>
+          </div>
+        </div>
+      </div>
+    </header>
 
-            tabLinks.forEach((link) => {
-                link.addEventListener("click", (e) => {
-                    e.preventDefault();
-                    tabLinks.forEach((l) => l.classList.remove("active-tab"));
-                    link.classList.add("active-tab");
+    <div class="container">
+      <!-- Sidebar Menu -->
+      <div class="sidebar">
+        <h2>Bảng điều khiển Admin</h2>
+        <ul>
+          <li>
+            <a href="#" class="tab-link" data-tab="tab-approve-business"
+              >Yêu cầu phê duyệt</a
+            >
+          </li>
+          <li>
+            <a href="#" class="tab-link" data-tab="tab-manage-company"
+              >Quản lý doanh nghiệp</a
+            >
+          </li>
+        </ul>
+      </div>
 
-                    tabContents.forEach((c) => c.classList.remove("active"));
-                    const tabId = link.getAttribute("data-tab");
-                    document.getElementById(tabId).classList.add("active");
+      <!-- Main Content -->
+      <div class="main-content">
+        <div id="default-content" class="tab-content active">
+          <img
+            src="https://cdn-icons-png.flaticon.com/512/706/706797.png"
+            alt="Welcome"
+          />
+          <h1>Chào mừng bạn đến với GoTravel</h1>
+          <h3>Admin Dashboard</h3>
+        </div>
 
-                    defaultContent.classList.remove("active");
-                });
-            });
+        <div id="tab-approve-business" class="tab-content">
+          <div class="card-box">
+            <button class="close-btn" onclick="returnToDefault()">×</button>
+            <h2>Phê duyệt doanh nghiệp</h2>
+            <table class="room-table">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Tên doanh nghiệp</th>
+                  <th>Xem chi tiết</th>
+                  <th>Hành động</th>
+                </tr>
+              </thead>
+              <tbody id="homestay-request-body">
+                <tr>
+                  <td>DN001</td>
+                  <td>Công ty TNHH Du lịch ABC</td>
+                  <td>
+                    <button
+                      class="btn btn-view"
+                      onclick="openCommonPopup('business', { name: 'Homestay ABC', address: '123 Nha Trang', email: 'abc@mail.com', note: 'Ghi chú mẫu' })"
+                    >
+                      Xem chi tiết
+                    </button>
+                  </td>
+                  <td>
+                    <button class="btn btn-approve">Phê duyệt</button>
+                    <button class="btn btn-reject">Từ chối</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
 
-            function openCommonPopup(type, data) {
-                const title = document.getElementById("popup-title");
-                const body = document.getElementById("popup-body");
+        <div id="tab-manage-company" class="tab-content">
+          <div class="card-box">
+            <button class="close-btn" onclick="returnToDefault()">×</button>
+            <h2>Quản lý doanh nghiệp</h2>
+          </div>
+        </div>
+      </div>
+    </div>
 
-                if (type === "business") {
-                    title.innerText = "Chi tiết Doanh nghiệp";
-                    body.innerHTML = `
+    <div id="common-popup" class="popup-overlay" style="display: none">
+      <div class="popup-content">
+        <button class="close-popup" onclick="closeCommonPopup()">×</button>
+        <h3 id="popup-title">Chi tiết</h3>
+        <div id="popup-body"></div>
+      </div>
+    </div>
+
+    <script>
+      const tabLinks = document.querySelectorAll(".tab-link");
+      const tabContents = document.querySelectorAll(".tab-content");
+      const defaultContent = document.getElementById("default-content");
+
+      tabLinks.forEach((link) => {
+        link.addEventListener("click", (e) => {
+          e.preventDefault();
+          tabLinks.forEach((l) => l.classList.remove("active-tab"));
+          link.classList.add("active-tab");
+
+          tabContents.forEach((c) => c.classList.remove("active"));
+          const tabId = link.getAttribute("data-tab");
+          document.getElementById(tabId).classList.add("active");
+
+          defaultContent.classList.remove("active");
+        });
+      });
+
+      function returnToDefault() {
+        // 1. Ẩn tất cả nội dung tab
+        tabContents.forEach((tab) => tab.classList.remove("active"));
+
+        // 2. Hiện phần mặc định
+        defaultContent.classList.add("active");
+
+        // 3. Bỏ highlight tab con & homestay cha
+        tabLinks.forEach((l) => l.classList.remove("active-tab"));
+        homestayToggles.forEach((toggle) =>
+          toggle.classList.remove("active-homestay")
+        );
+
+        // 4. Thu gọn toàn bộ submenu trong sidebar
+        document
+          .querySelectorAll(".sub-menu")
+          .forEach((menu) => (menu.style.display = "none"));
+
+        // 5. Thu gọn danh sách homestay chính
+        homestayList.style.display = "none";
+      }
+
+      function openCommonPopup(type, data) {
+        const title = document.getElementById("popup-title");
+        const body = document.getElementById("popup-body");
+
+        if (type === "business") {
+          title.innerText = "Chi tiết Doanh nghiệp";
+          body.innerHTML = `
                         <p><strong>Tên Homestay:</strong> ${data.name}</p>
                         <p><strong>Địa chỉ:</strong> ${data.address}</p>
                         <p><strong>Email:</strong> ${data.email}</p>
-                        <p><strong>Ghi chú:</strong> ${data.note}</p>
+                        <p><strong>Ngày yêu cầu:</strong> ${data.note}</p>
                     `;
-                }
+        }
 
-                document.getElementById("common-popup").style.display = "flex";
-            }
+        document.getElementById("common-popup").style.display = "flex";
+      }
 
-            function closeCommonPopup() {
-                document.getElementById("common-popup").style.display = "none";
-            }
-        </script>
-        <script type="module" src="assets/js/main.js"></script>
-        <script type="module" src="assets/js/role-redirect.js"></script>
-    </body>
+      function closeCommonPopup() {
+        document.getElementById("common-popup").style.display = "none";
+      }
+    </script>
+    <script type="module" src="assets/js/main.js"></script>
+    <script type="module" src="assets/js/role-redirect.js"></script>
+    <script type="module" src="assets/js/admin-homestay.js"></script>
+  </body>
 </html>

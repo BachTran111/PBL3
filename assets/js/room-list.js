@@ -7,8 +7,92 @@ const paginationContainer = document.createElement("div");
 paginationContainer.classList.add("pagination");
 resultsContainer.after(paginationContainer);
 
-// API endpoint
-const endpoint = "http://localhost:8080/homestay/api/homestays";
+// Lấy filter + reload trang khi baasm filter mới
+const filterInputs = document.querySelectorAll("[data-filter]");
+filterInputs.forEach((input) => {
+  input.addEventListener("change", () => {
+    currentPage = 1;
+    loadHomestaysWithFilters();
+  });
+});
+
+//Gom mấy filter lại
+function collectFilters() {
+  const params = {};
+
+  filterInputs.forEach((input) => {
+    const key = input.dataset.filter;
+    const val = input.value.trim();
+
+    // Xử lý khác nhau giữa checkbox/radio và các input khác
+    if (input.type === "checkbox" || input.type === "radio") {
+      if (!input.checked) return; // Bỏ qua nếu không checked
+    } else {
+      if (!val) return; // Bỏ qua nếu giá trị rỗng (date, text...)
+    }
+
+    switch (key) {
+      case "price":
+        const [min, max] = val.split("-").map(Number);
+        if (!isNaN(min) && !isNaN(max)) {
+          params.priceFrom = Math.min(params.priceFrom ?? min, min);
+          params.priceTo = Math.max(params.priceTo ?? max, max);
+        }
+        break;
+
+      case "roomType":
+        if (!params.roomType || !params.roomType.includes(val)) {
+          params.roomType = params.roomType ? params.roomType + "," + val : val;
+        }
+        break;
+
+      case "features":
+        if (!params.features || !params.features.includes(val)) {
+          params.features = params.features ? params.features + "," + val : val;
+        }
+        break;
+
+      case "surfRating":
+        // Chỉ giữ rating cao nhất
+        params.surfRating = Math.max(params.surfRating ?? 0, Number(val));
+        break;
+
+      case "checkIn":
+        params.checkInDate = val;
+        break;
+
+      case "checkOut":
+        // Validate checkOut > checkIn
+        if (
+          params.checkInDate &&
+          new Date(val) <= new Date(params.checkInDate)
+        ) {
+          console.warn("Ngày check-out phải sau check-in");
+          return;
+        }
+        params.checkOutDate = val;
+        break;
+
+      case "location":
+        params.location = val;
+        break;
+    }
+  });
+
+  console.log("Filter params:", params);
+  return params;
+}
+
+function toQueryString(params) {
+  return Object.entries(params)
+    .map(
+      ([key, val]) => `${encodeURIComponent(key)}=${encodeURIComponent(val)}`
+    )
+    .join("&");
+}
+
+const endpoint = "http://localhost:8080/homestay/api/homestays/search";
+
 const ITEMS_PER_PAGE = 20;
 
 let currentPage = 1;
@@ -21,7 +105,7 @@ async function fetchPrimaryImageUrl(homestayId) {
     );
     if (!res.ok) throw new Error("No primary image");
     const data = await res.json();
-    return data.primaryImageUrl; // Đường link ảnh chính
+    return data.primaryImageUrl;
   } catch (error) {
     console.error(
       "Không lấy được ảnh chính cho homestay ID:",
@@ -38,6 +122,9 @@ async function renderPage(page) {
   const start = (page - 1) * ITEMS_PER_PAGE;
   const end = start + ITEMS_PER_PAGE;
   const currentItems = allHomestays.slice(start, end);
+
+  const checkInDate = document.querySelector(".date1").value;
+  const checkOutDate = document.querySelector(".date2").value;
 
   for (const item of currentItems) {
     const primaryImageUrl = await fetchPrimaryImageUrl(item.id);
@@ -65,6 +152,13 @@ async function renderPage(page) {
     );
     insertedCard.addEventListener("click", () => {
       window.location.href = `room.html?id=${item.id}`;
+      localStorage.setItem(
+        "lastSearchDates",
+        JSON.stringify({
+          checkIn: checkInDate,
+          checkOut: checkOutDate,
+        })
+      );
     });
   }
 }
@@ -112,14 +206,44 @@ function renderPagination() {
 }
 
 // Fetch dữ liệu homestay
-async function loadHomestays() {
+// async function loadHomestays() {
+//   try {
+//     const response = await fetch(endpoint);
+//     if (!response.ok) throw new Error("Lỗi khi truy cập API homestays");
+
+//     const data = await response.json();
+//     if (!Array.isArray(data) || data.length === 0) {
+//       resultsContainer.innerHTML = "<p>Hiện chưa có homestay nào.</p>";
+//       return;
+//     }
+
+//     allHomestays = data;
+//     await renderPage(currentPage);
+//     renderPagination();
+//   } catch (error) {
+//     console.error(error);
+//     resultsContainer.innerHTML =
+//       "<p>Lỗi khi tải dữ liệu. Vui lòng thử lại sau.</p>";
+//   }
+
+//   allHomestays = data;
+//   await renderPage(currentPage);
+//   renderPagination();
+// }
+
+async function loadHomestaysWithFilters() {
+  const filters = collectFilters();
+  const queryString = toQueryString(filters);
+  const url = `${endpoint}?${queryString}`;
+
   try {
-    const response = await fetch(endpoint);
-    if (!response.ok) throw new Error("Lỗi khi truy cập API homestays");
+    const response = await fetch(url);
+    if (!response.ok) throw new Error("Lỗi khi truy cập API /search");
 
     const data = await response.json();
     if (!Array.isArray(data) || data.length === 0) {
-      resultsContainer.innerHTML = "<p>Hiện chưa có homestay nào.</p>";
+      resultsContainer.innerHTML = "<p>Không tìm thấy homestay phù hợp.</p>";
+      paginationContainer.innerHTML = "";
       return;
     }
 
@@ -129,13 +253,9 @@ async function loadHomestays() {
   } catch (error) {
     console.error(error);
     resultsContainer.innerHTML =
-      "<p>Lỗi khi tải dữ liệu. Vui lòng thử lại sau.</p>";
+      "<p>Lỗi khi tải dữ liệu lọc. Vui lòng thử lại sau.</p>";
+    paginationContainer.innerHTML = "";
   }
-
-  allHomestays = data;
-  await renderPage(currentPage);
-  renderPagination();
 }
 
-// Khởi động
-loadHomestays();
+loadHomestaysWithFilters();

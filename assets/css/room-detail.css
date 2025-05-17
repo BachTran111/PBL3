@@ -100,8 +100,8 @@ main.room-detail {
 }
 
 .gallery-large img {
-  width: 100%;
-  height: 100%;
+  width: 472px;
+  height: 330px;
   object-fit: cover;
   border-radius: 10px;
 }
@@ -132,7 +132,7 @@ main.room-detail {
 
 .gallery-small img {
   width: 100%;
-  height: 100%;
+  height: 160px;
   object-fit: cover;
   border-radius: 8px;
 }
@@ -432,7 +432,6 @@ main.room-detail {
 .btn-book-now:hover {
   background-color: #0054c7;
 }
-
 
 .review-form {
   margin-top: 30px;

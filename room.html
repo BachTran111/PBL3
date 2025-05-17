@@ -146,8 +146,8 @@
     <div class="hero">
       <div class="search-box">
         <div class="date-picker">
-          <input type="date" class="date1" />
-          <input type="date" class="date2" />
+          <input type="date" id="checkInDate" class="date1" />
+          <input type="date" id="checkOutDate" class="date2" />
         </div>
         <button class="search-button">TÌM KIẾM</button>
       </div>
@@ -264,6 +264,13 @@
   </body>
   <div id="popup-placeholder"></div>
   <script type="module">
+
+    const lastDates = JSON.parse(localStorage.getItem('lastSearchDates'));
+    if (lastDates) {
+    document.getElementById('checkInDate').value = lastDates.checkIn;
+    document.getElementById('checkOutDate').value = lastDates.checkOut;
+}
+
     document.querySelector(".search-button").addEventListener("click", function () {
     const checkInDate = document.querySelector(".date1").value;
     const checkOutDate = document.querySelector(".date2").value;
@@ -399,57 +406,81 @@ if (!homestayId) {
       });
 
       function attachBookingHandlers() {
-        document.querySelectorAll(".btn-book-now").forEach((btn) => {
-          btn.addEventListener("click", () => {
-            const token = localStorage.getItem("authToken");
-            if (!token) {
-              alert("Vui lòng đăng nhập để đặt phòng.");
-              return;
-            }
-
-            const payload = decodeJWT(token);
-            const userId = payload.host_id || payload.sub || payload.userId;
-            const roomId = btn.dataset.roomId;
-            const checkInDate = checkInInput.value;
-            const checkOutDate = checkOutInput.value;
-
-            if (!checkInDate || !checkOutDate) {
-              alert("Vui lòng chọn ngày nhận và trả phòng.");
-              return;
-            }
-
-            const body = {
-              userId: Number(userId),
-              roomId: Number(roomId),
-              checkInDate,
-              checkOutDate,
-            };
-
-            fetch("http://localhost:8080/homestay/api/bookings", {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${token}`,
-              },
-              body: JSON.stringify(body),
-            })
-              .then((res) => {
-                if (!res.ok) throw new Error("Đặt phòng thất bại");
-                return res.json();
-              })
-              .then((data) => {
-                alert("Đặt phòng thành công!");
-                console.log("Booking:", data);
-                window.location.reload();
-              })
-              .catch((err) => {
-                console.error("Lỗi đặt phòng:", err);
-                alert("Không thể đặt phòng.");
-              });
-          });
-        });
+  document.querySelectorAll(".btn-book-now").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const token = localStorage.getItem("authToken");
+      if (!token) {
+        alert("Vui lòng đăng nhập để đặt phòng.");
+        return;
       }
-    };
+
+      const payload = decodeJWT(token);
+      const userId = payload.host_id || payload.sub || payload.userId;
+      const roomId = btn.dataset.roomId;
+      const checkInDate = checkInInput.value;
+      const checkOutDate = checkOutInput.value;
+
+      if (!checkInDate || !checkOutDate) {
+        alert("Vui lòng chọn ngày nhận và trả phòng.");
+        return;
+      }
+
+      const body = {
+        // userId: Number(userId),
+        roomId: Number(roomId),
+        checkInDate,
+        checkOutDate,
+      };
+
+      fetch("http://localhost:8080/homestay/api/bookings", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(body),
+      })
+        .then((res) => {
+          if (!res.ok) throw new Error("Đặt phòng thất bại");
+          return res.json();
+        })
+        .then((bookingData) => {
+          alert("Đặt phòng thành công!");
+          window.timer = null;
+          
+          const bookingId = bookingData.bookingId;
+
+          fetch(`http://localhost:8080/homestay/api/payment/vnpay/create-url/${bookingId}`,{
+            method: "POST",
+          headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+          })
+            .then((res) => {
+              if (!res.ok) throw new Error("Không thể tạo đơn thanh toán");
+              return res.json();
+            })
+            .then((paymentData) => {
+              const paymentUrl = paymentData.url;
+              if (paymentUrl) {
+                window.location.href = paymentUrl;
+              } else {
+                alert("Không lấy được đường dẫn thanh toán.");
+              }
+            })
+            .catch((err) => {
+              console.error("Lỗi tạo thanh toán:", err);
+              alert("Đặt phòng thành công nhưng lỗi khi tạo thanh toán.");
+            });
+        })
+        .catch((err) => {
+          console.error("Lỗi đặt phòng:", err);
+          alert("Không thể đặt phòng.");
+        });
+    });
+  });
+}};
   </script>
     <script type="module" src="assets/js/review-and-info.js"></script>
     <script type="module" src="assets/js/main.js"></script>
