@@ -1,281 +1,276 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>GoTravel - Đà Nẵng</title>
-        <link rel="stylesheet" href="" />
-        <link rel="stylesheet" href="assets/css/trang-chu.css" />
-        <link rel="stylesheet" href="assets/css/header.css" />
-        <link rel="stylesheet" href="assets/fonts/themify-icons/themify-icons.css" />
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" />
-    </head>
-    <body>
-        <!-- Header -->
-        <header>
-            <div class="header-container">
-                <div class="container">
-                    <div class="header-content">
-                        <div class="logo">
-                            <a href="trang-chu.html">
-                                <img class="logo-image" src="assets/img/gotravel_logo_air.png" alt="" />
-                            </a>
-                        </div>
-                        <nav class="nav">
-                            <ul>
-                                <li><a href="#">TRANG CHỦ</a></li>
-                                <li><a href="homestay.html">HOMESTAYS</a></li>
-                                <li><a href="about.html" target="_blank">VỀ CHÚNG TÔI</a></li>
-                                <li><a href="contact.html" target="_blank">LIÊN HỆ</a></li>
-                            </ul>
-                        </nav>
-                    </div>
-                </div>
-
-                <div class="btns desktop-btns" id="auth-buttons">
-                    <button class="cooperate-btn" onclick="location.href='partnership.html'">Hợp tác với chúng tôi</button>
-                    <button class="dang-ky-btn signup" id="registerBtn">Đăng ký</button>
-                    <button class="dang-nhap-btn login" id="loginBtn">Đăng nhập</button>
-                </div>
-
-                <div id="user-info" class="user-dropdown" style="display: none; position: relative">
-                    <img src="/assets/img/icon/user.svg" alt="user-icon" id="user-icon" />
-                    <div id="user-menu" class="dropdown-menu">
-                        <a href="#" id="profileLink" class="dropdown-item">Hồ sơ</a>
-                        <button id="logoutBtn" class="dropdown-item">Đăng xuất</button>
-                    </div>
-                </div>
-
-                <button class="mobile-menu-toggle" aria-label="Toggle menu" aria-expanded="false">
-                    <i class="ti-menu"></i>
-                </button>
-
-                <div class="mobile-menu">
-                    <a href="#" class="mobile-menu-link mobile-nav-link">TRANG CHỦ</a>
-                    <a href="homestay.html" class="mobile-menu-link mobile-nav-link">HOMESTAYS</a>
-                    <a href="about.html" class="mobile-menu-link mobile-nav-link">VỀ CHÚNG TÔI</a>
-                    <a href="contact.html" class="mobile-menu-link mobile-nav-link">LIÊN HỆ</a>
-                    <hr class="mobile-menu-divider" />
-                    <a href="partnership.html" class="mobile-menu-link">Hợp tác với chúng tôi</a>
-                    <button class="mobile-menu-btn" onclick="openPopup('register'); closeMobileMenu();">Đăng ký</button>
-                    <button class="mobile-menu-btn" onclick="openPopup('login'); closeMobileMenu();">Đăng nhập</button>
-                </div>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GoTravel - Đà Nẵng</title>
+    <link rel="stylesheet" href="" />
+    <link rel="stylesheet" href="assets/css/trang-chu.css" />
+    <link rel="stylesheet" href="assets/css/header.css" />
+    <link rel="stylesheet" href="./assets/fonts/themify-icons/themify-icons.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" />
+  </head>
+  <body>
+    <!-- Header -->
+    <header>
+      <div class="header-container">
+        <div class="container">
+          <div class="header-content">
+            <div class="logo">
+              <a href="trang-chu.html">
+                <img class="logo-image" src="assets/img/gotravel_logo_air.png" alt="" />
+              </a>
             </div>
-        </header>
+            <nav class="nav">
+              <ul>
+                <li><a href="#">TRANG CHỦ</a></li>
+                <li><a href="homestay.html">HOMESTAYS</a></li>
+                <li><a href="about.html" target="_blank">VỀ CHÚNG TÔI</a></li>
+                <li><a href="contact.html" target="_blank">LIÊN HỆ</a></li>
+              </ul>
+            </nav>
+          </div>
+        </div>
 
-        <section class="hero">
-            <div class="hero-content">
-                <h1>Trải nghiệm sự thoải mái và ấm cúng giữa lòng Đà Nẵng</h1>
-                <div class="search-box">
-                    <div class="search-wrapper">
-                        <img src="assets/img/icon/search.svg" alt="search-icon" class="search-icon" />
-                        <input type="text" autocomplete="off" placeholder="Nhập địa điểm..." class="search-field" />
-                    </div>
+        <div class="btns desktop-btns" id="auth-buttons">
+          <button class="cooperate-btn" onclick="location.href='partnership.html'">Hợp tác với chúng tôi</button>
+          <button class="dang-ky-btn signup" id="registerBtn">Đăng ký</button>
+          <button class="dang-nhap-btn login" id="loginBtn">Đăng nhập</button>
+        </div>
 
-                    <div class="date-picker">
-                        <div class="date1">
-                            <img src="assets/img/icon/calendar.svg" alt="date-icon" class="date-icon" />
-                            <input type="date" class="date-start" placeholder="Ngày nhận phòng" />
-                        </div>
-                        <div class="date2">
-                            <img src="assets/img/icon/calendar.svg" alt="date-icon" class="date-icon" />
-                            <input type="date" class="date-end" placeholder="Ngày trả phòng" />
-                        </div>
-                    </div>
+        <div id="user-info" class="user-dropdown" style="display: none; position: relative">
+          <img src="/assets/img/icon/user.svg" alt="user-icon" id="user-icon" />
+          <div id="user-menu" class="dropdown-menu">
+            <a href="#" id="profileLink" class="dropdown-item">Hồ sơ</a>
+            <button id="logoutBtn" class="dropdown-item">Đăng xuất</button>
+          </div>
+        </div>
 
-                    <div class="room-type-selector">
-                        <img src="assets/img/icon/bed-alt.svg" alt="room-icon" class="room-icon" />
-                        <select class="room-type-select">
-                            <option>Single</option>
-                            <option>Superior</option>
-                            <option>Deluxe</option>
-                            <option>Suite</option>
-                        </select>
-                        <img src="assets/img/icon/angle-small-down.svg" alt="arrow-icon" class="arrow-icon" />
-                    </div>
+        <button class="mobile-menu-toggle" aria-label="Toggle menu" aria-expanded="false">
+          <i class="ti-menu"></i>
+        </button>
 
-                    <button class="search-button">TÌM KIẾM</button>
-                </div>
+        <div class="mobile-menu">
+          <a href="#" class="mobile-menu-link mobile-nav-link">TRANG CHỦ</a>
+          <a href="homestay.html" class="mobile-menu-link mobile-nav-link">HOMESTAYS</a>
+          <a href="about.html" class="mobile-menu-link mobile-nav-link">VỀ CHÚNG TÔI</a>
+          <a href="contact.html" class="mobile-menu-link mobile-nav-link">LIÊN HỆ</a>
+          <hr class="mobile-menu-divider" />
+          <a href="partnership.html" class="mobile-menu-link">Hợp tác với chúng tôi</a>
+          <button class="mobile-menu-btn" onclick="openPopup('register'); closeMobileMenu();">Đăng ký</button>
+          <button class="mobile-menu-btn" onclick="openPopup('login'); closeMobileMenu();">Đăng nhập</button>
+        </div>
+      </div>
+    </header>
+
+    <section class="hero">
+      <div class="hero-content">
+        <h1>Trải nghiệm sự thoải mái và ấm cúng giữa lòng Đà Nẵng</h1>
+        <div class="search-box">
+          <div class="search-wrapper">
+            <img src="assets/img/icon/search.svg" alt="search-icon" class="search-icon" />
+            <input type="text" autocomplete="off" placeholder="Nhập địa điểm..." class="search-field" />
+          </div>
+
+          <div class="date-picker">
+            <div class="date1">
+              <img src="assets/img/icon/calendar.svg" alt="date-icon" class="date-icon" />
+              <input type="date" class="date-start" placeholder="Ngày nhận phòng" />
             </div>
-        </section>
-        <!-- Destinations -->
-        <section class="destinations">
-            <h2>Các điểm đến thu hút nhất Đà Nẵng</h2>
-            <div class="carousel-container">
-                <button class="carousel-button prev" onclick="prevSlides(5)">
-                    <i class="ti-angle-left"></i>
-                </button>
-                <div class="carousel">
-                    <div class="slide">
-                        <img src="assets/img/ba-na.jpg" alt="Sun World Bà Nà Hills" />
-                        <div class="slide-info">
-                            <h3>Sun World Bà Nà Hills</h3>
-                        </div>
-                    </div>
-                    <div class="slide">
-                        <img src="assets/img/nui-than-tai.jpg" alt="Núi Thần Tài" />
-                        <div class="slide-info">
-                            <h3>Núi Thần Tài</h3>
-                        </div>
-                    </div>
-                    <div class="slide">
-                        <img src="assets/img/mikazuki.jpg" alt="Mikazuki" />
-                        <div class="slide-info">
-                            <h3>Mikazuki</h3>
-                        </div>
-                    </div>
-                    <div class="slide">
-                        <img src="assets/img/asia-park.jpg" alt="Công viên châu Á" />
-                        <div class="slide-info">
-                            <h3>Công viên châu Á</h3>
-                        </div>
-                    </div>
-                    <div class="slide">
-                        <img src="assets/img/hoa-phu-thanh.png" alt="Thác Hòa Phú Thành" />
-                        <div class="slide-info">
-                            <h3>Thác Hòa Phú Thành</h3>
-                        </div>
-                    </div>
-                    <div class="slide">
-                        <img src="assets/img/suoi-mo.jpg" alt="Suối Mơ" />
-                        <div class="slide-info">
-                            <h3>Suối Mơ</h3>
-                        </div>
-                    </div>
-                    <div class="slide">
-                        <img src="assets/img/cau-quay-song-han.jpg" alt="Cầu Sông Hàn" />
-                        <div class="slide-info">
-                            <h3>Cầu Sông Hàn</h3>
-                        </div>
-                    </div>
-                    <div class="slide">
-                        <img src="assets/img/cau-thuan-phuoc.jpg" alt="Cầu Thuận Phước" />
-                        <div class="slide-info">
-                            <h3>Cầu Thuận Phước</h3>
-                        </div>
-                    </div>
-                    <div class="slide">
-                        <img src="assets/img/cau-rong.png" alt="Cầu Rồng" />
-                        <div class="slide-info">
-                            <h3>Cầu Rồng</h3>
-                        </div>
-                    </div>
-                    <div class="slide">
-                        <img src="assets/img/cau-tran-thi-ly.jpg" alt="Cầu Trần Thị Lý" />
-                        <div class="slide-info">
-                            <h3>Cầu Trần Thị Lý</h3>
-                        </div>
-                    </div>
-                    <div class="slide">
-                        <img src="assets/img/chua-linh-ung.jpg" alt="Linh Ứng Sơn Trà" />
-                        <div class="slide-info">
-                            <h3>Linh Ứng Sơn Trà</h3>
-                        </div>
-                    </div>
-                    <div class="slide">
-                        <img src="assets/img/ngu_hanh_son.jpg" alt="Ngũ Hành Sơn" />
-                        <div class="slide-info">
-                            <h3>Ngũ Hành Sơn</h3>
-                        </div>
-                    </div>
-                    <div class="slide">
-                        <img src="assets/img/dinh-ban-co.webp" alt="Đỉnh Bàn Cờ" />
-                        <div class="slide-info">
-                            <h3>Đỉnh Bàn Cờ</h3>
-                        </div>
-                    </div>
-                    <div class="slide">
-                        <img src="assets/img/bai-bien-my-khe.jpg" alt="Bãi biển Mỹ Khê" />
-                        <div class="slide-info">
-                            <h3>Bãi biển Mỹ Khê</h3>
-                        </div>
-                    </div>
-                    <div class="slide">
-                        <img src="assets/img/bien-non-nuoc.jpg" alt="Bãi biển Non Nước" />
-                        <div class="slide-info">
-                            <h3>Bãi biển Non Nước</h3>
-                        </div>
-                    </div>
-                    <div class="slide">
-                        <img src="assets/img/lang-da-my-nghe-non-nuoc.jpg" alt="Điêu Khắc Đá Mỹ Nghệ" />
-                        <div class="slide-info">
-                            <h3>Điêu Khắc Đá Mỹ Nghệ</h3>
-                        </div>
-                    </div>
-                </div>
-                <button class="carousel-button next" onclick="nextSlides()">
-                    <i class="ti-angle-right"></i>
-                </button>
+            <div class="date2">
+              <img src="assets/img/icon/calendar.svg" alt="date-icon" class="date-icon" />
+              <input type="date" class="date-end" placeholder="Ngày trả phòng" />
             </div>
-        </section>
-        <!-- featured properties -->
-        <section class="featured-properties">
-            <h2>Những chỗ nghỉ nổi bật được đề xuất cho quý khách</h2>
+          </div>
 
-            <div class="location-tabs-container">
-                <div class="location-tabs hide-scrollbar">
-                    <button class="tab active" data-location="ngu-hanh-son">Ngũ Hành Sơn</button>
-                    <button class="tab" data-location="son-tra">Sơn Trà</button>
-                    <button class="tab" data-location="hai-chau">Hải Châu</button>
-                    <button class="tab" data-location="thanh-khe">Thanh Khê</button>
-                    <button class="tab" data-location="lien-chieu">Liên Chiểu</button>
-                </div>
+          <div class="room-type-selector">
+            <img src="assets/img/icon/bed-alt.svg" alt="room-icon" class="room-icon" />
+            <select class="room-type-select">
+              <option>Single</option>
+              <option>Superior</option>
+              <option>Deluxe</option>
+              <option>Suite</option>
+            </select>
+            <img src="assets/img/icon/angle-small-down.svg" alt="arrow-icon" class="arrow-icon" />
+          </div>
+
+          <button class="search-button">TÌM KIẾM</button>
+        </div>
+      </div>
+    </section>
+    <!-- Destinations -->
+    <section class="destinations">
+      <h2>Các điểm đến thu hút nhất Đà Nẵng</h2>
+      <div class="carousel-container">
+        <button class="carousel-button prev" onclick="prevSlides(5)">
+          <i class="ti-angle-left"></i>
+        </button>
+        <div class="carousel">
+          <div class="slide">
+            <img src="assets/img/ba-na.jpg" alt="Sun World Bà Nà Hills" />
+            <div class="slide-info">
+              <h3>Sun World Bà Nà Hills</h3>
             </div>
-
-            <div id="property-container">
-                <div class="property-grid" data-location="ngu-hanh-son"></div>
-                <div class="property-grid" data-location="son-tra" style="display: none"></div>
-                <div class="property-grid" data-location="hai-chau" style="display: none"></div>
-                <div class="property-grid" data-location="thanh-khe" style="display: none"></div>
-                <div class="property-grid" data-location="lien-chieu" style="display: none"></div>
+          </div>
+          <div class="slide">
+            <img src="assets/img/nui-than-tai.jpg" alt="Núi Thần Tài" />
+            <div class="slide-info">
+              <h3>Núi Thần Tài</h3>
             </div>
-            <div class="view-more-container">
-                <a href="#" class="view-more">Xem thêm các chỗ nghỉ (<span id="view-more-text">Ngũ Hành Sơn</span>)</a>
+          </div>
+          <div class="slide">
+            <img src="assets/img/mikazuki.jpg" alt="Mikazuki" />
+            <div class="slide-info">
+              <h3>Mikazuki</h3>
             </div>
-        </section>
-        <div id="popup-placeholder"></div>
-        <script type="module">
-            // Khởi tạo flatpickr cho "Ngày nhận phòng"
-            const dateStart = flatpickr(".date-start", {
-                dateFormat: "d/m/Y",
-                locale: "vi", // Đặt ngôn ngữ tiếng Việt
-                minDate: "today", // Không cho phép chọn các ngày trước ngày hôm nay
-                onChange: function (selectedDates, dateStr, instance) {
-                    // Cập nhật minDate cho "Ngày trả phòng" khi người dùng chọn "Ngày nhận phòng"
-                    const dateStartValue = selectedDates[0]; // Ngày nhận phòng đã chọn
-                    if (dateStartValue) {
-                        // Cập nhật minDate cho "Ngày trả phòng"
-                        dateEnd.set("minDate", dateStartValue);
-                    }
-                },
-            });
+          </div>
+          <div class="slide">
+            <img src="assets/img/asia-park.jpg" alt="Công viên châu Á" />
+            <div class="slide-info">
+              <h3>Công viên châu Á</h3>
+            </div>
+          </div>
+          <div class="slide">
+            <img src="assets/img/hoa-phu-thanh.png" alt="Thác Hòa Phú Thành" />
+            <div class="slide-info">
+              <h3>Thác Hòa Phú Thành</h3>
+            </div>
+          </div>
+          <div class="slide">
+            <img src="assets/img/suoi-mo.jpg" alt="Suối Mơ" />
+            <div class="slide-info">
+              <h3>Suối Mơ</h3>
+            </div>
+          </div>
+          <div class="slide">
+            <img src="assets/img/cau-quay-song-han.jpg" alt="Cầu Sông Hàn" />
+            <div class="slide-info">
+              <h3>Cầu Sông Hàn</h3>
+            </div>
+          </div>
+          <div class="slide">
+            <img src="assets/img/cau-thuan-phuoc.jpg" alt="Cầu Thuận Phước" />
+            <div class="slide-info">
+              <h3>Cầu Thuận Phước</h3>
+            </div>
+          </div>
+          <div class="slide">
+            <img src="assets/img/cau-rong.png" alt="Cầu Rồng" />
+            <div class="slide-info">
+              <h3>Cầu Rồng</h3>
+            </div>
+          </div>
+          <div class="slide">
+            <img src="assets/img/cau-tran-thi-ly.jpg" alt="Cầu Trần Thị Lý" />
+            <div class="slide-info">
+              <h3>Cầu Trần Thị Lý</h3>
+            </div>
+          </div>
+          <div class="slide">
+            <img src="assets/img/chua-linh-ung.jpg" alt="Linh Ứng Sơn Trà" />
+            <div class="slide-info">
+              <h3>Linh Ứng Sơn Trà</h3>
+            </div>
+          </div>
+          <div class="slide">
+            <img src="assets/img/ngu_hanh_son.jpg" alt="Ngũ Hành Sơn" />
+            <div class="slide-info">
+              <h3>Ngũ Hành Sơn</h3>
+            </div>
+          </div>
+          <div class="slide">
+            <img src="assets/img/dinh-ban-co.webp" alt="Đỉnh Bàn Cờ" />
+            <div class="slide-info">
+              <h3>Đỉnh Bàn Cờ</h3>
+            </div>
+          </div>
+          <div class="slide">
+            <img src="assets/img/bai-bien-my-khe.jpg" alt="Bãi biển Mỹ Khê" />
+            <div class="slide-info">
+              <h3>Bãi biển Mỹ Khê</h3>
+            </div>
+          </div>
+          <div class="slide">
+            <img src="assets/img/bien-non-nuoc.jpg" alt="Bãi biển Non Nước" />
+            <div class="slide-info">
+              <h3>Bãi biển Non Nước</h3>
+            </div>
+          </div>
+          <div class="slide">
+            <img src="assets/img/lang-da-my-nghe-non-nuoc.jpg" alt="Điêu Khắc Đá Mỹ Nghệ" />
+            <div class="slide-info">
+              <h3>Điêu Khắc Đá Mỹ Nghệ</h3>
+            </div>
+          </div>
+        </div>
+        <button class="carousel-button next" onclick="nextSlides()">
+          <i class="ti-angle-right"></i>
+        </button>
+      </div>
+    </section>
+    <!-- featured properties -->
+    <section class="featured-properties">
+      <h2>Những chỗ nghỉ nổi bật được đề xuất cho quý khách</h2>
 
-            // Khởi tạo flatpickr cho "Ngày trả phòng"
-            const dateEnd = flatpickr(".date-end", {
-                dateFormat: "d/m/Y",
-                locale: "vi", // Đặt ngôn ngữ tiếng Việt
-                minDate: "today", // Ban đầu cho phép chọn ngày từ ngày hôm nay
-                onChange: function (selectedDates, dateStr, instance) {
-                    const dateEndValue = selectedDates[0]; // Ngày trả phòng đã chọn
-                    if (dateEndValue) {
-                        // Cập nhật minDate cho "Ngày nhận phòng" để không chọn ngày trước ngày trả phòng
-                        dateStart.set("maxDate", dateEndValue);
-                    }
-                },
-            });
+      <div class="location-tabs-container">
+        <div class="location-tabs hide-scrollbar">
+          <button class="tab active" data-location="ngu-hanh-son">Ngũ Hành Sơn</button>
+          <button class="tab" data-location="son-tra">Sơn Trà</button>
+          <button class="tab" data-location="hai-chau">Hải Châu</button>
+          <button class="tab" data-location="thanh-khe">Thanh Khê</button>
+          <button class="tab" data-location="lien-chieu">Liên Chiểu</button>
+        </div>
+      </div>
 
-            import { setupPopupEventListeners } from "./assets/js/popup-login.js";
+      <div id="property-container">
+        <div class="property-grid" data-location="ngu-hanh-son"></div>
+        <div class="property-grid" data-location="son-tra" style="display: none"></div>
+        <div class="property-grid" data-location="hai-chau" style="display: none"></div>
+        <div class="property-grid" data-location="thanh-khe" style="display: none"></div>
+        <div class="property-grid" data-location="lien-chieu" style="display: none"></div>
+      </div>
+      <div class="view-more-container">
+        <a href="#" class="view-more">Xem thêm các chỗ nghỉ (<span id="view-more-text">Ngũ Hành Sơn</span>)</a>
+      </div>
+    </section>
+    <div id="popup-placeholder"></div>
+    <script type="module">
+      const dateStart = flatpickr(".date-start", {
+        dateFormat: "d/m/Y",
+        locale: "vi",
+        minDate: "today",
+        onChange: function (selectedDates, dateStr, instance) {
+          const dateStartValue = selectedDates[0];
+          if (dateStartValue) {
+            dateEnd.set("minDate", dateStartValue);
+          }
+        },
+      });
 
-            fetch("popup.html")
-                .then((response) => response.text())
-                .then((data) => {
-                    document.getElementById("popup-placeholder").innerHTML = data;
-                    setupPopupEventListeners();
-                });
-        </script>
+      const dateEnd = flatpickr(".date-end", {
+        dateFormat: "d/m/Y",
+        locale: "vi",
+        minDate: "today",
+        onChange: function (selectedDates, dateStr, instance) {
+          const dateEndValue = selectedDates[0];
+          if (dateEndValue) {
+            dateStart.set("maxDate", dateEndValue);
+          }
+        },
+      });
 
-        <script type="module" src="assets/js/role-redirect.js"></script>
-        <script type="module" src="assets/js/main.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-    </body>
+      import { setupPopupEventListeners } from "./assets/js/popup-login.js";
+
+      fetch("popup.html")
+        .then((response) => response.text())
+        .then((data) => {
+          document.getElementById("popup-placeholder").innerHTML = data;
+          setupPopupEventListeners();
+        });
+    </script>
+
+    <script type="module" src="assets/js/role-redirect.js"></script>
+    <script type="module" src="assets/js/main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+  </body>
 </html>

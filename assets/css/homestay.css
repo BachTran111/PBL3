@@ -1,371 +1,317 @@
 body {
-    font-family: sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #fff;
+  font-family: sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #fff;
 }
 
 /* Search box style */
 .search-box {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 12px;
-    width: 100%;
-    max-width: 1000px; /* Giảm max-width */
-    margin: 60px auto 0;
-    gap: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px;
+  width: 100%;
+  max-width: 1000px;
+  margin: 60px auto 0;
+  gap: 10px;
 }
 
 .search-wrapper {
-    display: flex;
-    align-items: center;
-    position: relative;
-    width: auto;
-    min-width: 300px; /* Giảm min-width */
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    background-color: #fff;
-    transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  position: relative;
+  width: auto;
+  min-width: 300px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: #fff;
+  transition: all 0.3s ease;
 }
 
 .search-wrapper:focus-within {
-    border-color: #007bff;
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
 }
 
 .search-field {
-    width: 100%;
-    padding: 12px 40px 12px 40px; /* Dành không gian cho icon */
-    font-size: 16px;
-    border: none;
-    outline: none;
-    background-color: transparent;
-    box-sizing: border-box;
+  width: 100%;
+  padding: 12px 40px 12px 40px;
+  font-size: 16px;
+  border: none;
+  outline: none;
+  background-color: transparent;
+  box-sizing: border-box;
 }
 
 .search-icon {
-    position: absolute;
-    left: 12px;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 20px; /* Kích thước biểu tượng */
-    height: 20px;
-    color: #888;
-    pointer-events: none; /* Ngăn không cho người dùng tương tác với icon */
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  color: #888;
+  pointer-events: none;
 }
 
 .date-picker {
-    display: flex;
-    justify-content: space-between;
-    gap: 10px;
-    width: 100%;
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  width: 100%;
 }
 
 .date1,
 .date2 {
-    position: relative;
-    flex: 1;
+  position: relative;
+  flex: 1;
 }
 
 .date-picker input {
-    width: 100%;
-    padding: 12px;
-    font-size: 16px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    box-sizing: border-box; /* Đảm bảo padding không làm thay đổi chiều rộng */
-    transition: all 0.3s ease;
+  width: 100%;
+  padding: 12px;
+  font-size: 16px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-sizing: border-box;
+  transition: all 0.3s ease;
 }
 
 .date-picker input:focus {
-    border-color: #007bff;
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
-    outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+  outline: none;
 }
 
 .date-icon {
-    position: absolute;
-    left: 12px;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 20px; /* Kích thước biểu tượng */
-    height: 20px;
-    color: #888;
-    pointer-events: none; /* Ngăn không cho người dùng tương tác với icon */
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  color: #888;
+  pointer-events: none;
 }
 
 .date-picker .date-start,
 .date-picker .date-end {
-    padding-left: 40px; /* Dành không gian cho biểu tượng */
-}
-
-.room-type-selector {
-    display: flex;
-    align-items: center;
-    position: relative;
-    width: auto;
-    min-width: 150px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    background-color: #fff;
-}
-
-.room-type-selector select {
-    width: 100%;
-    padding: 12px 40px 12px 40px; /* Dành không gian cho icon */
-    font-size: 16px;
-    border: none;
-    background-color: transparent;
-    appearance: none; /* Ẩn mũi tên mặc định của select */
-    cursor: pointer;
-    transition: border-color 0.3s ease; /* Thêm hiệu ứng khi focus vào */
-    border-radius: 5px;
-    padding-left: 40px; /* Dành không gian cho icon bên trái */
-    box-sizing: border-box;
-}
-
-.room-type-selector select:focus {
-    border-color: #007bff;
-    outline: none;
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
-}
-
-.room-type-selector .room-icon {
-    position: absolute;
-    left: 12px;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 20px;
-    height: 20px;
-    color: #888;
-    pointer-events: none; /* Ngăn không cho người dùng tương tác với icon */
-}
-
-.arrow-icon {
-    position: absolute;
-    right: 15px;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 20px;
-    height: 20px;
-    pointer-events: none; /* Ngăn không cho người dùng tương tác với icon */
-    color: #888;
+  padding-left: 40px;
 }
 
 .search-button {
-    background-color: #0099ff;
-    color: white;
-    padding: 12px 20px; /* Giữ padding hợp lý để chữ không bị tràn */
-    font-size: 16px; /* Điều chỉnh kích thước chữ vừa đủ */
-    border: 1px solid #0099ff; /* Thêm border giống như các ô khác */
-    border-radius: 5px; /* Giữ border-radius giống với các ô khác */
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.3s ease;
-    box-sizing: border-box; /* Đảm bảo padding không làm thay đổi kích thước */
-    white-space: nowrap; /* Đảm bảo chữ không xuống dòng */
-    width: auto; /* Đảm bảo chiều rộng của nút tự động điều chỉnh */
-    min-width: 120px; /* Đảm bảo nút có chiều rộng tối thiểu */
+  background-color: #0099ff;
+  color: white;
+  padding: 12px 20px;
+  font-size: 16px;
+  border: 1px solid #0099ff;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  box-sizing: border-box;
+  white-space: nowrap;
+  width: auto;
+  min-width: 120px;
 }
 
 .search-button:hover {
-    background-color: #007acc;
+  background-color: #007acc;
 }
 
 /* Homestay section style */
 .homestay-section {
-    max-width: 1200px;
-    display: flex;
-    margin: 0 auto;
+  max-width: 1200px;
+  display: flex;
+  margin: 0 auto;
 }
 
 .search-input {
-    position: relative;
-    margin-bottom: 20px; /* Tạo khoảng cách dưới ô tìm kiếm */
+  position: relative;
+  margin-bottom: 20px;
 }
 
 .search-input .search-field {
-    width: 100%;
-    padding: 12px 40px; /* Tạo không gian cho biểu tượng */
-    font-size: 14px;
-    border: 1px solid #ddd;
-    border-radius: 50px;
-    background-color: #fff;
-    outline: none;
-    box-sizing: border-box; /* Đảm bảo padding không làm thay đổi chiều rộng */
-    transition: border-color 0.3s ease;
+  width: 100%;
+  padding: 12px 40px;
+  font-size: 14px;
+  border: 1px solid #ddd;
+  border-radius: 50px;
+  background-color: #fff;
+  outline: none;
+  box-sizing: border-box;
+  transition: border-color 0.3s ease;
 }
 
-/* Khi focus vào ô nhập địa điểm */
 .search-field:focus {
-    border-color: #0099ff; /* Màu xanh khi focus */
+  border-color: #0099ff;
 }
 
 .filters {
-    width: 250px;
-    padding: 0 20px;
-    height: min-content;
-    margin-top: 20px;
-    background-color: white;
+  width: 250px;
+  padding: 0 20px;
+  height: min-content;
+  margin-top: 20px;
+  background-color: white;
 }
 
 .filters h2 {
-    margin-top: 0;
-    margin-bottom: 10px;
-    font-size: 1.2em;
+  margin-top: 0;
+  margin-bottom: 10px;
+  font-size: 1.2em;
 }
 
 .filters label {
-    display: block;
-    margin-bottom: 10px;
+  display: block;
+  margin-bottom: 10px;
 }
 
 .results {
-    flex: 1;
-    padding: 20px;
+  flex: 1;
+  padding: 20px;
 }
 
 .result-card {
-    background-color: white;
-    border-top-right-radius: 8px;
-    border-bottom-right-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-    margin-bottom: 20px;
-    display: flex;
-    overflow: hidden;
+  background-color: white;
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  margin-bottom: 20px;
+  display: flex;
+  overflow: hidden;
 }
 
 .result-card:hover {
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 1);
-    background-color: rgba(85, 104, 231, 0.1);
-    cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 1);
+  background-color: rgba(85, 104, 231, 0.1);
+  cursor: pointer;
 }
 
 .result-card img {
-    width: 300px;
-    height: 200px;
-    object-fit: cover;
+  width: 300px;
+  height: 200px;
+  object-fit: cover;
 }
 
 .result-details {
-    padding: 20px;
-    flex: 1;
+  padding: 20px;
+  flex: 1;
 }
 
 .result-details h3 {
-    margin-top: 0;
-    margin-bottom: 5px;
-    font-size: 1.3em;
+  margin-top: 0;
+  margin-bottom: 5px;
+  font-size: 1.3em;
 }
 
 .result-details .stars {
-    color: #ffc107;
-    margin-bottom: 10px;
-    font-weight: 700;
-    font-family: system-ui;
+  color: #ffc107;
+  margin-bottom: 10px;
+  font-weight: 700;
+  font-family: system-ui;
 }
 
 .result-details .location {
-    margin-bottom: 10px;
-    color: #555;
-    font-size: 0.9em;
+  margin-bottom: 10px;
+  color: #555;
+  font-size: 0.9em;
 }
 
 .result-details .amenities {
-    color: #777;
-    font-size: 0.85em;
+  color: #777;
+  font-size: 0.85em;
 }
 
 .result-card {
-    background-color: white;
-    border-radius: 10px;
-    display: flex;
-    overflow: hidden;
-    margin-bottom: 20px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s, box-shadow 0.3s;
+  background-color: white;
+  border-radius: 10px;
+  display: flex;
+  overflow: hidden;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s, box-shadow 0.3s;
 }
 
 .result-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
-    background-color: rgba(85, 104, 231, 0.05);
-    cursor: pointer;
+  transform: translateY(-4px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+  background-color: rgba(85, 104, 231, 0.05);
+  cursor: pointer;
 }
 
 .result-card img {
-    width: 300px;
-    height: 200px;
-    object-fit: cover;
-    flex-shrink: 0;
+  width: 300px;
+  height: 200px;
+  object-fit: cover;
+  flex-shrink: 0;
 }
 
 .result-details {
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    flex: 1;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex: 1;
 }
 
 .result-details h3 {
-    margin: 0 0 10px;
-    font-size: 1.4em;
-    color: #020a33;
+  margin: 0 0 10px;
+  font-size: 1.4em;
+  color: #020a33;
 }
 
 .result-details .stars {
-    color: #ffc107;
-    font-size: 1.1em;
-    margin-bottom: 10px;
+  color: #ffc107;
+  font-size: 1.1em;
+  margin-bottom: 10px;
 }
 
 .result-details .price {
-    color: #e91e63;
-    font-weight: bold;
-    margin-bottom: 8px;
-    font-size: 1em;
+  color: #e91e63;
+  font-weight: bold;
+  margin-bottom: 8px;
+  font-size: 1em;
 }
 
 .result-details .location {
-    color: #555;
-    font-size: 0.95em;
-    margin-bottom: 8px;
+  color: #555;
+  font-size: 0.95em;
+  margin-bottom: 8px;
 }
 
 .result-details .amenities {
-    font-size: 0.9em;
-    color: #666;
+  font-size: 0.9em;
+  color: #666;
 }
 
 .result-details .stars i {
-    color: #ffc107;
-    margin-left: 4px;
+  color: #ffc107;
+  margin-left: 4px;
 }
 
 .pagination {
-    text-align: center;
-    margin: 30px 0;
+  text-align: center;
+  margin: 30px 0;
 }
 
 .pagination button {
-    background-color: #f0f0f0;
-    border: none;
-    margin: 0 5px;
-    padding: 8px 15px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-weight: bold;
-    color: #020a33;
-    transition: background-color 0.3s, color 0.3s;
+  background-color: #f0f0f0;
+  border: none;
+  margin: 0 5px;
+  padding: 8px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  color: #020a33;
+  transition: background-color 0.3s, color 0.3s;
 }
 
 .pagination button.active {
-    background-color: #020a33;
-    color: white;
+  background-color: #020a33;
+  color: white;
 }
 
 .pagination button:hover {
-    background-color: #0099ff;
-    color: white;
+  background-color: #0099ff;
+  color: white;
 }

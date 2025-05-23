@@ -1,180 +1,164 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Homestay</title>
-        <link rel="stylesheet" href="assets/css/homestay.css" />
-        <link rel="stylesheet" href="assets/css/header.css" />
-        <link rel="stylesheet" href="./assets/fonts/themify-icons/themify-icons.css" />
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" />
-    </head>
-    <body>
-        <header>
-            <div class="header-container">
-                <div class="container1">
-                    <div class="header-content">
-                        <div class="logo">
-                            <a href="trang-chu.html">
-                                <img src="assets/img/gotravel_logo_air.png" alt="" />
-                            </a>
-                        </div>
-                        <nav class="nav">
-                            <ul>
-                                <li><a href="trang-chu.html">TRANG CHỦ</a></li>
-                                <li><a href="#">HOMESTAYS</a></li>
-                                <li><a href="about.html" target="_blank">VỀ CHÚNG TÔI</a></li>
-                                <li><a href="contact.html" target="_blank">LIÊN HỆ</a></li>
-                            </ul>
-                        </nav>
-                    </div>
-                </div>
-                <div class="btns desktop-btns" id="auth-buttons">
-                    <button class="cooperate-btn" onclick="location.href='partnership.html'">Hợp tác với chúng tôi</button>
-                    <button class="dang-ky-btn signup" id="registerBtn">Đăng ký</button>
-                    <button class="dang-nhap-btn login" id="loginBtn">Đăng nhập</button>
-                </div>
-
-                <div id="user-info" class="user-dropdown" style="display: none; position: relative">
-                    <img src="/assets/img/icon/user.svg" alt="user-icon" id="user-icon" />
-                    <div id="user-menu" class="dropdown-menu">
-                        <a href="#" id="profileLink" class="dropdown-item">Hồ sơ</a>
-                        <button id="logoutBtn" class="dropdown-item">Đăng xuất</button>
-                    </div>
-                </div>
-
-                <button class="mobile-menu-toggle" aria-label="Toggle menu" aria-expanded="false">
-                    <i class="ti-menu"></i>
-                </button>
-
-                <div class="mobile-menu">
-                    <a href="trang-chu.html" class="mobile-menu-link">TRANG CHỦ</a>
-                    <a href="#" class="mobile-menu-link">HOMESTAYS</a>
-                    <a href="about.html" class="mobile-menu-link">VỀ CHÚNG TÔI</a>
-                    <a href="contact.html" class="mobile-menu-link">LIÊN HỆ</a>
-                    <hr class="mobile-menu-divider" />
-                    <a href="partnership.html" class="mobile-menu-link">Hợp tác với chúng tôi</a>
-                    <button class="mobile-menu-btn" onclick="openPopup('register'); closeMobileMenu();">Đăng ký</button>
-                    <button class="mobile-menu-btn" onclick="openPopup('login'); closeMobileMenu();">Đăng nhập</button>
-                </div>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Homestay</title>
+    <link rel="stylesheet" href="assets/css/homestay.css" />
+    <link rel="stylesheet" href="assets/css/header.css" />
+    <link rel="stylesheet" href="./assets/fonts/themify-icons/themify-icons.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" />
+  </head>
+  <body>
+    <header>
+      <div class="header-container">
+        <div class="container1">
+          <div class="header-content">
+            <div class="logo">
+              <a href="trang-chu.html">
+                <img src="assets/img/gotravel_logo_air.png" alt="" />
+              </a>
             </div>
-        </header>
-
-        <div class="search-box">
-            <div class="search-wrapper">
-                <img src="assets/img/icon/search.svg" alt="search-icon" class="search-icon" />
-                <input type="text" autocomplete="off" placeholder="Nhập địa điểm..." class="search-field" />
-            </div>
-
-            <div class="date-picker">
-                <div class="date1">
-                    <img src="assets/img/icon/calendar.svg" alt="date-icon" class="date-icon" />
-                    <input type="date" class="date-start" placeholder="Ngày nhận phòng" />
-                </div>
-                <div class="date2">
-                    <img src="assets/img/icon/calendar.svg" alt="date-icon" class="date-icon" />
-                    <input type="date" class="date-end" placeholder="Ngày trả phòng" />
-                </div>
-            </div>
-
-            <div class="room-type-selector">
-                <img src="assets/img/icon/bed-alt.svg" alt="room-icon" class="room-icon" />
-                <select class="room-type-select">
-                    <option>Single</option>
-                    <option>Superior</option>
-                    <option>Deluxe</option>
-                    <option>Suite</option>
-                </select>
-                <img src="assets/img/icon/angle-small-down.svg" alt="arrow-icon" class="arrow-icon" />
-            </div>
-
-            <button class="search-button">Tìm kiếm</button>
+            <nav class="nav">
+              <ul>
+                <li><a href="trang-chu.html">TRANG CHỦ</a></li>
+                <li><a href="#">HOMESTAYS</a></li>
+                <li><a href="about.html" target="_blank">VỀ CHÚNG TÔI</a></li>
+                <li><a href="contact.html" target="_blank">LIÊN HỆ</a></li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+        <div class="btns desktop-btns" id="auth-buttons">
+          <button class="cooperate-btn" onclick="location.href='partnership.html'">Hợp tác với chúng tôi</button>
+          <button class="dang-ky-btn signup" id="registerBtn">Đăng ký</button>
+          <button class="dang-nhap-btn login" id="loginBtn">Đăng nhập</button>
         </div>
 
-        <div class="homestay-section">
-            <div class="filters">
-                <div class="search-input">
-                    <img src="assets/img/icon/search.svg" alt="search-icon" class="search-icon" />
-                    <input type="text" autocomplete="off" placeholder="Tìm kiếm..." class="search-field" />
-                </div>
-
-                <h2>Giá mỗi đêm</h2>
-                <label><input type="checkbox" /> Từ 200 nghìn đến 500 nghìn</label>
-                <label><input type="checkbox" /> Từ 500 nghìn đến 1 triệu</label>
-                <label><input type="checkbox" /> Từ 1 triệu đến 2 triệu</label>
-                <label><input type="checkbox" /> Trên 2 triệu</label>
-
-                <h2>Loại phòng</h2>
-                <label><input type="checkbox" /> Single</label>
-                <label><input type="checkbox" /> Supperior</label>
-                <label><input type="checkbox" /> Deluxe</label>
-                <label><input type="checkbox" /> Suite</label>
-
-                <h2>Tiện nghi</h2>
-                <label><input type="checkbox" /> Hồ bơi</label>
-                <label><input type="checkbox" /> Bãi đỗ xe</label>
-                <label><input type="checkbox" /> WiFi miễn phí</label>
-                <label><input type="checkbox" /> TV</label>
-                <label><input type="checkbox" /> Điều hòa</label>
-                <label><input type="checkbox" /> Tủ lạnh</label>
-                <label><input type="checkbox" /> Bếp riêng</label>
-                <label><input type="checkbox" /> Ban công</label>
-                <label><input type="checkbox" /> Bồn tắm</label>
-                <label><input type="checkbox" /> Máy pha trà/cà phê</label>
-
-                <h2>Xếp hạng đánh giá</h2>
-                <label><input type="checkbox" /> Từ 3 sao trở lên</label>
-                <label><input type="checkbox" /> Từ 4 sao trở lên</label>
-                <label><input type="checkbox" /> 5 sao</label>
-            </div>
-
-            <div class="results"></div>
+        <div id="user-info" class="user-dropdown" style="display: none; position: relative">
+          <img src="/assets/img/icon/user.svg" alt="user-icon" id="user-icon" />
+          <div id="user-menu" class="dropdown-menu">
+            <a href="#" id="profileLink" class="dropdown-item">Hồ sơ</a>
+            <button id="logoutBtn" class="dropdown-item">Đăng xuất</button>
+          </div>
         </div>
 
-        <div id="popup-placeholder"></div>
-        <script type="module">
-            // Khởi tạo flatpickr cho "Ngày nhận phòng"
-            const dateStart = flatpickr(".date-start", {
-                dateFormat: "d/m/Y",
-                locale: "vi", // Đặt ngôn ngữ tiếng Việt
-                minDate: "today", // Không cho phép chọn các ngày trước ngày hôm nay
-                onChange: function (selectedDates, dateStr, instance) {
-                    // Cập nhật minDate cho "Ngày trả phòng" khi người dùng chọn "Ngày nhận phòng"
-                    const dateStartValue = selectedDates[0]; // Ngày nhận phòng đã chọn
-                    if (dateStartValue) {
-                        // Cập nhật minDate cho "Ngày trả phòng"
-                        dateEnd.set("minDate", dateStartValue);
-                    }
-                },
-            });
+        <button class="mobile-menu-toggle" aria-label="Toggle menu" aria-expanded="false">
+          <i class="ti-menu"></i>
+        </button>
 
-            // Khởi tạo flatpickr cho "Ngày trả phòng"
-            const dateEnd = flatpickr(".date-end", {
-                dateFormat: "d/m/Y",
-                locale: "vi", // Đặt ngôn ngữ tiếng Việt
-                minDate: "today", // Ban đầu cho phép chọn ngày từ ngày hôm nay
-                onChange: function (selectedDates, dateStr, instance) {
-                    const dateEndValue = selectedDates[0]; // Ngày trả phòng đã chọn
-                    if (dateEndValue) {
-                        // Cập nhật minDate cho "Ngày nhận phòng" để không chọn ngày trước ngày trả phòng
-                        dateStart.set("maxDate", dateEndValue);
-                    }
-                },
-            });
+        <div class="mobile-menu">
+          <a href="trang-chu.html" class="mobile-menu-link">TRANG CHỦ</a>
+          <a href="#" class="mobile-menu-link">HOMESTAYS</a>
+          <a href="about.html" class="mobile-menu-link">VỀ CHÚNG TÔI</a>
+          <a href="contact.html" class="mobile-menu-link">LIÊN HỆ</a>
+          <hr class="mobile-menu-divider" />
+          <a href="partnership.html" class="mobile-menu-link">Hợp tác với chúng tôi</a>
+          <button class="mobile-menu-btn" onclick="openPopup('register'); closeMobileMenu();">Đăng ký</button>
+          <button class="mobile-menu-btn" onclick="openPopup('login'); closeMobileMenu();">Đăng nhập</button>
+        </div>
+      </div>
+    </header>
 
-            import { setupPopupEventListeners } from "./assets/js/popup-login.js";
+    <div class="search-box">
+      <div class="search-wrapper">
+        <img src="assets/img/icon/search.svg" alt="search-icon" class="search-icon" />
+        <input type="text" data-filter="location" placeholder="Nhập địa điểm..." class="search-field" />
+      </div>
 
-            fetch("popup.html")
-                .then((response) => response.text())
-                .then((data) => {
-                    document.getElementById("popup-placeholder").innerHTML = data;
-                    setupPopupEventListeners();
-                });
-        </script>
+      <div class="date-picker">
+        <div class="date1">
+          <img src="assets/img/icon/calendar.svg" alt="date-icon" class="date-icon" />
+          <input type="date" id="checkin" data-filter="checkIn" class="date-start" placeholder="Ngày nhận phòng" />
+        </div>
+        <div class="date2">
+          <img src="assets/img/icon/calendar.svg" alt="date-icon" class="date-icon" />
+          <input type="date" id="checkout" data-filter="checkOut" class="date-end" placeholder="Ngày trả phòng" />
+        </div>
+      </div>
 
-        <script type="module" src="assets/js/main.js"></script>
-        <script type="module" src="assets/js/role-redirect.js"></script>
-        <script type="module" src="assets/js/room-list.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-    </body>
+      <button class="search-button">TÌM KIẾM</button>
+    </div>
+
+    <div class="homestay-section">
+      <div class="filters">
+        <div class="search-input">
+          <img src="assets/img/icon/search.svg" alt="search-icon" class="search-icon" />
+          <input type="text" data-filter="location" placeholder="Tìm kiếm..." class="search-field" />
+        </div>
+
+        <h2>Giá mỗi đêm</h2>
+        <label><input type="checkbox" data-filter="price" value="0-200000" /> Dưới 200 nghìn</label>
+        <label><input type="checkbox" data-filter="price" value="200000-500000" /> Từ 200 nghìn đến 500 nghìn</label>
+        <label><input type="checkbox" data-filter="price" value="500000-1000000" /> Từ 500 nghìn đến 1 triệu</label>
+        <label><input type="checkbox" data-filter="price" value="1000000-100000000" /> Trên 1 triệu</label>
+
+        <h2>Loại phòng</h2>
+        <label><input type="checkbox" data-filter="roomType" value="Single" /> Single</label>
+        <label><input type="checkbox" data-filter="roomType" value="Superior" /> Supperior</label>
+        <label><input type="checkbox" data-filter="roomType" value="Deluxe" /> Deluxe</label>
+        <label><input type="checkbox" data-filter="roomType" value="Suite" /> Suite</label>
+
+        <h2>Tiện nghi</h2>
+        <label><input type="checkbox" data-filter="features" value="Hồ bơi" /> Hồ bơi</label>
+        <label><input type="checkbox" data-filter="features" value="Bãi đỗ xe" /> Bãi đỗ xe</label>
+        <label><input type="checkbox" data-filter="features" value="Wifi" /> WiFi miễn phí</label>
+        <label><input type="checkbox" data-filter="features" value="TV" /> TV</label>
+        <label><input type="checkbox" data-filter="features" value="Máy lạnh" /> Điều hòa</label>
+        <label><input type="checkbox" data-filter="features" value="Tủ lạnh" /> Tủ lạnh</label>
+        <label><input type="checkbox" data-filter="features" value="Bếp riêng" /> Bếp riêng</label>
+        <label><input type="checkbox" data-filter="features" value="Ban công" /> Ban công</label>
+        <label><input type="checkbox" data-filter="features" value="Bồn tắm" /> Bồn tắm</label>
+        <label><input type="checkbox" data-filter="features" value="Máy pha cà phê" /> Máy pha trà/cà phê</label>
+
+        <h2>Xếp hạng đánh giá</h2>
+        <label><input type="checkbox" data-filter="surfRating" value="3" /> Từ 3 sao trở lên</label>
+        <label><input type="checkbox" data-filter="surfRating" value="4" /> Từ 4 sao trở lên</label>
+        <label><input type="checkbox" data-filter="surfRating" value="5" /> 5 sao</label>
+      </div>
+
+      <div class="results"></div>
+    </div>
+
+    <div id="popup-placeholder"></div>
+    <script type="module">
+      const dateStart = flatpickr(".date-start", {
+        dateFormat: "d/m/Y",
+        locale: "vi",
+        minDate: "today",
+        onChange: function (selectedDates, dateStr, instance) {
+          const dateStartValue = selectedDates[0];
+          if (dateStartValue) {
+            dateEnd.set("minDate", dateStartValue);
+          }
+        },
+      });
+
+      const dateEnd = flatpickr(".date-end", {
+        dateFormat: "d/m/Y",
+        locale: "vi",
+        minDate: "today",
+        onChange: function (selectedDates, dateStr, instance) {
+          const dateEndValue = selectedDates[0];
+          if (dateEndValue) {
+            dateStart.set("maxDate", dateEndValue);
+          }
+        },
+      });
+
+      import { setupPopupEventListeners } from "./assets/js/popup-login.js";
+
+      fetch("popup.html")
+        .then((response) => response.text())
+        .then((data) => {
+          document.getElementById("popup-placeholder").innerHTML = data;
+          setupPopupEventListeners();
+        });
+    </script>
+
+    <script type="module" src="assets/js/main.js"></script>
+    <script type="module" src="assets/js/role-redirect.js"></script>
+    <script type="module" src="assets/js/room-list.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+  </body>
 </html>
