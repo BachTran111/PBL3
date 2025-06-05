@@ -15,7 +15,6 @@ function decodeJWT(token) {
 
 function login() {
   const loginBtn = document.querySelector(".submit-login-btn");
-
   
   if (loginBtn) {
     loginBtn.addEventListener("click", function () {

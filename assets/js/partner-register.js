@@ -1,4 +1,5 @@
 // partner-register.js
+import { closePopup } from "./popup-login.js";
 import { showHidePassword } from "./show-hide-password.js";
 
 // Validation logic
@@ -133,7 +134,7 @@ function setupValidation() {
         registerUser(username, email, password, roles)
           .then((message) => {
             alert("Đăng ký thành công: " + message);
-            document.getElementById("popup").style.display = "none";
+            window.location.href = "trang-chu.html";
           })
           .catch((err) => {
             alert("Đăng ký thất bại: " + (err.message || "Vui lòng thử lại."));

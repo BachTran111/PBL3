@@ -40,15 +40,16 @@ import { initializeCarousel } from "./carousel.js";
 import { setupTabsLocation } from "./tabs-location.js";
 import { initializeSlide } from "./slide.js";
 import { showHidePassword } from "./show-hide-password.js";
-import { setupValidation } from "./register.js";
+import { registerUser, setupValidation } from "./register.js";
 
 window.addEventListener("load", () => {
   setupPopupEventListeners();
   checkLoginStatus();
+  setupValidation();
+  registerUser();
   login();
   initializeCarousel();
   setupTabsLocation();
   initializeSlide();
   showHidePassword();
-  setupValidation();
 });

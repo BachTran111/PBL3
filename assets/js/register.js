@@ -126,7 +126,7 @@ function setupValidation() {
 
         registerUser(username, email, password, roles)
           .then((message) => {
-            alert("Đăng ký thành công: " + message);
+            alert("Đăng ký thành công: ");
             document.getElementById("popup").style.display = "none";
           })
           .catch((err) => {
@@ -139,25 +139,28 @@ function setupValidation() {
 }
 
 function registerUser(username, email, password, roles) {
-  const payload = { username, email, password, roles };
+  const registerBtn = document.querySelector(".submit-register-btn");
+  if (registerBtn) {
+    const payload = { username, email, password, roles };
 
-  return fetch("http://localhost:8080/homestay/auth/register", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(payload),
-  }).then((res) => {
-    if (!res.ok) {
-      return res.text().then((text) => {
-        try {
-          const json = JSON.parse(text);
-          return Promise.reject(json);
-        } catch (e) {
-          return Promise.reject({ message: text });
-        }
-      });
-    }
-    return res.text();
-  });
+    return fetch("http://localhost:8080/homestay/auth/register", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+    }).then((res) => {
+      if (!res.ok) {
+        return res.text().then((text) => {
+          try {
+            const json = JSON.parse(text);
+            return Promise.reject(json);
+          } catch (e) {
+            return Promise.reject({ message: text });
+          }
+        });
+      }
+      return res.text();
+    });
+  }
 }
 
-export { handleValidValue, handleInValidValue, setupValidation };
+export { handleValidValue, handleInValidValue, setupValidation, registerUser };
