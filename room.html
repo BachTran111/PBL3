@@ -113,7 +113,7 @@
               class="date-icon"
             />
             <input
-              type="date"
+              type="text"
               id="checkInDate"
               data-filter="checkIn"
               class="date-start"
@@ -127,7 +127,7 @@
               class="date-icon"
             />
             <input
-              type="date"
+              type="text"
               id="checkOutDate"
               data-filter="checkOut"
               class="date-end"
@@ -254,14 +254,8 @@
   <script type="module">
     const lastDates = JSON.parse(localStorage.getItem("lastSearchDates"));
     if (lastDates) {
-      document.getElementById("checkInDate").value = lastDates.checkIn
-        .split("/")
-        .reverse()
-        .join("-");
-      document.getElementById("checkOutDate").value = lastDates.checkOut
-        .split("/")
-        .reverse()
-        .join("-");
+      document.getElementById("checkInDate").value = lastDates.checkIn;
+      document.getElementById("checkOutDate").value = lastDates.checkOut;
     }
 
     document
@@ -273,16 +267,6 @@
 
         if (!checkInDate || !checkOutDate) {
           alert("Vui lòng chọn ngày nhận và trả phòng.");
-          return;
-        }
-
-        if (checkInDate <= today) {
-          alert("Ngày nhận phòng không hợp lệ.");
-          return;
-        }
-
-        if (checkOutDate <= checkInDate) {
-          alert("Ngày trả phòng phải sau ngày nhận phòng.");
           return;
         }
       });
@@ -317,6 +301,18 @@
     // ===================== Main Logic =====================
     window.onload = function () {
       initRoomSearch();
+
+      const lastDates = JSON.parse(localStorage.getItem("lastSearchDates"));
+      if (lastDates?.autoSearch) {
+        // Xóa để không tự động lần sau
+        lastDates.autoSearch = false;
+        localStorage.setItem("lastSearchDates", JSON.stringify(lastDates));
+
+        // Delay chút cho chacs ăn
+        setTimeout(() => {
+          document.querySelector(".search-button")?.click();
+        }, 200);
+      }
     };
 
     function initRoomSearch() {
@@ -358,9 +354,11 @@
       checkInInput,
       checkOutInput
     ) {
+      const checkIn = checkInDate.split("/").reverse().join("-");
+      const checkOut = checkOutDate.split("/").reverse().join("-");
       try {
         const res = await fetch(
-          `http://localhost:8080/homestay/api/rooms/available?homestayId=${homestayId}&checkInDate=${checkInDate}&checkOutDate=${checkOutDate}`
+          `http://localhost:8080/homestay/api/rooms/available?homestayId=${homestayId}&checkInDate=${checkIn}&checkOutDate=${checkOut}`
         );
         const data = await res.json();
 
@@ -433,8 +431,11 @@
           const payload = decodeJWT(token);
           const userId = payload.host_id || payload.sub || payload.userId;
           const roomId = btn.dataset.roomId;
-          const checkInDate = checkInInput.value;
-          const checkOutDate = checkOutInput.value;
+          const checkInDate = checkInInput.value.split("/").reverse().join("-");
+          const checkOutDate = checkOutInput.value
+            .split("/")
+            .reverse()
+            .join("-");
 
           if (!checkInDate || !checkOutDate) {
             alert("Vui lòng chọn ngày nhận và trả phòng.");

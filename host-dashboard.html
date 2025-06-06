@@ -63,20 +63,30 @@
         <h2>Bảng điều khiển Host</h2>
         <ul>
           <li>
-            <a href="#" class="parent-toggle">Quản lý Homestay<span class="arrow-icon">▼</span></a>
+            <a href="#" class="parent-toggle"
+              >Quản lý Homestay<span class="arrow-icon">▼</span></a
+            >
             <ul class="homestay-list" style="display: none"></ul>
           </li>
           <li>
-            <a href="#" class="tab-link" data-tab="pending-approval-homestays">Đang chờ phê duyệt</a>
+            <a href="#" class="tab-link" data-tab="pending-approval-homestays"
+              >Đang chờ phê duyệt</a
+            >
           </li>
           <li>
-            <a href="#" class="tab-link" data-tab="manage-bookings">Quản lý đơn đặt phòng</a>
+            <a href="#" class="tab-link" data-tab="manage-bookings"
+              >Quản lý đơn đặt phòng</a
+            >
           </li>
           <li>
-            <a href="#" class="tab-link" data-tab="add-homestay">Kinh doanh Homestay mới</a>
+            <a href="#" class="tab-link" data-tab="add-homestay"
+              >Kinh doanh Homestay mới</a
+            >
           </li>
           <li>
-            <a href="#" class="tab-link" data-tab="revenue-stats">Thống kê doanh thu</a>
+            <a href="#" class="tab-link" data-tab="revenue-stats"
+              >Thống kê doanh thu</a
+            >
           </li>
         </ul>
       </div>
@@ -114,7 +124,11 @@
               </table>
             </div>
           </div>
-          <div id="pending-approval-homestays" class="tab-content" style="display: none">
+          <div
+            id="pending-approval-homestays"
+            class="tab-content"
+            style="display: none"
+          >
             <div class="card-box">
               <button class="close-btn" onclick="returnToDefault()">×</button>
               <h2>Danh sách Homestay đang chờ phê duyệt</h2>
@@ -124,7 +138,6 @@
                     <th>Tên Homestay</th>
                     <th>Địa chỉ</th>
                     <th>Ngày tạo</th>
-                    <th>Trạng thái</th>
                     <th>Hành động</th>
                   </tr>
                 </thead>
@@ -167,17 +180,72 @@
                 />
               </div>
               <div class="form-group">
-                <label><strong>Tiện nghi:</strong></label><br />
-                <label><input type="checkbox" name="Facilities" value="Hồ bơi" />Hồ bơi</label><br />
-                <label><input type="checkbox" name="Facilities" value="Bãi đỗ xe" />Bãi đỗ xe</label><br />
-                <label><input type="checkbox" name="Facilities" value="Wifi" />Wifi</label><br />
-                <label><input type="checkbox" name="Facilities" value="TV" />TV</label><br />
-                <label><input type="checkbox" name="Facilities" value="Máy lạnh" />Máy lạnh</label><br />
-                <label><input type="checkbox" name="Facilities" value="Tủ lạnh" />Tủ lạnh</label><br />
-                <label><input type="checkbox" name="Facilities" value="Bếp riêng" />Bếp riêng</label><br />
-                <label><input type="checkbox" name="Facilities" value="Ban công" />Ban công</label><br />
-                <label><input type="checkbox" name="Facilities" value="Bồn tắm" />Bồn tắm</label><br />
-                <label><input type="checkbox" name="Facilities" value="Máy pha cà phê" />Máy pha cà phê</label><br />
+                <label><strong>Tiện nghi:</strong></label
+                ><br />
+                <label
+                  ><input type="checkbox" name="Facilities" value="Hồ bơi" />Hồ
+                  bơi</label
+                ><br />
+                <label
+                  ><input
+                    type="checkbox"
+                    name="Facilities"
+                    value="Bãi đỗ xe"
+                  />Bãi đỗ xe</label
+                ><br />
+                <label
+                  ><input
+                    type="checkbox"
+                    name="Facilities"
+                    value="Wifi"
+                  />Wifi</label
+                ><br />
+                <label
+                  ><input
+                    type="checkbox"
+                    name="Facilities"
+                    value="TV"
+                  />TV</label
+                ><br />
+                <label
+                  ><input
+                    type="checkbox"
+                    name="Facilities"
+                    value="Máy lạnh"
+                  />Máy lạnh</label
+                ><br />
+                <label
+                  ><input type="checkbox" name="Facilities" value="Tủ lạnh" />Tủ
+                  lạnh</label
+                ><br />
+                <label
+                  ><input
+                    type="checkbox"
+                    name="Facilities"
+                    value="Bếp riêng"
+                  />Bếp riêng</label
+                ><br />
+                <label
+                  ><input
+                    type="checkbox"
+                    name="Facilities"
+                    value="Ban công"
+                  />Ban công</label
+                ><br />
+                <label
+                  ><input
+                    type="checkbox"
+                    name="Facilities"
+                    value="Bồn tắm"
+                  />Bồn tắm</label
+                ><br />
+                <label
+                  ><input
+                    type="checkbox"
+                    name="Facilities"
+                    value="Máy pha cà phê"
+                  />Máy pha cà phê</label
+                ><br />
               </div>
 
               <div class="form-group">
@@ -185,7 +253,7 @@
                 <input
                   type="file"
                   name="Image"
-                  id="Image"
+                  id="room-image"
                   accept="image/*"
                   multiple
                 />
@@ -197,33 +265,107 @@
               </button>
             </div>
           </div>
-          <div id="edit-room" class="tab-content" style="display: none;">
+          <div id="edit-room" class="tab-content" style="display: none">
             <div class="card-box">
               <button class="close-btn" onclick="returnToDefault()">×</button>
               <h2>Sửa phòng</h2>
               <div class="form-group">
-                <label><strong>Loại phòng:</strong></label><br />
-                <label><input type="radio" name="editRoomType" value="Single" /> Single Room</label><br />
-                <label><input type="radio" name="editRoomType" value="Superior" /> Superior Room</label><br />
-                <label><input type="radio" name="editRoomType" value="Deluxe" /> Deluxe Room</label><br />
-                <label><input type="radio" name="editRoomType" value="Suite" /> Suite Room</label>
+                <label><strong>Loại phòng:</strong></label
+                ><br />
+                <label
+                  ><input type="radio" name="editRoomType" value="Single" />
+                  Single Room</label
+                ><br />
+                <label
+                  ><input type="radio" name="editRoomType" value="Superior" />
+                  Superior Room</label
+                ><br />
+                <label
+                  ><input type="radio" name="editRoomType" value="Deluxe" />
+                  Deluxe Room</label
+                ><br />
+                <label
+                  ><input type="radio" name="editRoomType" value="Suite" />
+                  Suite Room</label
+                >
               </div>
               <div class="form-group">
                 <label for="editPrice"><strong>Giá phòng (VNĐ):</strong></label>
                 <input type="number" id="editPrice" required />
               </div>
               <div class="form-group">
-                <label><strong>Tiện nghi:</strong></label><br />
-                <label><input type="checkbox" name="editFacilities" value="Hồ bơi" />Hồ bơi</label><br />
-                <label><input type="checkbox" name="editFacilities" value="Bãi đỗ xe" />Bãi đỗ xe</label><br />
-                <label><input type="checkbox" name="editFacilities" value="Wifi" />Wifi</label><br />
-                <label><input type="checkbox" name="editFacilities" value="TV" />TV</label><br />
-                <label><input type="checkbox" name="editFacilities" value="Máy lạnh" />Máy lạnh</label><br />
-                <label><input type="checkbox" name="editFacilities" value="Tủ lạnh" />Tủ lạnh</label><br />
-                <label><input type="checkbox" name="editFacilities" value="Bếp riêng" />Bếp riêng</label><br />
-                <label><input type="checkbox" name="editFacilities" value="Ban công" />Ban công</label><br />
-                <label><input type="checkbox" name="editFacilities" value="Bồn tắm" />Bồn tắm</label><br />
-                <label><input type="checkbox" name="editFacilities" value="Máy pha cà phê" />Máy pha cà phê</label><br />
+                <label><strong>Tiện nghi:</strong></label
+                ><br />
+                <label
+                  ><input
+                    type="checkbox"
+                    name="editFacilities"
+                    value="Hồ bơi"
+                  />Hồ bơi</label
+                ><br />
+                <label
+                  ><input
+                    type="checkbox"
+                    name="editFacilities"
+                    value="Bãi đỗ xe"
+                  />Bãi đỗ xe</label
+                ><br />
+                <label
+                  ><input
+                    type="checkbox"
+                    name="editFacilities"
+                    value="Wifi"
+                  />Wifi</label
+                ><br />
+                <label
+                  ><input
+                    type="checkbox"
+                    name="editFacilities"
+                    value="TV"
+                  />TV</label
+                ><br />
+                <label
+                  ><input
+                    type="checkbox"
+                    name="editFacilities"
+                    value="Máy lạnh"
+                  />Máy lạnh</label
+                ><br />
+                <label
+                  ><input
+                    type="checkbox"
+                    name="editFacilities"
+                    value="Tủ lạnh"
+                  />Tủ lạnh</label
+                ><br />
+                <label
+                  ><input
+                    type="checkbox"
+                    name="editFacilities"
+                    value="Bếp riêng"
+                  />Bếp riêng</label
+                ><br />
+                <label
+                  ><input
+                    type="checkbox"
+                    name="editFacilities"
+                    value="Ban công"
+                  />Ban công</label
+                ><br />
+                <label
+                  ><input
+                    type="checkbox"
+                    name="editFacilities"
+                    value="Bồn tắm"
+                  />Bồn tắm</label
+                ><br />
+                <label
+                  ><input
+                    type="checkbox"
+                    name="editFacilities"
+                    value="Máy pha cà phê"
+                  />Máy pha cà phê</label
+                ><br />
               </div>
               <div class="form-group">
                 <label for="editImage"><strong>Ảnh mới:</strong></label>
@@ -231,7 +373,9 @@
                 <div id="edit-preview-container"></div>
               </div>
               <input type="hidden" id="editRoomId" />
-              <button type="button" class="btn btn-add" id="save-room-changes">Lưu thay đổi</button>
+              <button type="button" class="btn btn-add" id="save-room-changes">
+                Lưu thay đổi
+              </button>
             </div>
           </div>
           <div id="manage-bookings" class="tab-content" style="display: none">
@@ -487,7 +631,7 @@
         homestayList.style.display = "none";
       }
 
-      const imageInput = document.getElementById("Image");
+      const imageInput = document.getElementById("room-image");
       const previewContainer = document.getElementById("preview-container");
 
       imageInput.addEventListener("change", function () {
