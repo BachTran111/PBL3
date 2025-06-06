@@ -626,13 +626,6 @@ document
         body: formData,
       });
     }
-    await fetch(`http://localhost:8080/homestay/api/rooms/${roomId}/images`, {
-      method: "POST",
-      headers: { Authorization: `Bearer ${token}` },
-      body: formData,
-    });
-  }
-
     alert("Cập nhật thành công!");
     document
       .querySelectorAll(".tab-content")
