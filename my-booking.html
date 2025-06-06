@@ -100,7 +100,6 @@
           <h2>Sắp tới</h2>
           <div class="homestay-list" id="upcoming-list"></div>
           <p id="no-upcoming" style="display: none">
-            Xin chào Phuc Thinh. Quý khách không có chuyến đi sắp tới nào.
           </p>
         </div>
 
@@ -108,7 +107,6 @@
           <h2>Hoàn tất</h2>
           <div class="homestay-list" id="completed-list"></div>
           <p id="no-completed" style="display: none">
-            Chào Phuc Thinh. Quý khách không có đặt chỗ đã hoàn thành gần đây.
           </p>
         </div>
 
@@ -116,7 +114,6 @@
           <h2>Đã hủy</h2>
           <div class="homestay-list" id="canceled-list"></div>
           <p id="no-canceled" style="display: none">
-            Chào Phuc Thinh. Quý khách không có đặt chỗ đã hủy gần đây.
           </p>
         </div>
       </div>
@@ -151,7 +148,25 @@
         return `${dd}/${mm}/${yy}`;
       }
 
-      function renderHomestays(items, listId, noId) {
+      async function fetchPrimaryImageUrl(homestayId) {
+        try {
+          const res = await fetch(
+            `http://localhost:8080/homestay/api/homestays/${homestayId}/images/primary`
+          );
+          if (!res.ok) throw new Error("No primary image");
+          const data = await res.json();
+          return data.primaryImageUrl;
+        } catch (error) {
+          console.error(
+            "Không lấy được ảnh chính cho homestay ID:",
+            homestayId,
+            error
+          );
+          return "assets/img/default-thumbnail.webp"; // fallback ảnh mặc định
+        }
+      }
+
+      async function renderHomestays(items, listId, noId) {
         const list = document.getElementById(listId);
         const no = document.getElementById(noId);
         list.innerHTML = "";
@@ -160,12 +175,15 @@
           return;
         }
         no.style.display = "none";
-        items.forEach((b) => {
+        for (const b of items) {
+
+          const primaryImageUrl = await fetchPrimaryImageUrl(b.homestayId);
+
           const card = document.createElement("div");
           card.className = "homestay-card";
           card.innerHTML = `
         <div class="homestay-image">
-          <img src="${b.image || "https://via.placeholder.com/150"}" alt="${
+          <img src="${primaryImageUrl}" alt="${
             b.homestayName
           }">
         </div>
@@ -189,7 +207,7 @@
         </div>
       `;
           list.appendChild(card);
-        });
+        };
       }
 
       function viewDetails(id) {

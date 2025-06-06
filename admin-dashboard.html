@@ -5,10 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Bảng điều khiển</title>
     <link rel="stylesheet" href="assets/css/header.css" />
-    <link
-      rel="stylesheet"
-      href="assets/fonts/themify-icons/themify-icons.css"
-    />
+    <link rel="stylesheet" href="assets/fonts/themify-icons/themify-icons.css" />
     <link rel="stylesheet" href="assets/css/admin-dashboard.css" />
   </head>
   <body>
@@ -33,21 +30,12 @@
         </div>
 
         <div class="btns desktop-btns" id="auth-buttons">
-          <button
-            class="cooperate-btn"
-            onclick="location.href='partnership.html'"
-          >
-            Hợp tác với chúng tôi
-          </button>
+          <button class="cooperate-btn" onclick="location.href='partnership.html'">Hợp tác với chúng tôi</button>
           <button class="dang-ky-btn signup" id="registerBtn">Đăng ký</button>
           <button class="dang-nhap-btn login" id="loginBtn">Đăng nhập</button>
         </div>
 
-        <div
-          id="user-info"
-          class="user-dropdown"
-          style="display: none; position: relative"
-        >
+        <div id="user-info" class="user-dropdown" style="display: none; position: relative">
           <img src="/assets/img/icon/user.svg" alt="user-icon" id="user-icon" />
           <div id="user-menu" class="dropdown-menu">
             <a href="#" id="profileLink" class="dropdown-item">Hồ sơ</a>
@@ -63,14 +51,10 @@
         <h2>Bảng điều khiển Admin</h2>
         <ul>
           <li>
-            <a href="#" class="tab-link" data-tab="tab-approve-business"
-              >Yêu cầu phê duyệt</a
-            >
+            <a href="#" class="tab-link" data-tab="tab-approve-business">Yêu cầu phê duyệt</a>
           </li>
           <li>
-            <a href="#" class="tab-link" data-tab="tab-manage-company"
-              >Quản lý doanh nghiệp</a
-            >
+            <a href="#" class="tab-link" data-tab="tab-manage-company">Quản lý doanh nghiệp</a>
           </li>
         </ul>
       </div>
@@ -78,10 +62,7 @@
       <!-- Main Content -->
       <div class="main-content">
         <div id="default-content" class="tab-content active">
-          <img
-            src="https://cdn-icons-png.flaticon.com/512/706/706797.png"
-            alt="Welcome"
-          />
+          <img src="https://cdn-icons-png.flaticon.com/512/706/706797.png" alt="Welcome" />
           <h1>Chào mừng bạn đến với GoTravel</h1>
           <h3>Admin Dashboard</h3>
         </div>
@@ -166,14 +147,10 @@
 
         // 3. Bỏ highlight tab con & homestay cha
         tabLinks.forEach((l) => l.classList.remove("active-tab"));
-        homestayToggles.forEach((toggle) =>
-          toggle.classList.remove("active-homestay")
-        );
+        homestayToggles.forEach((toggle) => toggle.classList.remove("active-homestay"));
 
         // 4. Thu gọn toàn bộ submenu trong sidebar
-        document
-          .querySelectorAll(".sub-menu")
-          .forEach((menu) => (menu.style.display = "none"));
+        document.querySelectorAll(".sub-menu").forEach((menu) => (menu.style.display = "none"));
 
         // 5. Thu gọn danh sách homestay chính
         homestayList.style.display = "none";

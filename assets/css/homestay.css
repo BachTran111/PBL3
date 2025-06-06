@@ -5,87 +5,146 @@ body {
   background-color: #fff;
 }
 
-.hero {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: #020a33;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  margin-top: 60px;
-  width: 100%;
-}
-
+/* Search box style */
 .search-box {
-  padding: 10px;
-  border-radius: 10px;
   display: flex;
-  flex-direction: row;
+  justify-content: space-between;
   align-items: center;
+  padding: 12px;
+  width: 100%;
+  max-width: 1000px;
+  margin: 60px auto 0;
   gap: 10px;
 }
 
-.search-location {
-  background-color: white;
+.search-wrapper {
   display: flex;
   align-items: center;
+  position: relative;
+  width: auto;
+  min-width: 300px;
   border: 1px solid #ddd;
   border-radius: 5px;
-  flex: 1;
+  background-color: #fff;
+  transition: all 0.3s ease;
 }
 
-.search-location:focus-within {
-  border: 2px solid #000;
+.search-wrapper:focus-within {
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
 }
 
-.search-location input {
+.search-field {
   width: 100%;
-  padding: 10px;
-  margin-right: 5px;
+  padding: 12px 40px 12px 40px;
+  font-size: 16px;
   border: none;
   outline: none;
+  background-color: transparent;
+  box-sizing: border-box;
 }
 
 .search-icon {
-  margin: 10px;
-  color: gray;
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  color: #888;
+  pointer-events: none;
 }
 
 .date-picker {
   display: flex;
+  justify-content: space-between;
   gap: 10px;
+  width: 100%;
+}
+
+.date1,
+.date2 {
+  position: relative;
+  flex: 1;
 }
 
 .date-picker input {
+  width: 100%;
   padding: 12px;
+  font-size: 16px;
   border: 1px solid #ddd;
   border-radius: 5px;
-  flex: 1;
+  box-sizing: border-box;
+  transition: all 0.3s ease;
 }
 
-.guests-selector select {
-  padding: 13px;
-  border-radius: 5px;
-  border: 1px solid #ddd;
-  flex: 1;
+.date-picker input:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+  outline: none;
+}
+
+.date-icon {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  color: #888;
+  pointer-events: none;
+}
+
+.date-picker .date-start,
+.date-picker .date-end {
+  padding-left: 40px;
 }
 
 .search-button {
   background-color: #0099ff;
   color: white;
-  padding: 14px 20px;
-  border: none;
-  border-radius: 5px;
+  padding: 12px 20px; 
+  font-size: 16px; 
+  border: 1px solid #0099ff; 
+  border-radius: 5px; 
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  box-sizing: border-box; 
+  white-space: nowrap; 
+  width: auto;
+  min-width: 120px; 
 }
+
 .search-button:hover {
   background-color: #007acc;
 }
 
+/* Homestay section style */
 .homestay-section {
   max-width: 1200px;
   display: flex;
   margin: 0 auto;
+}
+
+.search-input {
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.search-input .search-field {
+  width: 100%;
+  padding: 12px 40px; 
+  font-size: 14px;
+  border: 1px solid #ddd;
+  border-radius: 50px;
+  background-color: #fff;
+  outline: none;
+  box-sizing: border-box; 
+  transition: border-color 0.3s ease;
+}
+
+.search-field:focus {
+  border-color: #0099ff; 
 }
 
 .filters {
@@ -161,26 +220,6 @@ body {
 .result-details .amenities {
   color: #777;
   font-size: 0.85em;
-}
-
-.search-input {
-  display: flex;
-  align-items: center;
-  border: 1px solid #ddd;
-  padding: 5px;
-  border-radius: 50px;
-  margin-bottom: 10px;
-}
-
-.search-input:focus-within {
-  border: 2px solid #000;
-}
-
-.search-input input[type="text"] {
-  width: 75%;
-  padding: 10px;
-  border: none;
-  outline: none;
 }
 
 .result-card {

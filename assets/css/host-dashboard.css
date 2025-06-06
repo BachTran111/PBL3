@@ -1,209 +1,449 @@
 body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
 }
 
 .container {
-    display: flex;
-    min-height: 100vh;
+  display: flex;
+  min-height: 100vh;
 }
 
 /* Sidebar Styles */
 .sidebar {
-    width: 250px;
-    margin-top: 60px;
-    padding: 25px;
-    background-color: #fff;
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 100%;
-    box-shadow: 2px 0 6px rgba(0, 0, 0, 0.1);
+  width: 260px;
+  padding: 30px 20px;
+  background-color: #ffffff;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.08);
+  z-index: 100;
+  margin-top: 60px;
+  overflow-y: auto;
+  transition: all 0.3s ease;
 }
+
 .sidebar h2 {
-    text-align: center;
-    margin-bottom: 20px;
-    font-size: 20px;
-    color: #333;
+  text-align: center;
+  font-size: 22px;
+  color: #007bff;
+  margin-bottom: 25px;
+  font-weight: 600;
 }
+
 .sidebar ul {
-    list-style: none;
-    padding: 0 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
+
+.sidebar ul li ul {
+  list-style: none;
+  padding-left: 20px;
+  margin-top: 8px;
+}
+
 .sidebar li a {
-    color: #333;
-    text-decoration: none;
-    padding: 10px 15px;
-    display: flex;
-    align-items: center;
-    border-radius: 6px;
-    transition: background-color 0.3s ease;
+  color: #333;
+  text-decoration: none;
+  padding: 10px 15px;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  border-radius: 8px;
+  font-size: 15px;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
+
 .sidebar li a:hover {
-    background-color: #f0f0f0;
-    color: #007bff;
+  background-color: #f0f4ff;
+  color: #007bff;
 }
-/* nút mũi tên */
+
+/* Active tab style */
+.sidebar .tab-link.active-tab,
+.sidebar .homestay-toggle.active-homestay {
+  background-color: #e7f0ff;
+  font-weight: 600;
+  color: #007bff;
+}
+
+/* Arrow icon */
 .arrow-icon {
-    margin-left: auto;
-    transition: transform 0.3s ease;
-    font-size: 14px;
+  margin-left: auto;
+  font-size: 14px;
+  transition: transform 0.3s ease;
 }
+
 .parent-toggle.open .arrow-icon {
-    transform: rotate(180deg);
+  transform: rotate(180deg);
+  color: #007bff;
+}
+
+/* Submenu style */
+.sub-menu {
+  list-style: none;
+  padding-left: 20px;
+  margin-top: 8px;
+}
+
+.sub-menu li {
+  margin-bottom: 8px;
 }
 
 /* Main content */
 .main-content {
-    margin-left: 300px;
-    margin-top: 60px;
-    padding: 30px;
-    background-color: #fff;
-    border-radius: 10px;
-    flex: 1;
-    min-height: calc(100vh - 60px);
-    max-width: calc(100% - 300px);
-    box-sizing: border-box;
+  margin-left: 300px;
+  margin-top: 60px;
+  padding: 30px;
+  background-color: #fff;
+  border-radius: 10px;
+  flex: 1;
+  min-height: calc(100vh - 60px);
+  max-width: calc(100% - 300px);
+  box-sizing: border-box;
 }
 .tab-content {
-    display: none;
+  display: none;
 }
 .tab-content.active {
-    display: block;
+  display: block;
 }
 .tab-link.active-tab {
-    font-weight: bold;
-    color: #007bff;
+  font-weight: bold;
+  color: #007bff;
 }
 #default-content {
-    text-align: center;
+  text-align: center;
 }
 #default-content img {
-    width: 120px;
-    margin-bottom: 20px;
+  width: 120px;
+  margin-bottom: 20px;
 }
 
 .card-box {
-    background-color: #ffffff;
-    border-radius: 8px;
-    padding: 25px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    margin-bottom: 30px;
-    position: relative;
+  background-color: #ffffff;
+  border-radius: 8px;
+  padding: 25px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  position: relative;
 }
 
 .close-btn {
-    position: absolute;
-    top: 12px;
-    right: 15px;
-    background: transparent;
-    color: #888;
-    border: none;
-    font-size: 30px;
-    cursor: pointer;
-    transition: color 0.2s ease;
+  position: absolute;
+  top: 12px;
+  right: 15px;
+  background: transparent;
+  color: #888;
+  border: none;
+  font-size: 30px;
+  cursor: pointer;
+  transition: color 0.2s ease;
 }
 
 .close-btn:hover {
-    color: #007bff;
+  color: #007bff;
 }
 
 .room-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-    background-color: #fff;
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  background-color: #fff;
 }
 
 .room-table th,
 .room-table td {
-    border: 1px solid #ccc;
-    padding: 10px;
-    text-align: center;
+  border: 1px solid #ccc;
+  padding: 10px;
+  text-align: center;
 }
 
 .room-table th {
-    background-color: #f5f5f5;
+  background-color: #f5f5f5;
 }
 
 .btn {
-    padding: 8px 16px;
-    border: none;
-    border-radius: 4px;
-    font-size: 14px;
-    cursor: pointer;
-    margin: 2px;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  cursor: pointer;
+  margin: 2px;
+  width: 110px;
 }
 
 .btn-view {
-    background-color: #007bff;
-    color: white;
+  background-color: #007bff;
+  color: white;
 }
 
 .btn-edit {
-    background-color: #ffc107;
-    color: white;
+  background-color: #007bff;
+  color: white;
 }
 
 .btn-delete {
-    background-color: #dc3545;
-    color: white;
+  background-color: #dc3545;
+  color: white;
 }
 
-.btn-add {
-    background-color: #28a745;
-    color: white;
-    padding: 10px 20px;
-    border-radius: 6px;
-    margin-top: 15px;
+.btn-reject {
+  background-color: #dc3545;
+  color: white;
 }
 
-.btn-add:hover {
-    background-color: #218838;
+.btn-approve {
+  background-color: #28a745;
+  color: white;
 }
 
-.form-group {
-    margin-bottom: 15px;
+/* Tab "Thêm phòng mới" */
+#add-room .form-group {
+  margin-bottom: 20px;
+}
+
+#add-room .form-group label {
+  font-size: 16px;
+  color: #000;
+  display: block;
+  margin-bottom: 8px;
+  align-items: center;
+}
+
+#add-room .form-group input[type="radio"],
+#add-room .form-group input[type="checkbox"] {
+  margin-right: 10px;
+}
+
+#add-room .btn-add {
+  background-color: #5cb85c;
+  color: #fff;
+  border: none;
+  padding: 12px 24px;
+  font-size: 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  width: 100%;
+}
+
+#add-room .btn-add:hover {
+  background-color: #4cae4c;
+}
+
+/* Tab "Thêm phòng mới" */
+#edit-room .form-group {
+  margin-bottom: 20px;
+}
+
+#edit-room .form-group label {
+  font-size: 16px;
+  color: #000;
+  display: block;
+  margin-bottom: 8px;
+  align-items: center;
+}
+
+#edit-room .form-group input[type="radio"],
+#edit-room .form-group input[type="checkbox"] {
+  margin-right: 10px;
+}
+
+#edit-room .btn-add {
+  background-color: #5cb85c;
+  color: #fff;
+  border: none;
+  padding: 12px 24px;
+  font-size: 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  width: 100%;
+}
+
+#edit-room .btn-add:hover {
+  background-color: #4cae4c;
 }
 
 .form-group input[type="text"],
 .form-group input[type="number"],
 .form-group input[type="file"] {
-    width: 90%;
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+  width: 100%;
+  padding: 12px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-top: 8px;
+  box-sizing: border-box;
 }
 
 .form-group input:focus {
-    border-color: #1abc9c;
-    outline: none;
+  border-color: #1abc9c;
+  outline: none;
 }
 
+/* Xem trước ảnh */
 #preview-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-top: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-top: 20px;
 }
 
 #preview-container img {
-    width: 100px;
-    height: 100px;
-    object-fit: cover;
-    border: 1px solid #ccc;
-    border-radius: 6px;
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+#preview-container img:hover {
+  transform: scale(1.05);
 }
 
 @keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Tab "Kinh doanh Homestay mới" */
+#add-homestay .form-group {
+  margin-bottom: 20px;
+}
+
+#add-homestay .form-group label {
+  font-size: 16px;
+  color: #000;
+  display: block;
+  margin-bottom: 8px;
+}
+
+#add-homestay .form-group input,
+#add-homestay .form-group textarea {
+  width: 100%;
+  padding: 12px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-top: 8px;
+  box-sizing: border-box;
+}
+
+#add-homestay .form-group textarea {
+  height: 150px;
+  resize: vertical;
+}
+
+#add-homestay .form-group input[type="radio"],
+#add-homestay .form-group input[type="checkbox"] {
+  margin-right: 10px;
+}
+
+#add-homestay .btn-add {
+  background-color: #5cb85c;
+  color: #fff;
+  border: none;
+  padding: 12px 24px;
+  font-size: 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  width: 100%;
+}
+
+#add-homestay .btn-add:hover {
+  background-color: #4cae4c;
+}
+
+#add-homestay input[type="file"] {
+  margin-top: 10px;
+}
+
+/* Xem trước ảnh */
+#homestay-preview-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+#homestay-preview-container img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+#homestay-preview-container img:hover {
+  transform: scale(1.05);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  #add-homestay .card-box {
+    padding: 20px;
+  }
+
+  #add-homestay h2 {
+    font-size: 20px;
+  }
+
+  #add-homestay .form-group input,
+  #add-homestay .form-group textarea {
+    font-size: 14px;
+    padding: 10px;
+  }
+
+  #add-homestay .btn-add {
+    padding: 10px 20px;
+    font-size: 14px;
+  }
+}
+
+.card-box h2 {
+  font-size: 30px;
+  color: #333;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+#loading {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 15px 30px;
+  border-radius: 5px;
+  font-size: 16px;
+  z-index: 1000;
+  display: none;
+}
+#loading::before {
+  content: "";
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #fff;
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-right: 10px;
+}
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
 }

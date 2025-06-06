@@ -11,6 +11,10 @@
       rel="stylesheet"
       href="./assets/fonts/themify-icons/themify-icons.css"
     />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css"
+    />
   </head>
   <body>
     <!-- Header -->
@@ -104,40 +108,66 @@
       <div class="hero-content">
         <h1>Trải nghiệm sự thoải mái và ấm cúng giữa lòng Đà Nẵng</h1>
         <div class="search-box">
-          <div class="search-input">
-            <svg
+          <div class="search-wrapper">
+            <img
+              src="assets/img/icon/search.svg"
+              alt="search-icon"
               class="search-icon"
-              xmlns="http://www.w3.org/2000/svg"
-              width="20"
-              height="20"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <circle cx="11" cy="11" r="8"></circle>
-              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-            </svg>
+            />
             <input
               type="text"
               autocomplete="off"
               placeholder="Nhập địa điểm..."
+              class="search-field"
             />
           </div>
+
           <div class="date-picker">
-            <input type="date" class="date1" />
-            <input type="date" class="date2" />
+            <div class="date1">
+              <img
+                src="assets/img/icon/calendar.svg"
+                alt="date-icon"
+                class="date-icon"
+              />
+              <input
+                type="date"
+                class="date-start"
+                placeholder="Ngày nhận phòng"
+              />
+            </div>
+            <div class="date2">
+              <img
+                src="assets/img/icon/calendar.svg"
+                alt="date-icon"
+                class="date-icon"
+              />
+              <input
+                type="date"
+                class="date-end"
+                placeholder="Ngày trả phòng"
+              />
+            </div>
           </div>
-          <div class="guests-selector">
-            <select>
+
+          <div class="room-type-selector">
+            <img
+              src="assets/img/icon/bed-alt.svg"
+              alt="room-icon"
+              class="room-icon"
+            />
+            <select class="room-type-select">
               <option>Single</option>
-              <option>Supperior</option>
+              <option>Superior</option>
               <option>Deluxe</option>
               <option>Suite</option>
             </select>
+            <img
+              src="assets/img/icon/angle-small-down.svg"
+              alt="arrow-icon"
+              class="arrow-icon"
+            />
           </div>
+
           <button class="search-button">TÌM KIẾM</button>
         </div>
       </div>
@@ -261,36 +291,36 @@
 
       <div class="location-tabs-container">
         <div class="location-tabs hide-scrollbar">
-          <button class="tab active" data-location="ngu-hanh-son">
+          <button class="tab active" data-location="Ngũ Hành Sơn">
             Ngũ Hành Sơn
           </button>
-          <button class="tab" data-location="son-tra">Sơn Trà</button>
-          <button class="tab" data-location="hai-chau">Hải Châu</button>
-          <button class="tab" data-location="thanh-khe">Thanh Khê</button>
-          <button class="tab" data-location="lien-chieu">Liên Chiểu</button>
+          <button class="tab" data-location="Sơn Trà">Sơn Trà</button>
+          <button class="tab" data-location="Hải Châu">Hải Châu</button>
+          <button class="tab" data-location="Thanh Khê">Thanh Khê</button>
+          <button class="tab" data-location="Liên Chiểu">Liên Chiểu</button>
         </div>
       </div>
 
       <div id="property-container">
-        <div class="property-grid" data-location="ngu-hanh-son"></div>
+        <div class="property-grid" data-location="Ngũ Hành Sơn"></div>
         <div
           class="property-grid"
-          data-location="son-tra"
+          data-location="Sơn Trà"
           style="display: none"
         ></div>
         <div
           class="property-grid"
-          data-location="hai-chau"
+          data-location="Hải Châu"
           style="display: none"
         ></div>
         <div
           class="property-grid"
-          data-location="thanh-khe"
+          data-location="Thanh Khê"
           style="display: none"
         ></div>
         <div
           class="property-grid"
-          data-location="lien-chieu"
+          data-location="Liên Chiểu"
           style="display: none"
         ></div>
       </div>
@@ -302,7 +332,32 @@
       </div>
     </section>
     <div id="popup-placeholder"></div>
+    <script type="module" src="assets/js/main.js"></script>
     <script type="module">
+      const dateStart = flatpickr(".date-start", {
+        dateFormat: "d/m/Y",
+        locale: "vi",
+        minDate: "today",
+        onChange: function (selectedDates, dateStr, instance) {
+          const dateStartValue = selectedDates[0];
+          if (dateStartValue) {
+            dateEnd.set("minDate", dateStartValue);
+          }
+        },
+      });
+
+      const dateEnd = flatpickr(".date-end", {
+        dateFormat: "d/m/Y",
+        locale: "vi",
+        minDate: "today",
+        onChange: function (selectedDates, dateStr, instance) {
+          const dateEndValue = selectedDates[0];
+          if (dateEndValue) {
+            dateStart.set("maxDate", dateEndValue);
+          }
+        },
+      });
+
       import { setupPopupEventListeners } from "./assets/js/popup-login.js";
 
       fetch("popup.html")
@@ -314,6 +369,7 @@
     </script>
 
     <script type="module" src="assets/js/role-redirect.js"></script>
-    <script type="module" src="assets/js/main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script type="module" src="assets/js/search-box.js"></script>
   </body>
 </html>

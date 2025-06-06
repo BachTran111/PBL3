@@ -1,84 +1,45 @@
 <!DOCTYPE html>
 <html lang="vi">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Chi tiết Homestay</title>
-        <link rel="stylesheet" href="assets/css/room-detail.css" />
-        <link rel="stylesheet" href="assets/css/header.css" />
-        <link rel="stylesheet" href="./assets/fonts/themify-icons/themify-icons.css" />
-    </head>
-    <body>
-        <!-- Header -->
-        <header>
-            <div class="header-container">
-                <div class="container">
-                    <div class="header-content">
-                        <div class="logo">
-                            <a href="trang-chu.html">
-                                <img class="logo-image" src="assets/img/gotravel_logo_air.png" alt="" />
-                            </a>
-                        </div>
-                        <nav class="nav">
-                            <ul>
-                                <li><a href="trang-chu.html">TRANG CHỦ</a></li>
-                                <li><a href="homestay.html">HOMESTAYS</a></li>
-                                <li><a href="about.html" target="_blank">VỀ CHÚNG TÔI</a></li>
-                                <li><a href="contact.html" target="_blank">LIÊN HỆ</a></li>
-                            </ul>
-                        </nav>
-                    </div>
-                </div>
-
-                <div class="btns desktop-btns" id="auth-buttons">
-                    <button class="cooperate-btn" onclick="location.href='partnership.html'">Hợp tác với chúng tôi</button>
-                    <button class="dang-ky-btn signup" id="registerBtn">Đăng ký</button>
-                    <button class="dang-nhap-btn login" id="loginBtn">Đăng nhập</button>
-                </div>
-
-                <div id="user-info" class="user-dropdown" style="display: none; position: relative">
-                    <img src="/assets/img/icon/user.svg" alt="user-icon" id="user-icon" />
-                    <div id="user-menu" class="dropdown-menu">
-                        <a href="#" id="profileLink" class="dropdown-item">Hồ sơ</a>
-                        <button id="logoutBtn" class="dropdown-item">Đăng xuất</button>
-                    </div>
-                </div>
-
-                <button class="mobile-menu-toggle" aria-label="Toggle menu" aria-expanded="false">
-                    <i class="ti-menu"></i>
-                </button>
-
-                <div class="mobile-menu">
-                    <a href="#" class="mobile-menu-link mobile-nav-link">TRANG CHỦ</a>
-                    <a href="homestay.html" class="mobile-menu-link mobile-nav-link">HOMESTAYS</a>
-                    <a href="about.html" class="mobile-menu-link mobile-nav-link">VỀ CHÚNG TÔI</a>
-                    <a href="contact.html" class="mobile-menu-link mobile-nav-link">LIÊN HỆ</a>
-                    <hr class="mobile-menu-divider" />
-                    <a href="partnership.html" class="mobile-menu-link">Hợp tác với chúng tôi</a>
-                    <button class="mobile-menu-btn" onclick="openPopup('register'); closeMobileMenu();">Đăng ký</button>
-                    <button class="mobile-menu-btn" onclick="openPopup('login'); closeMobileMenu();">Đăng nhập</button>
-                </div>
-            </div>
-        </header>
-
-        <!-- <div class="hero">
-            <div class="search-box">
-                <div class="date-picker">
-                    <input type="date" class="date1" />
-                    <input type="date" class="date2" />
-                </div>
-                <button class="search-button">TÌM KIẾM</button>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chi tiết Homestay</title>
+    <link rel="stylesheet" href="assets/css/room-detail.css" />
+    <link rel="stylesheet" href="assets/css/header.css" />
+    <link
+      rel="stylesheet"
+      href="./assets/fonts/themify-icons/themify-icons.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css"
+    />
+  </head>
+  <body>
+    <!-- Header -->
+    <header>
+      <div class="header-container">
+        <div class="container">
+          <div class="header-content">
+            <div class="logo">
+              <a href="trang-chu.html">
+                <img
+                  class="logo-image"
+                  src="assets/img/gotravel_logo_air.png"
+                  alt=""
+                />
+              </a>
             </div>
             <nav class="nav">
               <ul>
                 <li><a href="trang-chu.html">TRANG CHỦ</a></li>
                 <li><a href="homestay.html">HOMESTAYS</a></li>
-                <li><a href="about.html">VỀ CHÚNG TÔI</a></li>
-                <li><a href="contact.html">LIÊN HỆ</a></li>
+                <li><a href="about.html" target="_blank">VỀ CHÚNG TÔI</a></li>
+                <li><a href="contact.html" target="_blank">LIÊN HỆ</a></li>
               </ul>
             </nav>
           </div>
-        </div> -->
+        </div>
 
         <div class="btns desktop-btns" id="auth-buttons">
           <button
@@ -98,8 +59,7 @@
         >
           <img src="/assets/img/icon/user.svg" alt="user-icon" id="user-icon" />
           <div id="user-menu" class="dropdown-menu">
-            <a href="profile.html" class="dropdown-item">Hồ sơ</a>
-            <a href="homestay.html" class="dropdown-item">Homestay</a>
+            <a href="#" id="profileLink" class="dropdown-item">Hồ sơ</a>
             <button id="logoutBtn" class="dropdown-item">Đăng xuất</button>
           </div>
         </div>
@@ -146,8 +106,34 @@
     <div class="hero">
       <div class="search-box">
         <div class="date-picker">
-          <input type="date" id="checkInDate" class="date1" />
-          <input type="date" id="checkOutDate" class="date2" />
+          <div class="date1">
+            <img
+              src="assets/img/icon/calendar.svg"
+              alt="date-icon"
+              class="date-icon"
+            />
+            <input
+              type="text"
+              id="checkInDate"
+              data-filter="checkIn"
+              class="date-start"
+              placeholder="Ngày nhận phòng"
+            />
+          </div>
+          <div class="date2">
+            <img
+              src="assets/img/icon/calendar.svg"
+              alt="date-icon"
+              class="date-icon"
+            />
+            <input
+              type="text"
+              id="checkOutDate"
+              data-filter="checkOut"
+              class="date-end"
+              placeholder="Ngày trả phòng"
+            />
+          </div>
         </div>
         <button class="search-button">TÌM KIẾM</button>
       </div>
@@ -198,12 +184,10 @@
 
         <section class="homestay-review" id="homestay-review">
           <h3>Đánh giá về Homestay của chúng tôi</h3>
-        
-          <!-- Danh sách đánh giá -->
-          <div class="review-list" id="review-list">
 
-          </div>
-        
+          <!-- Danh sách đánh giá -->
+          <div class="review-list" id="review-list"></div>
+
           <!-- Form đánh giá -->
           <div class="review-form">
             <h4>Viết đánh giá của bạn</h4>
@@ -217,16 +201,20 @@
                 <option value="2">★★</option>
                 <option value="1">★</option>
               </select>
-        
+
               <label for="comment">Nhận xét:</label>
-              <textarea id="comment" name="comment" rows="4" placeholder="Hãy chia sẻ trải nghiệm của bạn..." required></textarea>
-        
+              <textarea
+                id="comment"
+                name="comment"
+                rows="4"
+                placeholder="Hãy chia sẻ trải nghiệm của bạn..."
+                required
+              ></textarea>
+
               <button type="submit">Gửi đánh giá</button>
             </form>
           </div>
         </section>
-        
-        
       </section>
       <section class="room-list" id="room-list">
         <h3>Phòng còn trống tại đây</h3>
@@ -264,33 +252,24 @@
   </body>
   <div id="popup-placeholder"></div>
   <script type="module">
-
-    const lastDates = JSON.parse(localStorage.getItem('lastSearchDates'));
+    const lastDates = JSON.parse(localStorage.getItem("lastSearchDates"));
     if (lastDates) {
-    document.getElementById('checkInDate').value = lastDates.checkIn;
-    document.getElementById('checkOutDate').value = lastDates.checkOut;
-}
-
-    document.querySelector(".search-button").addEventListener("click", function () {
-    const checkInDate = document.querySelector(".date1").value;
-    const checkOutDate = document.querySelector(".date2").value;
-    const today = new Date().toISOString().split("T")[0];
-
-    if (!checkInDate || !checkOutDate) {
-        alert("Vui lòng chọn ngày nhận và trả phòng.");
-        return;
+      document.getElementById("checkInDate").value = lastDates.checkIn;
+      document.getElementById("checkOutDate").value = lastDates.checkOut;
     }
 
-    if (checkInDate <= today) {
-        alert("Ngày nhận phòng không hợp lệ.");
-        return;
-    }
+    document
+      .querySelector(".search-button")
+      .addEventListener("click", function () {
+        const checkInDate = document.querySelector(".date-start").value;
+        const checkOutDate = document.querySelector(".date-end").value;
+        const today = new Date().toISOString().split("T")[0];
 
-    if (checkOutDate <= checkInDate) {
-        alert("Ngày trả phòng phải sau ngày nhận phòng.");
-        return;
-    }
-});
+        if (!checkInDate || !checkOutDate) {
+          alert("Vui lòng chọn ngày nhận và trả phòng.");
+          return;
+        }
+      });
   </script>
 
   <script type="module">
@@ -319,10 +298,27 @@
       return payload;
     }
 
+    // ===================== Main Logic =====================
     window.onload = function () {
+      initRoomSearch();
+
+      const lastDates = JSON.parse(localStorage.getItem("lastSearchDates"));
+      if (lastDates?.autoSearch) {
+        // Xóa để không tự động lần sau
+        lastDates.autoSearch = false;
+        localStorage.setItem("lastSearchDates", JSON.stringify(lastDates));
+
+        // Delay chút cho chacs ăn
+        setTimeout(() => {
+          document.querySelector(".search-button")?.click();
+        }, 200);
+      }
+    };
+
+    function initRoomSearch() {
       const searchBtn = document.querySelector(".search-button");
-      const checkInInput = document.querySelector(".date1");
-      const checkOutInput = document.querySelector(".date2");
+      const checkInInput = document.querySelector(".date-start");
+      const checkOutInput = document.querySelector(".date-end");
       const roomListSection = document.getElementById("room-list");
       const roomContainer = document.createElement("div");
       roomContainer.classList.add("room-items");
@@ -332,137 +328,143 @@
         const checkInDate = checkInInput.value;
         const checkOutDate = checkOutInput.value;
         const urlParams = new URLSearchParams(window.location.search);
-        const homestayId = urlParams.get("id"); // Trích xuất giá trị 'id'
+        const homestayId = urlParams.get("id");
 
-
-// Kiểm tra nếu homestayId không tồn tại
-if (!homestayId) {
-    alert("Không tìm thấy ID của homestay.");
-    return;
-}
-        if (!checkInDate || !checkOutDate) {
-          alert("Vui lòng chọn ngày nhận và trả phòng.");
+        if (!homestayId) {
+          alert("Không tìm thấy ID của homestay.");
           return;
         }
-        fetch(
-          `http://localhost:8080/homestay/api/rooms/available?homestayId=${homestayId}&checkInDate=${checkInDate}&checkOutDate=${checkOutDate}`
-        )
-          .then((res) => res.json())
-          .then((data) => {
-            roomContainer.innerHTML = "";
 
-            if (!data.length) {
-              roomContainer.innerHTML =
-                "<p>Không có phòng trống trong thời gian này.</p>";
-              return;
-            }
-
-            data.forEach((r) => {
-              const item = document.createElement("div");
-              item.classList.add("room-item");
-              item.dataset.roomId = r.roomId;
-
-              item.innerHTML = `
-                <div class="room-img">
-                  <img src="assets/img/standard-double.webp" alt="Room Image" />
-                </div>
-                <div class="room-facilities">
-                  <h4>Tiện nghi</h4>
-                  <div class="facilities-list">
-                    ${
-                      typeof r.features === "string"
-                        ? r.features
-                            .split(",")
-                            .map(
-                              (a) =>
-                                `<div class="facility-item"><i class="ti-check"></i> ${a.trim()}</div>`
-                            )
-                            .join("")
-                        : "<div class='facility-item'>Không có thông tin</div>"
-                    }
-                  </div>
-                </div>
-                <div class="room-price">
-                  <p class="price">${r.price.toLocaleString(
-                    "vi-VN"
-                  )} VND/đêm</p>
-                </div>
-                <div class="room-booking">
-                  <button class="btn-book-now" data-room-id="${
-                    r.roomId
-                  }">Đặt ngay</button>
-                </div>
-              `;
-
-              roomContainer.appendChild(item);
-            });
-
-            attachBookingHandlers();
-          })
-          .catch((err) => {
-            console.error("Lỗi khi lấy phòng:", err);
-            alert("Không thể tải danh sách phòng.");
-          });
+        fetchRooms(
+          homestayId,
+          checkInDate,
+          checkOutDate,
+          roomContainer,
+          checkInInput,
+          checkOutInput
+        );
       });
+    }
 
-      function attachBookingHandlers() {
-  document.querySelectorAll(".btn-book-now").forEach((btn) => {
-    btn.addEventListener("click", () => {
-      const token = localStorage.getItem("authToken");
-      if (!token) {
-        alert("Vui lòng đăng nhập để đặt phòng.");
-        return;
+    async function fetchRooms(
+      homestayId,
+      checkInDate,
+      checkOutDate,
+      roomContainer,
+      checkInInput,
+      checkOutInput
+    ) {
+      const checkIn = checkInDate.split("/").reverse().join("-");
+      const checkOut = checkOutDate.split("/").reverse().join("-");
+      try {
+        const res = await fetch(
+          `http://localhost:8080/homestay/api/rooms/available?homestayId=${homestayId}&checkInDate=${checkIn}&checkOutDate=${checkOut}`
+        );
+        const data = await res.json();
+
+        roomContainer.innerHTML = "";
+
+        if (!data.length) {
+          roomContainer.innerHTML =
+            "<p>Không có phòng trống trong thời gian này.</p>";
+          return;
+        }
+
+        for (const r of data) {
+          const imageUrl = await fetchRoomImage(r.roomId); // await hoạt động đúng ở đây
+          const item = createRoomItem(r, imageUrl);
+          roomContainer.appendChild(item);
+        }
+
+        attachBookingHandlers(checkInInput, checkOutInput);
+      } catch (err) {
+        console.error("Lỗi khi lấy phòng:", err);
+        alert("Không thể tải danh sách phòng.");
       }
+    }
 
-      const payload = decodeJWT(token);
-      const userId = payload.host_id || payload.sub || payload.userId;
-      const roomId = btn.dataset.roomId;
-      const checkInDate = checkInInput.value;
-      const checkOutDate = checkOutInput.value;
+    function createRoomItem(r, imageUrl) {
+      const item = document.createElement("div");
+      item.classList.add("room-item");
+      item.dataset.roomId = r.roomId;
 
-      if (!checkInDate || !checkOutDate) {
-        alert("Vui lòng chọn ngày nhận và trả phòng.");
-        return;
-      }
+      item.innerHTML = `
+    <div class="room-img">
+      <img src="${imageUrl}" alt="Room Image" />
+    </div>
+    <div class="room-facilities">
+      <h4>Tiện nghi</h4>
+      <div class="facilities-list">
+        ${
+          typeof r.features === "string"
+            ? r.features
+                .split(",")
+                .map(
+                  (a) =>
+                    `<div class="facility-item"><i class="ti-check"></i> ${a.trim()}</div>`
+                )
+                .join("")
+            : "<div class='facility-item'>Không có thông tin</div>"
+        }
+      </div>
+    </div>
+    <div class="room-price">
+      <p class="price">${r.price.toLocaleString("vi-VN")} VND/đêm</p>
+    </div>
+    <div class="room-booking">
+      <button class="btn-book-now" data-room-id="${r.roomId}">Đặt ngay</button>
+    </div>
+  `;
 
-      const body = {
-        // userId: Number(userId),
-        roomId: Number(roomId),
-        checkInDate,
-        checkOutDate,
-      };
+      return item;
+    }
 
-      fetch("http://localhost:8080/homestay/api/bookings", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify(body),
-      })
-        .then((res) => {
-          if (!res.ok) throw new Error("Đặt phòng thất bại");
-          return res.json();
-        })
-        .then((bookingData) => {
-          alert("Đặt phòng thành công!");
-          window.timer = null;
-          
-          const bookingId = bookingData.bookingId;
+    function attachBookingHandlers(checkInInput, checkOutInput) {
+      document.querySelectorAll(".btn-book-now").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const token = localStorage.getItem("authToken");
+          if (!token) {
+            alert("Vui lòng đăng nhập để đặt phòng.");
+            return;
+          }
 
-          fetch(`http://localhost:8080/homestay/api/payment/vnpay/create-url/${bookingId}`,{
+          const payload = decodeJWT(token);
+          const userId = payload.host_id || payload.sub || payload.userId;
+          const roomId = btn.dataset.roomId;
+          const checkInDate = checkInInput.value.split("/").reverse().join("-");
+          const checkOutDate = checkOutInput.value
+            .split("/")
+            .reverse()
+            .join("-");
+
+          if (!checkInDate || !checkOutDate) {
+            alert("Vui lòng chọn ngày nhận và trả phòng.");
+            return;
+          }
+
+          const body = {
+            roomId: Number(roomId),
+            checkInDate,
+            checkOutDate,
+          };
+
+          fetch("http://localhost:8080/homestay/api/bookings", {
             method: "POST",
-          headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+            body: JSON.stringify(body),
           })
             .then((res) => {
-              if (!res.ok) throw new Error("Không thể tạo đơn thanh toán");
+              if (!res.ok) throw new Error("Đặt phòng thất bại");
               return res.json();
             })
-            .then((paymentData) => {
-              const paymentUrl = paymentData.url;
+            .then((bookingData) => {
+              const bookingId = bookingData.bookingId;
+              return createPayment(bookingId, token);
+            })
+            .then((paymentUrl) => {
               if (paymentUrl) {
                 window.location.href = paymentUrl;
               } else {
@@ -470,19 +472,82 @@ if (!homestayId) {
               }
             })
             .catch((err) => {
-              console.error("Lỗi tạo thanh toán:", err);
-              alert("Đặt phòng thành công nhưng lỗi khi tạo thanh toán.");
+              console.error("Lỗi khi đặt phòng hoặc thanh toán:", err);
+              alert("Có lỗi xảy ra trong quá trình đặt phòng hoặc thanh toán.");
             });
-        })
-        .catch((err) => {
-          console.error("Lỗi đặt phòng:", err);
-          alert("Không thể đặt phòng.");
         });
-    });
-  });
-}};
+      });
+    }
+
+    function createPayment(bookingId, token) {
+      return fetch(
+        `http://localhost:8080/homestay/api/payment/vnpay/create-url/${bookingId}`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
+        .then((res) => {
+          if (!res.ok) throw new Error("Không thể tạo đơn thanh toán");
+          return res.json();
+        })
+        .then((data) => data.url);
+    }
+
+    async function fetchRoomImage(roomId) {
+      try {
+        const res = await fetch(
+          `http://localhost:8080/homestay/api/rooms/${roomId}/images`
+        );
+        if (!res.ok) throw new Error("No image");
+        const data = await res.json();
+        return data[0].imageUrl || "assets/img/default-thumbnail.webp";
+      } catch (error) {
+        console.error("Không lấy được ảnh chính cho room:", roomId, error);
+        return "assets/img/standard-double.webp"; // fallback ảnh mặc định
+      }
+    }
   </script>
-    <script type="module" src="assets/js/review-and-info.js"></script>
-    <script type="module" src="assets/js/main.js"></script>
-    <script type="module" src="assets/js/role-redirect.js"></script>
+  <script type="module">
+    const dateStart = flatpickr(".date-start", {
+      dateFormat: "d/m/Y",
+      locale: "vi",
+      minDate: "today",
+      onChange: function (selectedDates, dateStr, instance) {
+        const dateStartValue = selectedDates[0];
+        if (dateStartValue) {
+          dateEnd.set("minDate", dateStartValue);
+        }
+      },
+    });
+    const dateEnd = flatpickr(".date-end", {
+      dateFormat: "d/m/Y",
+      locale: "vi",
+      minDate: "today",
+      onChange: function (selectedDates, dateStr, instance) {
+        const dateEndValue = selectedDates[0];
+        if (dateEndValue) {
+          dateStart.set("maxDate", dateEndValue);
+        }
+      },
+    });
+    import { setupPopupEventListeners } from "./assets/js/popup-login.js";
+    fetch("popup.html")
+      .then((response) => response.text())
+      .then((data) => {
+        document.getElementById("popup-placeholder").innerHTML = data;
+        setupPopupEventListeners();
+      });
+  </script>
+  <script type="module" src="assets/js/review-and-info.js"></script>
+  <script type="module" src="assets/js/main.js"></script>
+  <script type="module" src="assets/js/role-redirect.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+  <script type="module" src="assets/js/review-and-info.js"></script>
+  <script type="module" src="assets/js/main.js"></script>
+  <script type="module" src="assets/js/role-redirect.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 </html>

@@ -1,5 +1,61 @@
 // assets/js/room-list.js
 
+window.onload = async function () {
+  const urlParams = new URLSearchParams(window.location.search);
+
+  // --- TICK CHECKBOX ROOM TYPE ---
+  const roomTypeParam = urlParams.get("roomType");
+  if (roomTypeParam) {
+    const checkboxes = document.querySelectorAll(
+      'input[type="checkbox"][data-filter="roomType"]'
+    );
+    checkboxes.forEach((checkbox) => {
+      if (checkbox.value === roomTypeParam) {
+        checkbox.checked = true;
+      }
+    });
+  }
+
+  // --- ĐIỀN LOCATION ---
+  const locationParam = urlParams.get("location");
+  if (locationParam) {
+    const locationInput = document.querySelector(
+      'input[data-filter="location"]'
+    );
+    if (locationInput) {
+      locationInput.value = locationParam;
+    }
+  }
+
+  // --- ĐIỀN CHECK-IN ---
+  const checkInParam = urlParams.get("checkIn");
+  if (checkInParam) {
+    const checkInInput = document.querySelector('input[data-filter="checkIn"]');
+    if (checkInInput) {
+      checkInInput.value = formatToDDMMYYYY(checkInParam);
+    }
+  }
+
+  // --- ĐIỀN CHECK-OUT ---
+  const checkOutParam = urlParams.get("checkOut");
+  if (checkOutParam) {
+    const checkOutInput = document.querySelector(
+      'input[data-filter="checkOut"]'
+    );
+    if (checkOutInput) {
+      checkOutInput.value = formatToDDMMYYYY(checkOutParam);
+    }
+  }
+
+  await loadHomestaysWithFilters();
+
+  // --- HÀM CHUYỂN TỪ YYYY-MM-DD VỀ DD/MM/YYYY ---
+  function formatToDDMMYYYY(dateStr) {
+    const [year, month, day] = dateStr.split("-");
+    return `${day}/${month}/${year}`;
+  }
+};
+
 const resultsContainer = document.querySelector(".results");
 
 // Tạo pagination container
@@ -58,19 +114,11 @@ function collectFilters() {
         break;
 
       case "checkIn":
-        params.checkInDate = val;
+        params.checkInDate = val.split("/").reverse().join("-");
         break;
 
       case "checkOut":
-        // Validate checkOut > checkIn
-        if (
-          params.checkInDate &&
-          new Date(val) <= new Date(params.checkInDate)
-        ) {
-          console.warn("Ngày check-out phải sau check-in");
-          return;
-        }
-        params.checkOutDate = val;
+        params.checkOutDate = val.split("/").reverse().join("-");
         break;
 
       case "location":
@@ -123,8 +171,8 @@ async function renderPage(page) {
   const end = start + ITEMS_PER_PAGE;
   const currentItems = allHomestays.slice(start, end);
 
-  const checkInDate = document.querySelector(".date1").value;
-  const checkOutDate = document.querySelector(".date2").value;
+  const checkInDate = document.querySelector(".date-start").value;
+  const checkOutDate = document.querySelector(".date-end").value;
 
   for (const item of currentItems) {
     const primaryImageUrl = await fetchPrimaryImageUrl(item.id);
@@ -138,7 +186,7 @@ async function renderPage(page) {
           <div class="location">
             <i class="ti-location-pin"></i> ${item.street ?? ""}, ${
       item.ward ?? ""
-    }
+    }, ${item.district ?? ""}
           </div>
           <div class="amenities">
             ${item.description ?? "Chỗ nghỉ lý tưởng cho bạn."}
@@ -157,6 +205,7 @@ async function renderPage(page) {
         JSON.stringify({
           checkIn: checkInDate,
           checkOut: checkOutDate,
+          autoSearch: true,
         })
       );
     });
@@ -258,4 +307,4 @@ async function loadHomestaysWithFilters() {
   }
 }
 
-loadHomestaysWithFilters();
+// loadHomestaysWithFilters();

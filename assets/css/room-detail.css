@@ -11,49 +11,78 @@ body {
   background-color: #f9f9f9;
 }
 
-/* thanh tìm kiếm */
-
-.hero {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: #020a33;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  margin-top: 60px;
-  width: 100%;
-}
-
+/* Search box style */
 .search-box {
-  padding: 10px;
-  border-radius: 10px;
   display: flex;
-  flex-direction: row;
+  justify-content: space-between;
   align-items: center;
+  padding: 12px;
+  width: 100%;
+  max-width: 800px;
+  margin: 60px auto 0;
   gap: 10px;
 }
 
 .date-picker {
   display: flex;
+  justify-content: space-between;
   gap: 10px;
+  width: 100%;
+}
+
+.date1,
+.date2 {
+  position: relative;
+  flex: 1;
 }
 
 .date-picker input {
-  width: 200px;
+  width: 100%;
   padding: 12px;
+  font-size: 16px;
   border: 1px solid #ddd;
   border-radius: 5px;
-  flex: 1;
+  box-sizing: border-box;
+  transition: all 0.3s ease;
+}
+
+.date-picker input:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+  outline: none;
+}
+
+.date-icon {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  color: #888;
+  pointer-events: none;
+}
+
+.date-picker .date-start,
+.date-picker .date-end {
+  padding-left: 40px;
 }
 
 .search-button {
   background-color: #0099ff;
   color: white;
-  padding: 14px 20px;
-  border: none;
+  padding: 12px 20px;
+  font-size: 16px;
+  border: 1px solid #0099ff;
   border-radius: 5px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  box-sizing: border-box;
+  white-space: nowrap;
+  width: auto;
+  min-width: 120px;
 }
+
 .search-button:hover {
   background-color: #007acc;
 }
@@ -355,6 +384,7 @@ main.room-detail {
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
 }
 
 /* === Ảnh phòng === */
@@ -500,4 +530,49 @@ main.room-detail {
 .review-rating {
   color: #f39c12;
   font-weight: bold;
+}
+
+.date-picker {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  width: 100%;
+}
+
+.date1,
+.date2 {
+  position: relative;
+  flex: 1;
+}
+
+.date-picker input {
+  width: 100%;
+  padding: 12px;
+  font-size: 16px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-sizing: border-box;
+  transition: all 0.3s ease;
+}
+
+.date-picker input:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+  outline: none;
+}
+
+.date-icon {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  color: #888;
+  pointer-events: none;
+}
+
+.date-picker .date-start,
+.date-picker .date-end {
+  padding-left: 40px;
 }

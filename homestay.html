@@ -10,6 +10,10 @@
       rel="stylesheet"
       href="./assets/fonts/themify-icons/themify-icons.css"
     />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css"
+    />
   </head>
   <body>
     <header>
@@ -87,67 +91,71 @@
       </div>
     </header>
 
-    <div class="hero">
-      <div class="search-box">
-        <div class="search-location">
-          <svg
-            class="search-icon"
-            xmlns="http://www.w3.org/2000/svg"
-            width="20"
-            height="20"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          >
-            <circle cx="11" cy="11" r="8"></circle>
-            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-          </svg>
-          <input type="text" data-filter="location" placeholder="Hải Châu" />
-        </div>
-        <div class="date-picker">
-          <input type="date" id="checkin" data-filter="checkIn" class="date1" />
+    <div class="search-box">
+      <div class="search-wrapper">
+        <img
+          src="assets/img/icon/search.svg"
+          alt="search-icon"
+          class="search-icon"
+        />
+        <input
+          type="text"
+          data-filter="location"
+          placeholder="Nhập địa điểm..."
+          class="search-field"
+        />
+      </div>
+
+      <div class="date-picker">
+        <div class="date1">
+          <img
+            src="assets/img/icon/calendar.svg"
+            alt="date-icon"
+            class="date-icon"
+          />
           <input
-            type="date"
-            id="checkout"
-            data-filter="checkOut"
-            class="date2"
+            type="text"
+            id="checkin"
+            data-filter="checkIn"
+            class="date-start"
+            placeholder="Ngày nhận phòng"
           />
         </div>
-        <!-- <div class="guests-selector">
-          <select>
-            <option>Single</option>
-            <option>Supperior</option>
-            <option>Deluxe</option>
-            <option>Suite</option>
-          </select>
-        </div> -->
-        <button class="search-button">TÌM KIẾM</button>
+        <div class="date2">
+          <img
+            src="assets/img/icon/calendar.svg"
+            alt="date-icon"
+            class="date-icon"
+          />
+          <input
+            type="text"
+            id="checkout"
+            data-filter="checkOut"
+            class="date-end"
+            placeholder="Ngày trả phòng"
+          />
+        </div>
       </div>
+
+      <button class="search-button">TÌM KIẾM</button>
     </div>
 
     <div class="homestay-section">
       <div class="filters">
         <div class="search-input">
-          <svg
+          <img
+            src="assets/img/icon/search.svg"
+            alt="search-icon"
             class="search-icon"
-            xmlns="http://www.w3.org/2000/svg"
-            width="20"
-            height="20"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          >
-            <circle cx="11" cy="11" r="8"></circle>
-            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-          </svg>
-          <input type="text" data-filter="location" placeholder="Tìm kiếm..." />
+          />
+          <input
+            type="text"
+            data-filter="location"
+            placeholder="Tìm kiếm..."
+            class="search-field"
+          />
         </div>
+
         <h2>Giá mỗi đêm</h2>
         <label
           ><input type="checkbox" data-filter="price" value="0-200000" /> Dưới
@@ -253,6 +261,49 @@
 
     <div id="popup-placeholder"></div>
     <script type="module">
+      function formatToISO(dateStr) {
+        const [day, month, year] = dateStr.split("/");
+        return `${year}-${month}-${day}`; // Chuyển đổi "dd/mm/yyyy" ➝ "yyyy-MM-dd"
+      }
+
+      const dateStart = flatpickr(".date-start", {
+        dateFormat: "d/m/Y",
+        locale: "vi",
+        minDate: "today",
+        onChange: function (selectedDates, dateStr) {
+          if (selectedDates.length > 0) {
+            const lastSearchDates =
+              JSON.parse(localStorage.getItem("lastSearchDates")) || {};
+            lastSearchDates.checkIn = formatToISO(dateStr); // Lưu đúng định dạng
+            localStorage.setItem(
+              "lastSearchDates",
+              JSON.stringify(lastSearchDates)
+            );
+
+            dateEnd.set("minDate", selectedDates[0]);
+          }
+        },
+      });
+
+      const dateEnd = flatpickr(".date-end", {
+        dateFormat: "d/m/Y",
+        locale: "vi",
+        minDate: "today",
+        onChange: function (selectedDates, dateStr) {
+          if (selectedDates.length > 0) {
+            const lastSearchDates =
+              JSON.parse(localStorage.getItem("lastSearchDates")) || {};
+            lastSearchDates.checkOut = formatToISO(dateStr); // Lưu đúng định dạng
+            localStorage.setItem(
+              "lastSearchDates",
+              JSON.stringify(lastSearchDates)
+            );
+
+            dateStart.set("maxDate", selectedDates[0]);
+          }
+        },
+      });
+
       import { setupPopupEventListeners } from "./assets/js/popup-login.js";
 
       fetch("popup.html")
@@ -266,5 +317,6 @@
     <script type="module" src="assets/js/main.js"></script>
     <script type="module" src="assets/js/role-redirect.js"></script>
     <script type="module" src="assets/js/room-list.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
   </body>
 </html>
