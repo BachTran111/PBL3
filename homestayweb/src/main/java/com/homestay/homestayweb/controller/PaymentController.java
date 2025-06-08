@@ -6,6 +6,7 @@ import com.homestay.homestayweb.service.PaymentService;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
@@ -55,12 +56,14 @@ public class PaymentController {
     }
 
     @GetMapping("/stats/daily")
+    @PreAuthorize("hasAuthority('HOST_ACCESS')")
     public ResponseEntity<List<DailyRevenueResponse>> getDailyRevenueByHost() {
         List<DailyRevenueResponse> result = paymentService.getDailyRevenueByHost();
         return ResponseEntity.ok(result);
     }
 
     @GetMapping("/stats/homestay")
+    @PreAuthorize("hasAuthority('HOST_ACCESS')")
     public ResponseEntity<List<HomestayRevenueResponse>> getRevenueByHomestayByHost() {
         List<HomestayRevenueResponse> result = paymentService.getRevenueByHomestayByHost();
         return ResponseEntity.ok(result);

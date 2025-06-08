@@ -5,8 +5,6 @@ import com.homestay.homestayweb.dto.response.HomestayImageResponse;
 import com.homestay.homestayweb.dto.response.HomestayResponse;
 import com.homestay.homestayweb.entity.Homestay;
 import com.homestay.homestayweb.entity.HomestayImage;
-import com.homestay.homestayweb.repository.HomestayImageRepository;
-import com.homestay.homestayweb.security.UserDetailsImpl;
 import com.homestay.homestayweb.service.CloudinaryService;
 import com.homestay.homestayweb.service.HomestayImageService;
 import com.homestay.homestayweb.service.HomestayService;
@@ -16,7 +14,6 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
