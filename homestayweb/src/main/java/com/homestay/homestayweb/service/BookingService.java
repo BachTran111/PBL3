@@ -12,9 +12,7 @@ public interface BookingService {
     BookingResponse getBookingById(Long id);
     BookingResponse createBooking(BookingRequest request, UserDetailsImpl currentUser);
     BookingResponse pendingBooking(Long id);
-
     BookingResponse rejectBooking(Long id);
-
     void deleteBooking(Long id);
     List<BookingResponse> getPendingBookingsByUserId(Long userId);
     List<BookingResponse> getAcceptedBookingsByUserId(Long userId);

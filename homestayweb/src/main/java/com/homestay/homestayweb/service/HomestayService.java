@@ -18,16 +18,11 @@ public interface HomestayService {
     HomestayResponse updateHomestay(Long id, HomestayRequest request);
     void deleteHomestay(Long id);
     HomestayResponse pendingHomestay(Long id);
-
     List<HomestayResponse> getAllByDistrict(String district,String status);
-
     List<HomestayResponse> getHomestayByHost(Long id);
-
     List<HomestayResponse> getAllPendingHomestays();
     Homestay findEntityById(Long id);
-
     HomestayResponse rejectHomestay(Long id);
     List<HomestayResponse> getMyHomestays();
-
     List<HomestayResponse> searchHomestays(String roomType, Double priceFrom, Double priceTo, String features, LocalDate checkInDate, LocalDate checkOutDate, Double surfRating, String location);
 }

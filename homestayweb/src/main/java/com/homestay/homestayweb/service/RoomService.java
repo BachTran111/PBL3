@@ -13,17 +13,11 @@ public interface RoomService {
     RoomResponse updateRoom(Long roomId, RoomRequest request);
     void deleteRoom(Long roomId);
     RoomResponse getRoomById(Long roomId);
-
     List<RoomResponse> getAllRooms();
-
     List<RoomResponse> getRoomsByHomestayA(Long homestayId, String status);
     List<RoomResponse> getRoomsByHomestayP(Long homestayId, String status);
-
     RoomResponse pendingRoom(Long id);
-
     List<RoomResponse> getAllPendingRooms();
-
     List<RoomResponse> getAvailableRooms(Long homestayId, LocalDate checkInDate, LocalDate checkOutDate);
-
     Room getRoomEntityById(Long roomId);
 }
