@@ -2,7 +2,7 @@
 import { showHidePassword } from "./show-hide-password.js";
 
 // Validation logic
-const regexUsername = /^[a-zA-Z]{3,}$/;
+const regexUsername = /^[\p{L}\s]{3,}$/u;
 const regexEmail = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 const regexPassword = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/;
 
@@ -34,7 +34,7 @@ function setupValidation() {
         handleValidValue(username);
       } else {
         const message =
-          "Tên người dùng phải có ít nhất 3 ký tự, chỉ chứa chữ cái và không có khoảng trắng.";
+          "Tên người dùng phải có ít nhất 3 ký tự, chỉ chứa chữ cái.";
         handleInValidValue(username, message);
       }
     });
@@ -86,7 +86,7 @@ function setupValidation() {
       if (!regexUsername.test(registerName.value.trim())) {
         handleInValidValue(
           registerName,
-          "Tên người dùng phải có ít nhất 3 ký tự, chỉ chứa chữ cái và không có khoảng trắng."
+          "Tên người dùng phải có ít nhất 3 ký tự, chỉ chứa chữ cái."
         );
         isValid = false;
       } else {
@@ -133,7 +133,7 @@ function setupValidation() {
         registerUser(username, email, password, roles)
           .then((message) => {
             alert("Đăng ký thành công: " + message);
-            document.getElementById("popup").style.display = "none";
+            window.location.href = "trang-chu.html";
           })
           .catch((err) => {
             alert("Đăng ký thất bại: " + (err.message || "Vui lòng thử lại."));

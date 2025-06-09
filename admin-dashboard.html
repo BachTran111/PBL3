@@ -21,7 +21,7 @@
             <nav class="nav">
               <ul>
                 <li><a href="trang-chu.html">TRANG CHỦ</a></li>
-                <li><a href="homestay.html">HOMESTAYS</a></li>
+                <li><a href="homestay-list.html">HOMESTAYS</a></li>
                 <li><a href="about.html" target="_blank">VỀ CHÚNG TÔI</a></li>
                 <li><a href="contact.html" target="_blank">LIÊN HỆ</a></li>
               </ul>
@@ -56,6 +56,9 @@
           <li>
             <a href="#" class="tab-link" data-tab="tab-manage-company">Quản lý doanh nghiệp</a>
           </li>
+          <li>
+            <a href="#" class="tab-link" data-tab="tab-manage-users">Quản lý người dùng</a>
+          </li>
         </ul>
       </div>
 
@@ -71,34 +74,7 @@
           <div class="card-box">
             <button class="close-btn" onclick="returnToDefault()">×</button>
             <h2>Phê duyệt doanh nghiệp</h2>
-            <table class="room-table">
-              <thead>
-                <tr>
-                  <th>ID</th>
-                  <th>Tên doanh nghiệp</th>
-                  <th>Xem chi tiết</th>
-                  <th>Hành động</th>
-                </tr>
-              </thead>
-              <tbody id="homestay-request-body">
-                <tr>
-                  <td>DN001</td>
-                  <td>Công ty TNHH Du lịch ABC</td>
-                  <td>
-                    <button
-                      class="btn btn-view"
-                      onclick="openCommonPopup('business', { name: 'Homestay ABC', address: '123 Nha Trang', email: 'abc@mail.com', note: 'Ghi chú mẫu' })"
-                    >
-                      Xem chi tiết
-                    </button>
-                  </td>
-                  <td>
-                    <button class="btn btn-approve">Phê duyệt</button>
-                    <button class="btn btn-reject">Từ chối</button>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+            <div id="homestay-request-container" class="host-container"></div>
           </div>
         </div>
 
@@ -106,6 +82,15 @@
           <div class="card-box">
             <button class="close-btn" onclick="returnToDefault()">×</button>
             <h2>Quản lý doanh nghiệp</h2>
+            <div id="host-container" class="host-container"></div>
+          </div>
+        </div>
+        
+        <div id="tab-manage-users" class="tab-content">
+          <div class="card-box">
+            <button class="close-btn" onclick="returnToDefault()">×</button>
+            <h2>Quản lý người dùng</h2>
+            <div id="user-container" class="host-container"></div>
           </div>
         </div>
       </div>
@@ -139,20 +124,15 @@
       });
 
       function returnToDefault() {
-        // 1. Ẩn tất cả nội dung tab
         tabContents.forEach((tab) => tab.classList.remove("active"));
 
-        // 2. Hiện phần mặc định
         defaultContent.classList.add("active");
 
-        // 3. Bỏ highlight tab con & homestay cha
         tabLinks.forEach((l) => l.classList.remove("active-tab"));
         homestayToggles.forEach((toggle) => toggle.classList.remove("active-homestay"));
 
-        // 4. Thu gọn toàn bộ submenu trong sidebar
         document.querySelectorAll(".sub-menu").forEach((menu) => (menu.style.display = "none"));
 
-        // 5. Thu gọn danh sách homestay chính
         homestayList.style.display = "none";
       }
 
@@ -163,11 +143,18 @@
         if (type === "business") {
           title.innerText = "Chi tiết Doanh nghiệp";
           body.innerHTML = `
-                        <p><strong>Tên Homestay:</strong> ${data.name}</p>
-                        <p><strong>Địa chỉ:</strong> ${data.address}</p>
-                        <p><strong>Email:</strong> ${data.email}</p>
-                        <p><strong>Ngày yêu cầu:</strong> ${data.note}</p>
-                    `;
+            <p><strong>Tên Homestay:</strong> ${data.name}</p>
+            <p><strong>Địa chỉ:</strong> ${data.address}</p>
+            <p><strong>Email:</strong> ${data.email}</p>
+            <p><strong>Ngày yêu cầu:</strong> ${data.note}</p>
+          `;
+        } else if (type === "user") {
+          title.innerText = "Chi tiết Người dùng";
+          body.innerHTML = `
+            <p><strong>ID:</strong> ${data.id}</p>
+            <p><strong>Tên:</strong> ${data.name}</p>
+            <p><strong>Email:</strong> ${data.email}</p>
+          `;
         }
 
         document.getElementById("common-popup").style.display = "flex";

@@ -22,7 +22,7 @@ window.onload = function () {
     if (checkOut) params.append("checkOut", formatToISO(checkOut));
     if (roomType) params.append("roomType", roomType);
 
-    window.location.href = `homestay.html?${params.toString()}`;
+    window.location.href = `homestay-list.html?${params.toString()}`;
   });
 
   function formatToISO(dateStr) {

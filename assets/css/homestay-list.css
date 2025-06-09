@@ -1,0 +1,271 @@
+body {
+  font-family: sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #fff;
+}
+
+/* Search box style */
+.search-box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px;
+  width: 100%;
+  max-width: 1000px;
+  margin: 60px auto 0;
+  gap: 10px;
+}
+
+.search-wrapper {
+  display: flex;
+  align-items: center;
+  position: relative;
+  width: auto;
+  min-width: 300px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: #fff;
+  transition: all 0.3s ease;
+}
+
+.search-wrapper:focus-within {
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+.search-field {
+  width: 100%;
+  padding: 12px 40px 12px 40px;
+  font-size: 16px;
+  border: none;
+  outline: none;
+  background-color: transparent;
+  box-sizing: border-box;
+}
+
+.search-icon {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  color: #888;
+  pointer-events: none;
+}
+
+.date-picker {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  width: 100%;
+}
+
+.date1,
+.date2 {
+  position: relative;
+  flex: 1;
+}
+
+.date-picker input {
+  width: 100%;
+  padding: 12px;
+  font-size: 16px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-sizing: border-box;
+  transition: all 0.3s ease;
+}
+
+.date-picker input:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+  outline: none;
+}
+
+.date-icon {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  color: #888;
+  pointer-events: none;
+}
+
+.date-picker .date-start,
+.date-picker .date-end {
+  padding-left: 40px;
+}
+
+.search-button {
+  background-color: #0099ff;
+  color: white;
+  padding: 12px 20px; 
+  font-size: 16px; 
+  border: 1px solid #0099ff; 
+  border-radius: 5px; 
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  box-sizing: border-box; 
+  white-space: nowrap; 
+  width: auto;
+  min-width: 120px; 
+}
+
+.search-button:hover {
+  background-color: #007acc;
+}
+
+/* Homestay section style */
+.homestay-section {
+  max-width: 1200px;
+  display: flex;
+  margin: 0 auto;
+}
+
+.search-input {
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.search-input .search-field {
+  width: 100%;
+  padding: 12px 40px; 
+  font-size: 14px;
+  border: 1px solid #ddd;
+  border-radius: 50px;
+  background-color: #fff;
+  outline: none;
+  box-sizing: border-box; 
+  transition: border-color 0.3s ease;
+}
+
+.search-field:focus {
+  border-color: #0099ff; 
+}
+
+.filters {
+  width: 250px;
+  padding: 0 20px;
+  height: min-content;
+  margin-top: 20px;
+  background-color: white;
+}
+
+.filters h2 {
+  margin-top: 0;
+  margin-bottom: 10px;
+  font-size: 1.2em;
+}
+
+.filters label {
+  display: block;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+
+.filters label:hover {
+  color: #0099ff;
+}
+
+.results {
+  flex: 1;
+  padding: 20px;
+}
+
+.result-card {
+  background-color: white;
+  border-radius: 10px;
+  display: flex;
+  overflow: hidden;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.result-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+  background-color: rgba(85, 104, 231, 0.05);
+  cursor: pointer;
+}
+
+.result-card img {
+  width: 300px;
+  height: 200px;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.result-details {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex: 1;
+}
+
+.result-details h3 {
+  margin: 0 0 10px;
+  font-size: 1.4em;
+  color: #020a33;
+}
+
+.result-details .stars {
+  color: #ffc107;
+  font-size: 1.1em;
+  margin-bottom: 10px;
+}
+
+.result-details .price {
+  color: #e91e63;
+  font-weight: bold;
+  margin-bottom: 8px;
+  font-size: 1em;
+}
+
+.result-details .location {
+  color: #555;
+  font-size: 0.95em;
+  margin-bottom: 8px;
+}
+
+.result-details .amenities {
+  font-size: 0.9em;
+  color: #666;
+}
+
+.result-details .stars i {
+  color: #ffc107;
+  margin-left: 4px;
+}
+
+.pagination {
+  text-align: center;
+  margin: 30px 0;
+}
+
+.pagination button {
+  background-color: #f0f0f0;
+  border: none;
+  margin: 0 5px;
+  padding: 8px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  color: #020a33;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.pagination button.active {
+  background-color: #020a33;
+  color: white;
+}
+
+.pagination button:hover {
+  background-color: #0099ff;
+  color: white;
+}

@@ -141,7 +141,7 @@ function toQueryString(params) {
 
 const endpoint = "http://localhost:8080/homestay/api/homestays/search";
 
-const ITEMS_PER_PAGE = 20;
+const ITEMS_PER_PAGE = 10;
 
 let currentPage = 1;
 let allHomestays = [];
@@ -199,7 +199,7 @@ async function renderPage(page) {
       `.result-card[data-id="${item.id}"]`
     );
     insertedCard.addEventListener("click", () => {
-      window.location.href = `room.html?id=${item.id}`;
+      window.location.href = `homestay.html?id=${item.id}`;
       localStorage.setItem(
         "lastSearchDates",
         JSON.stringify({

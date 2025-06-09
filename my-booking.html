@@ -15,7 +15,7 @@
     <!-- Header -->
     <header>
       <div class="header-container">
-        <div class="container">
+        <div class="container1">
           <div class="header-content">
             <div class="logo">
               <a href="trang-chu.html">
@@ -29,13 +29,14 @@
             <nav class="nav">
               <ul>
                 <li><a href="trang-chu.html">TRANG CHỦ</a></li>
-                <li><a href="homestay.html">HOMESTAYS</a></li>
+                <li><a href="homestay-list.html">HOMESTAYS</a></li>
                 <li><a href="about.html" target="_blank">VỀ CHÚNG TÔI</a></li>
                 <li><a href="contact.html" target="_blank">LIÊN HỆ</a></li>
               </ul>
             </nav>
           </div>
         </div>
+
         <div class="btns desktop-btns" id="auth-buttons">
           <button
             class="cooperate-btn"
@@ -61,64 +62,234 @@
       </div>
     </header>
 
+    <div class="loading" style="display: none">Đang tải...</div>
+
     <div class="container">
       <div class="sidebar">
         <h2>Tài khoản của tôi</h2>
         <ul>
-          <li><a href="#">Đơn đặt chỗ của tôi</a></li>
-          <li><a href="#">Khách Sạn</a></li>
-          <li><a href="#">Hoạt động</a></li>
-          <li><a href="#">Tin nhắn từ chỗ nghỉ</a></li>
-          <li><a href="#">Nhận xét</a></li>
-          <li><a href="#">Tiền GoTravel</a></li>
-          <li><a href="#">Hồ sơ</a></li>
+          <li>
+            <a href="#" class="tab-link" data-tab="tab-my-booking"
+              >Đơn đặt chỗ</a
+            >
+          </li>
+          <li><a href="#" class="tab-link" data-tab="tab-profile">Hồ sơ</a></li>
+          <li>
+            <a href="#" class="tab-link" data-tab="tab-change-password"
+              >Đổi mật khẩu</a
+            >
+          </li>
         </ul>
       </div>
 
       <!-- Main Content -->
       <div class="main-content">
-        <div class="tabs">
-          <button class="tab-btn active" onclick="openTab('upcoming')">
-            Đang được phê duyệt
-          </button>
-          <button class="tab-btn" onclick="openTab('completed')">
-            Đã đặt thành công
-          </button>
-          <button class="tab-btn" onclick="openTab('canceled')">Đã hủy</button>
-        </div>
-
-        <div class="search-box-container">
-          <input
-            type="text"
-            class="search-box"
-            placeholder="Tìm kiếm theo mã đặt phòng"
+        <div id="default-content" class="tab-content active">
+          <img
+            src="https://cdn-icons-png.flaticon.com/512/706/706797.png"
+            alt="Welcome"
           />
-          <button class="search-btn">Tìm</button>
+          <h1>Chào mừng bạn đến với GoTravel</h1>
+          <h3>Tài khoản của tôi</h3>
         </div>
 
-        <div id="upcoming" class="tab-content active">
-          <h2>Sắp tới</h2>
-          <div class="homestay-list" id="upcoming-list"></div>
-          <p id="no-upcoming" style="display: none">
-          </p>
+        <div id="tab-my-booking" class="tab-content">
+          <div class="card-box">
+            <button class="close-btn" onclick="returnToDefault()">×</button>
+            <h2>Đơn đặt chỗ của tôi</h2>
+            <div class="booking-tabs">
+              <button
+                class="booking-tab-btn active"
+                onclick="openTab('upcoming')"
+              >
+                Đang chờ phê duyệt
+              </button>
+              <button class="booking-tab-btn" onclick="openTab('completed')">
+                Đã đặt thành công
+              </button>
+              <button class="booking-tab-btn" onclick="openTab('canceled')">
+                Bị từ chối
+              </button>
+            </div>
+
+            <div class="search-box-container">
+              <input
+                type="text"
+                class="search-box"
+                placeholder="Tìm kiếm theo mã đặt phòng"
+              />
+              <button class="search-btn">Tìm</button>
+            </div>
+
+            <div id="upcoming" class="booking-tab-content active">
+              <h2>Đang chờ phê duyệt</h2>
+              <div class="homestay-list" id="upcoming-list"></div>
+              <p id="no-upcoming" style="display: none">
+                Không có đơn đặt chỗ sắp tới.
+              </p>
+            </div>
+
+            <div id="completed" class="booking-tab-content">
+              <h2>Đã đặt thành công</h2>
+              <div class="homestay-list" id="completed-list"></div>
+              <p id="no-completed" style="display: none">
+                Không có đơn đặt chỗ hoàn tất.
+              </p>
+            </div>
+
+            <div id="canceled" class="booking-tab-content">
+              <h2>Đã hủy hoặc bị từ chối</h2>
+              <div class="homestay-list" id="canceled-list"></div>
+              <p id="no-canceled" style="display: none">
+                Không có đơn đặt chỗ đã hủy.
+              </p>
+            </div>
+          </div>
         </div>
 
-        <div id="completed" class="tab-content">
-          <h2>Hoàn tất</h2>
-          <div class="homestay-list" id="completed-list"></div>
-          <p id="no-completed" style="display: none">
-          </p>
+        <div id="tab-profile" class="tab-content">
+          <div class="card-box">
+            <button class="close-btn" onclick="returnToDefault()">×</button>
+            <h2>Hồ sơ của tôi</h2>
+
+            <div class="profile-info">
+              <p>
+                <span class="label">Họ và tên:</span>
+                <span id="userName">Phuc Thinh</span>
+              </p>
+              <p>
+                <span class="label">Email:</span>
+                <span id="userEmail">phuc.thinh@example.com</span>
+              </p>
+            </div>
+
+            <button class="change-info-btn" onclick="editProfile()">
+              Thay đổi thông tin
+            </button>
+
+            <div
+              id="edit-profile-form"
+              class="edit-profile-form"
+              style="display: none"
+            >
+              <label for="editName">Họ và tên:</label>
+              <input type="text" id="editName" value="Phuc Thinh" />
+
+              <label for="editEmail">Email:</label>
+              <input
+                type="email"
+                id="editEmail"
+                value="phuc.thinh@example.com"
+              />
+
+              <button class="profile-save-btn" onclick="saveProfile()">
+                Lưu thay đổi
+              </button>
+              <button class="profile-cancel-btn" onclick="cancelEdit()">
+                Hủy
+              </button>
+            </div>
+          </div>
         </div>
 
-        <div id="canceled" class="tab-content">
-          <h2>Đã hủy</h2>
-          <div class="homestay-list" id="canceled-list"></div>
-          <p id="no-canceled" style="display: none">
-          </p>
+        <div id="tab-change-password" class="tab-content">
+          <div class="card-box">
+            <button class="close-btn" onclick="returnToDefault()">×</button>
+            <h2>Đổi mật khẩu</h2>
+
+            <div class="change-password-form">
+              <label for="currentPassword">Mật khẩu hiện tại:</label>
+              <input
+                type="password"
+                id="currentPassword"
+                placeholder="Nhập mật khẩu hiện tại"
+              />
+
+              <label for="newPassword">Mật khẩu mới:</label>
+              <input
+                type="password"
+                id="newPassword"
+                placeholder="Nhập mật khẩu mới"
+              />
+
+              <label for="confirmPassword">Xác nhận mật khẩu mới:</label>
+              <input
+                type="password"
+                id="confirmPassword"
+                placeholder="Xác nhận mật khẩu mới"
+              />
+
+              <button class="profile-save-btn" onclick="savePassword()">
+                Lưu thay đổi
+              </button>
+              <button
+                class="profile-cancel-btn"
+                onclick="cancelChangePassword()"
+              >
+                Hủy
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
+
     <script>
+      const tabLinks = document.querySelectorAll(".tab-link");
+      const tabContents = document.querySelectorAll(".tab-content");
+      const defaultContent = document.getElementById("default-content");
+      const homestayList = document.querySelector(".homestay-list");
+
+      tabLinks.forEach((link) => {
+        link.addEventListener("click", (e) => {
+          e.preventDefault();
+          tabLinks.forEach((l) => l.classList.remove("active-tab"));
+          link.classList.add("active-tab");
+
+          tabContents.forEach((c) => c.classList.remove("active"));
+          const tabId = link.getAttribute("data-tab");
+          document.getElementById(tabId).classList.add("active");
+
+          defaultContent.classList.remove("active");
+        });
+      });
+
+      function returnToDefault() {
+        tabContents.forEach((tab) => tab.classList.remove("active"));
+        defaultContent.classList.add("active");
+        tabLinks.forEach((l) => l.classList.remove("active-tab"));
+        document
+          .querySelectorAll(".sub-menu")
+          .forEach((menu) => (menu.style.display = "none"));
+      }
+
+      function openTab(tabId) {
+        const tabContents = document.querySelectorAll(".booking-tab-content");
+        tabContents.forEach((content) => content.classList.remove("active"));
+
+        const tabButtons = document.querySelectorAll(".booking-tab-btn");
+        tabButtons.forEach((btn) => btn.classList.remove("active"));
+
+        document.getElementById(tabId).classList.add("active");
+
+        const clickedButton = [...tabButtons].find(
+          (btn) =>
+            btn.textContent.trim() ===
+            document
+              .getElementById(tabId)
+              .querySelector("h2")
+              .textContent.trim()
+        );
+        if (clickedButton) {
+          clickedButton.classList.add("active");
+        }
+      }
+
+      document.addEventListener("DOMContentLoaded", () => {
+        loadCustomerBookings();
+        openTab("upcoming");
+      });
+
       function parseJwt(token) {
         try {
           const base64Url = token.split(".")[1];
@@ -162,56 +333,149 @@
             homestayId,
             error
           );
-          return "assets/img/default-thumbnail.webp"; // fallback ảnh mặc định
+          return "assets/img/default-thumbnail.webp";
         }
       }
 
-      async function renderHomestays(items, listId, noId) {
+      async function renderHomestays(items, listId, noId, showCancel = false) {
+        const token = localStorage.getItem("authToken");
         const list = document.getElementById(listId);
         const no = document.getElementById(noId);
         list.innerHTML = "";
+
         if (!items.length) {
           no.style.display = "block";
           return;
         }
         no.style.display = "none";
-        for (const b of items) {
 
-          const primaryImageUrl = await fetchPrimaryImageUrl(b.homestayId);
+        for (const b of items) {
+          const primaryImageUrl = await fetchPrimaryImageUrl(
+            b.homestayId,
+            token
+          );
+          const isPaid = await checkPaymentStatus(b.bookingId, token);
 
           const card = document.createElement("div");
           card.className = "homestay-card";
           card.innerHTML = `
-        <div class="homestay-image">
-          <img src="${primaryImageUrl}" alt="${
-            b.homestayName
-          }">
-        </div>
-        <div class="homestay-info">
-          <h3>${b.homestayName}</h3>
-          <p><span class="label">Ngày Check In:</span> ${formatDate(
-            b.checkInDate
-          )}</p>
-          <p><span class="label">Ngày Check Out:</span> ${formatDate(
-            b.checkOutDate
-          )}</p>
-          <p><span class="label">Ngày Đặt:</span> ${formatDate(b.createdAt)}</p>
-          <p><span class="label">Tổng tiền:</span> ${b.totalPrice.toLocaleString(
-            "vi-VN"
-          )} VND</p>
-          <div class="action-buttons">
-            <button class="detail-btn" onclick="viewDetails(${
-              b.bookingId
-            })">Xem chi tiết</button>
-          </div>
-        </div>
-      `;
+            <div class="homestay-image">
+              <img src="${primaryImageUrl}" alt="${b.homestayName}">
+            </div>
+            <div class="homestay-info">
+              <h3>${b.homestayName}</h3>
+              <div class="info-row">
+                <p><span class="label">Mã Đặt Phòng:</span> ${b.bookingId}</p>
+              </div>
+              <div class="info-row">
+                <p><span class="label">Mã Phòng:</span> ${b.roomId}</p>
+              </div>
+              <div class="info-row">
+                <p><span class="label">Ngày Check In:</span> ${formatDate(
+                  b.checkInDate
+                )}</p>
+              </div>
+              <div class="info-row">
+                <p><span class="label">Ngày Check Out:</span> ${formatDate(
+                  b.checkOutDate
+                )}</p>
+              </div>
+              <div class="info-row">
+                <p><span class="label">Ngày Đặt:</span> ${formatDate(
+                  b.createdAt
+                )}</p>
+              </div>
+              <div class="info-row">
+                <p><span class="label">Tổng tiền:</span> ${b.totalPrice.toLocaleString(
+                  "vi-VN"
+                )} VND</p>
+              </div>
+              <div class="action-buttons">
+                ${
+                  !isPaid && showCancel
+                    ? `<button class="pay-btn" onclick="createPayment('${b.bookingId}','${token}')">Thanh toán</button>`
+                    : ""
+                }
+                ${
+                  !isPaid && showCancel
+                    ? `<button class="cancel-btn" onclick="cancelBooking(${b.bookingId})">Hủy đặt chỗ</button>`
+                    : ""
+                }
+                <button class="detail-btn" onclick="viewDetails(${
+                  b.bookingId
+                })">Xem chi tiết</button>
+              </div>
+            </div>
+          `;
           list.appendChild(card);
-        };
+        }
       }
 
-      function viewDetails(id) {
-        alert(`Xem chi tiết booking #${id}`);
+      async function checkPaymentStatus(bookingId, token) {
+        const response = await fetch(
+          `http://localhost:8080/homestay/api/payment/check/${bookingId}`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        if (!response.ok) throw new Error("Failed to check payment status");
+        return await response.json(); // true/false
+      }
+
+      // Hàm tạo URL thanh toán và chuyển hướng
+      async function createPayment(bookingId, token) {
+        const checkResponse = await fetch(
+          `http://localhost:8080/homestay/api/bookings/check_booking_status/${bookingId}`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+
+        if (!checkResponse.ok) {
+          throw new Error("Không thể kiểm tra trạng thái booking.");
+        }
+
+        const isOverlapping = await checkResponse.json();
+
+        if (isOverlapping === true) {
+          alert("Lỗi khi duyệt: Phòng đã được đặt trong khoảng thời gian này.");
+          return; // Dừng lại nếu trùng lịch
+        }
+
+        try {
+          const response = await fetch(
+            `http://localhost:8080/homestay/api/payment/vnpay/create-url/${bookingId}`,
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`,
+              },
+            }
+          );
+
+          if (!response.ok) {
+            const errorText = await response.text();
+            console.error("Lỗi khi tạo thanh toán:", errorText);
+            throw new Error("Không thể tạo đơn thanh toán");
+          }
+
+          const data = await response.json();
+          const paymentUrl = data.url;
+
+          if (paymentUrl) {
+            window.location.href = paymentUrl;
+          } else {
+            alert("Không lấy được đường dẫn thanh toán.");
+          }
+        } catch (err) {
+          console.error("Lỗi khi tạo thanh toán:", err);
+          alert("Có lỗi xảy ra trong quá trình tạo thanh toán.");
+        }
       }
 
       async function fetchBookings(status) {
@@ -246,30 +510,118 @@
           fetchBookings("accepted"),
           fetchBookings("rejected"),
         ]);
-        renderHomestays(pending, "upcoming-list", "no-upcoming");
-        renderHomestays(accepted, "completed-list", "no-completed");
-        renderHomestays(rejected, "canceled-list", "no-canceled");
+        renderHomestays(pending, "upcoming-list", "no-upcoming", true);
+        renderHomestays(accepted, "completed-list", "no-completed", false);
+        renderHomestays(rejected, "canceled-list", "no-canceled", false);
       }
 
-      function openTab(id) {
-        document
-          .querySelectorAll(".tab-content")
-          .forEach((c) => c.classList.remove("active"));
-        document
-          .querySelectorAll(".tab-btn")
-          .forEach((b) => b.classList.remove("active"));
-        document.getElementById(id).classList.add("active");
-        document
-          .querySelector(`.tab-btn[onclick="openTab('${id}')"]`)
-          .classList.add("active");
+      async function viewDetails(bookingId) {
+        try {
+          const token = localStorage.getItem("authToken");
+          if (!token) {
+            alert("Vui lòng đăng nhập để xem chi tiết.");
+            return;
+          }
+
+          const response = await fetch(
+            `http://localhost:8080/homestay/api/bookings/${bookingId}`,
+            {
+              headers: {
+                Authorization: `Bearer ${token}`,
+                "Content-Type": "application/json",
+              },
+            }
+          );
+
+          if (!response.ok) {
+            const errorText = await response.text();
+            throw new Error(`Không thể lấy thông tin đặt chỗ: ${errorText}`);
+          }
+
+          const booking = await response.json();
+          const homestayId = booking.homestayId;
+
+          if (homestayId) {
+            window.location.href = `homestay.html?id=${homestayId}`;
+          } else {
+            throw new Error("Không tìm thấy ID homestay.");
+          }
+        } catch (error) {
+          console.error("Lỗi khi xem chi tiết:", error);
+          alert("Có lỗi xảy ra khi xem chi tiết đặt chỗ. Vui lòng thử lại.");
+        }
       }
 
-      document.addEventListener("DOMContentLoaded", () => {
-        loadCustomerBookings();
-        openTab("upcoming");
-      });
+      async function cancelBooking(bookingId) {
+        try {
+          const token = localStorage.getItem("authToken");
+          if (!token) {
+            alert("Vui lòng đăng nhập để hủy đặt chỗ.");
+            return;
+          }
+
+          const response = await fetch(
+            `http://localhost:8080/homestay/api/bookings/${bookingId}`,
+            {
+              method: "DELETE",
+              headers: {
+                Authorization: `Bearer ${token}`,
+                "Content-Type": "application/json",
+              },
+            }
+          );
+
+          if (!response.ok) {
+            const errorText = await response.text();
+            throw new Error(`Không thể hủy đặt chỗ: ${errorText}`);
+          }
+
+          alert(`Hủy đơn đặt chỗ thành công!`);
+          await loadCustomerBookings();
+        } catch (error) {
+          console.error("Lỗi khi hủy đặt chỗ:", error);
+          alert("Có lỗi xảy ra khi hủy đặt chỗ. Vui lòng thử lại.");
+        }
+      }
+
+      function editProfile() {
+        document.getElementById("edit-profile-form").style.display = "block";
+        document.querySelector(".profile-info").style.display = "none";
+        document.querySelector(".change-info-btn").style.display = "none";
+      }
+
+      function saveProfile() {
+        const name = document.getElementById("editName").value;
+        const email = document.getElementById("editEmail").value;
+        document.getElementById("userName").textContent = name;
+        document.getElementById("userEmail").textContent = email;
+        cancelEdit();
+      }
+
+      function cancelEdit() {
+        document.getElementById("edit-profile-form").style.display = "none";
+        document.querySelector(".profile-info").style.display = "block";
+        document.querySelector(".change-info-btn").style.display = "block";
+      }
+
+      function savePassword() {
+        const newPassword = document.getElementById("newPassword").value;
+        const confirmPassword =
+          document.getElementById("confirmPassword").value;
+        if (newPassword !== confirmPassword) {
+          alert("Mật khẩu mới và xác nhận không khớp!");
+          return;
+        }
+        alert("Mật khẩu đã được cập nhật!");
+        cancelChangePassword();
+      }
+
+      function cancelChangePassword() {
+        document.getElementById("currentPassword").value = "";
+        document.getElementById("newPassword").value = "";
+        document.getElementById("confirmPassword").value = "";
+      }
     </script>
-
     <script type="module" src="assets/js/main.js"></script>
     <script type="module" src="assets/js/role-redirect.js"></script>
   </body>

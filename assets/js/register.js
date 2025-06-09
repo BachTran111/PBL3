@@ -3,6 +3,41 @@ const regexEmail = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 const regexPassword = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/;
 const regexName = /^[\p{L}\s]{2,}$/u;
 
+function sanitizeInput(input) {
+  return input.replace(/[<>{}]/g, "");
+}
+
+function validateInput(input, regex, errorMessage, maxLength = 255) {
+  const value = input.value.trim();
+  if (!value) {
+    handleInValidValue(input, "Trường này không được để trống.");
+    return false;
+  }
+  if (value.length > maxLength) {
+    handleInValidValue(input, `Trường này không được vượt quá ${maxLength} ký tự.`);
+    return false;
+  }
+  if (!regex.test(value)) {
+    handleInValidValue(input, errorMessage);
+    return false;
+  }
+  handleValidValue(input);
+  return true;
+}
+
+function validateConfirmPassword(confirmInput, passwordInput) {
+  if (!confirmInput.value.trim()) {
+    handleInValidValue(confirmInput, "Trường này không được để trống.");
+    return false;
+  }
+  if (confirmInput.value !== passwordInput.value) {
+    handleInValidValue(confirmInput, "Mật khẩu xác nhận không khớp.");
+    return false;
+  }
+  handleValidValue(confirmInput);
+  return true;
+}
+
 function handleValidValue(input) {
   const small = input.parentElement.nextElementSibling;
   small.style.visibility = "hidden";
@@ -25,51 +60,50 @@ function setupValidation() {
   const confirmPassword = document.getElementById("confirmPassword");
   const registerBtn = document.querySelector(".submit-register-btn");
 
+  const requiredElements = [
+    { element: registerName, name: "registerName" },
+    { element: registerEmail, name: "registerEmail" },
+    { element: registerPassword, name: "registerPassword" },
+    { element: confirmPassword, name: "confirmPassword" },
+    { element: registerBtn, name: "submit-register-btn" },
+  ];
+
+  for (const { element, name } of requiredElements) {
+    if (!element) {
+      console.error(`Phần tử ${name} không tồn tại trong DOM.`);
+      return;
+    }
+  }
+
   if (registerName) {
     registerName.addEventListener("blur", () => {
-      if (regexName.test(registerName.value.trim())) {
-        handleValidValue(registerName);
-      } else {
-        const message = "Tên phải có ít nhất 2 ký tự và chỉ chứa chữ cái.";
-        handleInValidValue(registerName, message);
-      }
+      validateInput(
+        registerName,
+        regexName,
+        "Tên phải có ít nhất 2 ký tự và chỉ chứa chữ cái."
+      );
     });
   }
 
   if (registerEmail) {
     registerEmail.addEventListener("blur", () => {
-      if (regexEmail.test(registerEmail.value)) {
-        handleValidValue(registerEmail);
-      } else {
-        const message = "Email không hợp lệ.";
-        handleInValidValue(registerEmail, message);
-      }
+      validateInput(registerEmail, regexEmail, "Email không hợp lệ.");
     });
   }
 
   if (registerPassword) {
     registerPassword.addEventListener("blur", () => {
-      if (regexPassword.test(registerPassword.value)) {
-        handleValidValue(registerPassword);
-      } else {
-        const message =
-          "Mật khẩu ít nhất 6 ký tự và chứa ít nhất một chữ cái và một số.";
-        handleInValidValue(registerPassword, message);
-      }
+      validateInput(
+        registerPassword,
+        regexPassword,
+        "Mật khẩu ít nhất 6 ký tự và chứa ít nhất một chữ cái và một số."
+      );
     });
   }
 
   if (confirmPassword) {
     confirmPassword.addEventListener("blur", () => {
-      if (
-        confirmPassword.value === registerPassword.value &&
-        confirmPassword.value !== ""
-      ) {
-        handleValidValue(confirmPassword);
-      } else {
-        const message = "Mật khẩu xác nhận không khớp.";
-        handleInValidValue(confirmPassword, message);
-      }
+      validateConfirmPassword(confirmPassword, registerPassword);
     });
   }
 
@@ -78,60 +112,45 @@ function setupValidation() {
       e.preventDefault();
       let isValid = true;
 
-      if (!regexName.test(registerName.value.trim())) {
-        handleInValidValue(
-          registerName,
-          "Tên phải có ít nhất 2 ký tự và chỉ chứa chữ cái."
-        );
-        isValid = false;
-      } else {
-        handleValidValue(registerName);
-      }
-
-      if (!regexEmail.test(registerEmail.value)) {
-        handleInValidValue(registerEmail, "Email không hợp lệ.");
-        isValid = false;
-      } else {
-        handleValidValue(registerEmail);
-      }
-
-      if (!regexPassword.test(registerPassword.value)) {
-        handleInValidValue(
-          registerPassword,
-          "Mật khẩu ít nhất 6 ký tự và chứa ít nhất một chữ cái và một số."
-        );
-        isValid = false;
-      } else {
-        handleValidValue(registerPassword);
-      }
-
-      if (
-        confirmPassword.value !== registerPassword.value ||
-        confirmPassword.value === ""
-      ) {
-        handleInValidValue(confirmPassword, "Mật khẩu xác nhận không khớp.");
-        isValid = false;
-      } else {
-        handleValidValue(confirmPassword);
-      }
+      isValid &= validateInput(
+        registerName,
+        regexName,
+        "Tên phải có ít nhất 2 ký tự và chỉ chứa chữ cái."
+      );
+      isValid &= validateInput(registerEmail, regexEmail, "Email không hợp lệ.");
+      isValid &= validateInput(
+        registerPassword,
+        regexPassword,
+        "Mật khẩu ít nhất 6 ký tự và chứa ít nhất một chữ cái và một số."
+      );
+      isValid &= validateConfirmPassword(confirmPassword, registerPassword);
 
       if (isValid) {
-        // Lấy giá trị input
+        registerBtn.disabled = true;
+        registerBtn.textContent = "Đang xử lý...";
+
         const username = registerName.value.trim();
         const email = registerEmail.value.trim();
         const password = registerPassword.value;
-
         const pageRole = document.body.dataset.role;
         const roles = pageRole === "host" ? ["ROLE_HOST"] : ["ROLE_USER"];
 
         registerUser(username, email, password, roles)
           .then((message) => {
-            alert("Đăng ký thành công: " + message);
-            document.getElementById("popup").style.display = "none";
+            alert("Đăng ký thành công");
+            setTimeout(() => {
+              window.location.reload();
+              const popup = document.getElementById("popup");
+              if (popup) popup.style.display = "none";
+            }, 1000);
           })
           .catch((err) => {
             alert("Đăng ký thất bại: " + (err.message || "Vui lòng thử lại."));
             console.error("Lỗi đăng ký:", err);
+          })
+          .finally(() => {
+            registerBtn.disabled = false;
+            registerBtn.textContent = "Đăng ký";
           });
       }
     });
@@ -139,8 +158,10 @@ function setupValidation() {
 }
 
 function registerUser(username, email, password, roles) {
-  const payload = { username, email, password, roles };
-
+  const sanitizedUsername = sanitizeInput(username);
+  const sanitizedEmail = sanitizeInput(email);
+  const payload = { username: sanitizedUsername, email: sanitizedEmail, password, roles };
+  
   return fetch("http://localhost:8080/homestay/auth/register", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -150,9 +171,14 @@ function registerUser(username, email, password, roles) {
       return res.text().then((text) => {
         try {
           const json = JSON.parse(text);
+          if (json.code === "DUPLICATE_EMAIL") {
+            return Promise.reject({ message: "Email đã được sử dụng." });
+          } else if (json.code === "DUPLICATE_USERNAME") {
+            return Promise.reject({ message: "Tên người dùng đã được sử dụng." });
+          }
           return Promise.reject(json);
         } catch (e) {
-          return Promise.reject({ message: text });
+          return Promise.reject({ message: text || "Lỗi không xác định từ server." });
         }
       });
     }

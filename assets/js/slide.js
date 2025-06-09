@@ -53,16 +53,12 @@ function initializeSlide() {
                     <img src="${primaryImageUrl}" alt="${item.name}" />
                     <div class="property-details">
                       <h3>${item.name}</h3>
+                      <span class="stars">${item.surfRating ?? "?"}/5 ★</span>
                       <div class="property-info">
-                        <div class="stars">${item.surfRating ?? "?"}/5 ★</div>
                         <div class="property-location">
-                          <i class="ti-location-pin"></i>${item.street}, ${
-                  item.ward
-                }
+                          <i class="ti-location-pin"></i>${item.street}, ${item.ward}
                         </div>
                       </div>
-                      <p class="property-price-description">Mô tả</p>
-                      <p class="property-price">${item.description}</p>
                     </div>
                   </div>
                 `;
@@ -72,7 +68,7 @@ function initializeSlide() {
                   `.result-card[data-id="${item.id}"]`
                 );
                 insertedCard.addEventListener("click", () => {
-                  window.location.href = `room.html?id=${item.id}`;
+                  window.location.href = `homestay.html?id=${item.id}`;
                 });
               });
             })
