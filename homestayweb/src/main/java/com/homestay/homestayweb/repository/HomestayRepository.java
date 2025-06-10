@@ -47,7 +47,8 @@ public interface HomestayRepository extends JpaRepository<Homestay, Long> {
     AND (:surfRating IS NULL OR h.surf_rating >= :surfRating)
     AND (
         :location IS NULL OR (
-            h.street LIKE CONCAT('%', :location, '%')
+            h.name LIKE CONCAT ('%', :location, '%')
+            OR h.street LIKE CONCAT('%', :location, '%')
             OR h.ward LIKE CONCAT('%', :location, '%')
             OR h.district LIKE CONCAT('%', :location, '%')
         )
